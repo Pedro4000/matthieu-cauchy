@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+	<title>Savate - fonte libre</title>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" type="text/css" href="savate.css">
+	<link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+	<section id="title" class="dark">
+	<a href="http://www.collectif-we.ch">
+		<svg id="wech-logo" version="1.1"
+			 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+			 x="0px" y="0px" width="36px" height="36px" viewBox="0 0 36 36" overflow="visible" enable-background="new 0 0 36 36"
+			 xml:space="preserve">
+		<path d="M25.055,25.073c-1.96,1.957-4.318,2.937-7.079,2.937c-2.758,0-5.113-0.979-7.065-2.937
+			c-1.951-1.956-2.929-4.315-2.929-7.075c0-2.758,0.978-5.114,2.929-7.069c1.952-1.948,4.308-2.925,7.065-2.925
+			c2.76,0,5.119,0.977,7.079,2.925c1.957,1.955,2.938,4.312,2.938,7.069C27.992,20.758,27.012,23.116,25.055,25.073 M17.295,6.58
+			c-1.199,0.105-2.309,0.354-3.33,0.75c-1.02,0.398-2.19,1.051-3.503,1.963L4.765,3.788l-0.94,1.112l5.546,5.605
+			c-0.897,1.091-1.563,2.156-1.991,3.191c-0.43,1.033-0.703,2.24-0.819,3.618H0v1.348h6.561c0.138,1.377,0.433,2.604,0.875,3.67
+			c0.443,1.067,1.096,2.147,1.951,3.238l-5.562,5.583l0.996,0.996l5.739-5.425c1.041,0.794,2.057,1.392,3.055,1.792
+			c0.996,0.404,2.221,0.707,3.68,0.898v6.58h1.483v-6.58c1.39-0.155,2.563-0.417,3.515-0.79c0.951-0.369,2.06-1.023,3.338-1.962
+			l5.521,5.507l1.114-0.977l-5.562-5.68c1.611-2.057,2.541-4.312,2.792-6.774h6.537v-1.347h-6.561c-0.021-1.21-0.282-2.441-0.776-3.69
+			c-0.392-0.964-1.062-2.061-2.013-3.297l5.583-5.586L31.25,3.787l-5.662,5.544c-1.144-0.924-2.234-1.592-3.27-2.002
+			c-1.033-0.409-2.214-0.658-3.541-0.75V0h-1.483L17.295,6.58L17.295,6.58z"/>
+		</svg>
+		</a>
+		<article>
+			<h1 contenteditable="true" spellcheck="false">Savate</h1>
+			<p contenteditable="true" spellcheck="false" class="italic">Une fonte libre du collectif We.ch</p>
+		</article>
+	</section>
+	<section id="styles" class="light">
+		<article>
+			<header>
+				<h3>Savate Régulière |</h3>
+			</header>
+			<p contenteditable="true" spellcheck="false">Pantoufle</p>
+		</article>
+		<article class="italic">
+			<header>
+				<h3>Savate Italique |</h3>
+			</header>
+			<p contenteditable="true" spellcheck="false">Babouche</p>
+		</article>
+	</section>
+	<section id="exemple" class="dark">
+		<article>
+			<p contenteditable="true" spellcheck="false" class="big">Combo Breaker</p>
+			<p contenteditable="true" spellcheck="false" class="cap medium">Street Fighting Man</p>
+			<p contenteditable="true" spellcheck="false" class="italic small">Et ma main dans ta gueule&thinsp;?</p>
+			<p contenteditable="true" spellcheck="false" class="big">À l’aise Blaise</p>
+			<p contenteditable="true" spellcheck="false" class="cap italic medium">Paroles de scout</p>
+			<p contenteditable="true" spellcheck="false" class="medium">T’aimes ça, hein.</p>
+			<p contenteditable="true" spellcheck="false" class="italic big">Paix et félicité</p>
+		</article>
+	</section>
+	<section id="quote" class="light">
+		<article class="hyphenate italic">
+			<p contenteditable="true" spellcheck="false">«&thinsp;Je suis l’ennemi, parce que je pense, parce que j’aime lire, parce que je suis pour la liberté d’expression et la liberté de choix, je suis le genre de mec qui aime aller dans un bon resto et qui se demande si il va prendre une côte de bœuf ou un pavé de rumsteack géant avec ces frites mayonnaise. Je veux faire du cholestérol, je veux bouffer du bacon, du beurre, des montagnes de fromage, je veux fumer un bon cigare de la taille de la tour Eiffel dans un coin non fumeur, je veux courir nu dans les rues le corps couvert de ketchup en lisant Playboy. Pourquoi&thinsp;? Parce que j’en aurai eu envie tout d’un coup, ouais mec&thinsp;!&thinsp;»</p>
+		</article>
+	</section>
+	<section id="cascade" class="dark">
+		<article>
+			<header>
+				<h3>Savate Régulière</h3>
+			</header>
+			<div v-for="value in scale">
+				<span>{{value}} |</span><input v-model="pangram" style="font-size: {{value}}pt"></input>
+			</div>
+		</article>
+		<article class="italic">
+			<header>
+				<span>Savate Italique</span>
+			</header>
+			<div v-for="value in scale">
+				<span>{{value}} |</span><input v-model="pangram" style="font-size: {{value}}pt"></input>
+			</div>
+		</article>
+	</section>
+	<section id="linguistic" class="light">
+		<article>
+			<header>
+				<p>La Savate supporte toutes les langues européennes utilisant l'alphabet latin (Adobe Latin 3).</p>
+			</header>
+			<ul>
+				<li class="center">tälôçĥe</li>
+				<li class="right italic">mőrnîflę</li>
+				<li class="center">bãstoňnade</li>
+				<li class="right">čaļotţè</li>
+				<li class="center italic">rǻćļée</li>
+				<li class="right">běīģñë</li>
+			</ul>
+		</article>
+	</section>
+	<section id="glyphs" class="dark">
+		<article>
+			<header>
+				<h3>Savate Régulière</h3>
+			</header>
+			<ul>
+				<li v-for="glyph in glyphsList">{{ glyph }}</li>
+			</ul>
+		</article>
+		<article class='italic'>
+			<header>
+				<h3>Savate Italique</h3>
+			</header>
+			<ul>
+				<li v-for="glyph in glyphsList">{{ glyph }}</li>
+			</ul>
+		</article>
+	</section>
+	<section id="infos" class="light">
+		<div id="download">
+			<p id="download-link">→ <a href="http://velvetyne.fr/fonts/savate/">Télécharger</a> ←</p>
+			<p class="italic">sur velvetyne.fr</p>
+		</div>
+		<footer>
+			<div>
+				<p>La Savate est une création du <a href="http://www.collectif-we.ch">collectif We.ch</a></p>
+			</div>
+			<div>
+				<p>La Savate est distribuée sous license libre (<a href="https://opensource.org/licenses/MIT">MIT License</a>)</p>
+				<p>Les fichiers sources sont disponibles sur <a href="https://github.com/CollectifWech/Savate">Github</a></p>
+			</div>
+		</footer>
+		
+	</section>
+
+	<script type="text/javascript" src="js/hyphenator.js"></script>
+	<script type="text/javascript" src="js/vue.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

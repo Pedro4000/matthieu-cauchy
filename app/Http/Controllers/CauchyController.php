@@ -21,13 +21,10 @@ class CauchyController extends Controller
     public function __construct(){
 
     }
-    public function landing(Request $request){
+    public function home(Request $request){
 
         $session = $request->session()->has('users');
-        dd($session);
-
-
-        return view('landing', [
+        return view('home', [
         ]);
     }
 
@@ -38,18 +35,18 @@ class CauchyController extends Controller
         ]);
     }
 
-    public function works(){
-  //      $allFiles=Storage::allFiles('public/images/martha1/');
-  //      $allFiles=Storage::allFiles('public/images/martha1/');
-/*        foreach ($allFiles as $allFile) {
+    public function works(Request $request){
+        $allFiles=Storage::allFiles('public/images/martha1/');
+        $allFiles=Storage::allFiles('public/images/martha1/');
+        foreach ($allFiles as $allFile) {
             $image = Storage::get($allFile);
             $img = ImageManagerStatic::make($image);
             $img->resize(720,720);
             $img->save('public/images/'.explode('/',$allFile)[2].'/720x720_'.explode('/',$allFile)[3]);
            Storage::put('public/images/'.explode('/',$allFile)[2].'/720/'.explode('/',$allFile)[3],$img);
-        } */
-
-        $image = Storage::get("public/images/martha1/03_15_10_2016-copy.jpg");
+        }
+ 
+         $image = Storage::get("public/images/martha1/03_15_10_2016-copy.jpg");
 
         return view('works',[]);
     }
@@ -75,11 +72,17 @@ class CauchyController extends Controller
 
     public function getImages(){
         $imgLinks = [];
-        $homepage = file_get_contents('http://matthieucauchy.com/coucou-magazine/');
+        //$album = 'silence';
+        //$album = 'martha';
+        //$album = 'coucou-magazine';
+        //$album = '/coucou-magazine/tomorrowland';
+        $album = '/coucou-magazine/33-midi';
+        $homepage = file_get_contents('http://matthieucauchy.com/'.$album);
 
-        preg_match_all("{<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesimg, PREG_SET_ORDER);
-        preg_match_all("{<a\s[^>]*?href\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesa, PREG_SET_ORDER);
-        $matchesimg = array_merge($matchesimg,$matchesa);
+        preg_match_all("{<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesimg1, PREG_SET_ORDER);
+        preg_match_all("{<a\s[^>]*?href\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesimg2, PREG_SET_ORDER);
+        $matchesimg = array_merge($matchesimg1, $matchesimg2);
+
 
         foreach ($matchesimg as $val) {
 //            preg_match_all('{([0-9]{1,3})x([0-9]{1,3})}ims',$val[1],$minimatch,PREG_SET_ORDER);
@@ -93,6 +96,8 @@ class CauchyController extends Controller
             Storage::put('public/images/'.explode('/',$img)[5].'/'.explode('/',$img)[6],$content);
         }
 
+        return ('ok');
+        
         return view('showImages', [
             'imgLinks' => $imgLinks
         ]);
