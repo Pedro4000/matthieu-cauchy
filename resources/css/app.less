@@ -63,29 +63,25 @@ body {
     margin: 10vh 16%;
     width: 550px;
     text-align: center;
+    position: relative;
 }
 
-#stage img {
-  max-width: 100%;
-  object-fit: contain;
+#stage img{
+  padding: 10px;
+  background: #fff;
+  width: 550px;
 }
 
 #stage img:nth-of-type(1) {
-  animation-name: fader;
-  animation-delay: 10s;
-  animation-duration: 0.4s;
-  z-index: 20;
-}
-#stage img:nth-of-type(2) {
-  z-index: 10;
-  display: none;
-
-}
-#stage img:nth-of-type(n+3) {
-  display: none;
+ z-index: 20;
 }
 
-@keyframes fader {
-  from { opacity: 1.0; }
-  to   { opacity: 0.0; }
+#stage img:nth-of-type(2) { 
+  z-index: 10; 
+ display: none;
+
+}
+
+#stage img:nth-of-type(n+3) { 
+  display: none;
 }

@@ -5,6 +5,7 @@ use Carbon\Carbon;
 @extends('layout.layout')
 
 @section('titre')
+home
 @endsection
 
 @section('sidebar')
@@ -15,7 +16,7 @@ use Carbon\Carbon;
 <div class="d-flex justify-content-end pt-1">
 </div>
 <div class="d-flex mb-1 flex-column">
-  <h1 class="h2">@yield('titre')</h1>
+  <h1 class="h2"></h1>
 </div>
 @endsection
 

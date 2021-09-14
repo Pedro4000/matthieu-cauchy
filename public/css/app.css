@@ -52,19 +52,14 @@ body {
   margin: 10vh 16%;
   width: 550px;
   text-align: center;
+  position: relative;
 }
 #stage img {
-  max-width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  padding: 10px;
+  background: #fff;
+  width: 550px;
 }
 #stage img:nth-of-type(1) {
-  -webkit-animation-name: fader;
-          animation-name: fader;
-  -webkit-animation-delay: 10s;
-          animation-delay: 10s;
-  -webkit-animation-duration: 0.4s;
-          animation-duration: 0.4s;
   z-index: 20;
 }
 #stage img:nth-of-type(2) {
@@ -73,22 +68,6 @@ body {
 }
 #stage img:nth-of-type(n+3) {
   display: none;
-}
-@-webkit-keyframes fader {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-@keyframes fader {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 }
 
 

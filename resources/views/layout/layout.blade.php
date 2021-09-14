@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
-    <title></title>
+    <title>@yield('titre') - {{ Str::replace('_',' ',config('app.name', '')) }}</title>
+</title>
     <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/fonts/fonts.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
