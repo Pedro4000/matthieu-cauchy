@@ -21,7 +21,7 @@ home
 @endsection
 
 @section('content')
-<div class="row ">
+<div class="row col-10">
 
   <div id="stage">
     <img src="{{ asset('storage/images/martha1/03_15_10_2016-copy.jpg') }}" >
