@@ -16,7 +16,7 @@
     </header>
     <div id="haut_de_page" role="main" class="main container-fluid">
       <div class="row">
-        <div class="col-1 col-lg-2 sidebar pl-0 pr-0">
+        <div class="col-1 col-lg-2 sidebar pl-4 pr-0">
           <div id="sidebar_sticky" class="sticky-top">
 @yield('sidebar')
           </div>
