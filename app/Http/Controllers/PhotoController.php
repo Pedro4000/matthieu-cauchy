@@ -44,6 +44,7 @@ class PhotoController extends Controller
 
     public function createFromStorage(Request $request) {
 
+        /*$album = Album::find(1);
         $directories =  Storage::directories('public/images');
         $types = Type::all();
         foreach($directories as &$directory){
@@ -59,7 +60,7 @@ class PhotoController extends Controller
             };
             $album->save();
         };
-        die;
+        die;*/
         
         $files = Storage::files('public/images/coucou-magazine1');
 
