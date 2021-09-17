@@ -55,6 +55,10 @@ Route::middleware(['auth'])
     'type' => TypeController::class,
     ]);
 
+    Route::get('/createFromStorage', [PhotoController::class, 'createFromStorage'])
+        ->name('create_from_storage');
+
+
 });
 
 require __DIR__.'/auth.php';

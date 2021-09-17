@@ -33,7 +33,8 @@ class Type extends Model
      * @var array
      */
     protected $dates = [
-
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -43,4 +44,10 @@ class Type extends Model
      */
     protected $casts = [
     ];
+
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
 }

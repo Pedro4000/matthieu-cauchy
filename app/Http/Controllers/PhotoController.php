@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{Album, Photo, Type};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +40,30 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function createFromStorage(Request $request) {
+
+        $directories =  Storage::directories('public/images');
+        $types = Type::all();
+        foreach($directories as &$directory){
+            $directory = explode('/',$directory)[2];
+            $album = new Album();
+            $album->nom = $directory;
+            $album->nom_route = $directory;
+            if(preg_match('/coucou/', $directory)){
+                // books == types[0]
+                $album->type_id = $types[0]->id; 
+            } else {
+                $album->type_id = $types[1]->id;                
+            };
+            $album->save();
+        };
+        die;
+        
+        $files = Storage::files('public/images/coucou-magazine1');
+
+        dd($files);
     }
 
     /**

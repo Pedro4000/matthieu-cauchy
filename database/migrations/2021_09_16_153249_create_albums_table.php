@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlbulTable extends Migration
+class CreateAlbumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateAlbulTable extends Migration
      */
     public function up()
     {
-        Schema::create('albul', function (Blueprint $table) {
+        Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nom')->nullable();
+            $table->string('nom_route')->nullable();
+            $table->foreignId('type_id')->nullable();
+            $table->longText('description')->nullable();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateAlbulTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('albul');
+        Schema::dropIfExists('albums');
     }
 }

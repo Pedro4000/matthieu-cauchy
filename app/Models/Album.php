@@ -15,7 +15,9 @@ class Album extends Model
      * @var array
      */
     protected $fillable = [
-
+        'nom',
+        'nom_route',
+        'description',
     ];
 
     /**
@@ -33,7 +35,8 @@ class Album extends Model
      * @var array
      */
     protected $dates = [
-
+        'created_at',
+        'updated_at',
     ];    
 
     /**
@@ -43,4 +46,17 @@ class Album extends Model
      */
     protected $casts = [
     ];
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+
+
 }

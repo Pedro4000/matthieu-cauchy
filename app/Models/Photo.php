@@ -33,7 +33,8 @@ class Photo extends Model
      * @var array
      */
     protected $dates = [
-
+        'created_at',
+        'updated_at',
     ];    
 
     /**
@@ -43,4 +44,10 @@ class Photo extends Model
      */
     protected $casts = [
     ];
+
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }    
 }
