@@ -69,6 +69,10 @@ body {
   background: #fff;
   width: 550px;
 }
+.apercu {
+  max-width: 45px;
+  border: 1px solid black;
+}
 
 /*! tailwindcss v2.2.15 | MIT License | https://tailwindcss.com */
 

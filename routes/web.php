@@ -49,11 +49,75 @@ Route::middleware(['auth'])
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])
         ->name('dashboard');
 
-    Route::resources([
-    'photo' => PhotoController::class,
-    'album' => PostController::class,
-    'type' => TypeController::class,
-    ]);
+    Route::get('photo-index', [PhotoController::class, 'index'])
+        ->name('photo.index');
+
+    Route::get('photo-creer', [PhotoController::class, 'create'])
+        ->name('photo.create');
+
+    Route::post('store', [PhotoController::class, 'store'])
+        ->name('photo.store');
+
+    Route::get('photo-show/{id}', [PhotoController::class, 'show'])
+        ->name('photo.show');
+
+    Route::get('photo-edit', [PhotoController::class, 'edit'])
+        ->name('photo.edit');
+
+    Route::post('photo-update', [PhotoController::class, 'update'])
+        ->name('photo.update');
+
+    Route::get('photo-destroy', [PhotoController::class, 'destroy'])
+        ->name('photo.destroy');
+
+
+
+    Route::get('album-index', [AlbumController::class, 'index'])
+        ->name('album.index');
+
+    Route::get('album-creer', [AlbumController::class, 'create'])
+        ->name('album.create');
+
+    Route::post('store', [AlbumController::class, 'store'])
+        ->name('album.store');
+
+    Route::get('album-show', [AlbumController::class, 'show'])
+        ->name('album.show');
+
+    Route::get('album-edit', [AlbumController::class, 'edit'])
+        ->name('album.edit');
+
+    Route::post('album-update', [AlbumController::class, 'update'])
+        ->name('album.update');
+
+    Route::get('album-destroy', [AlbumController::class, 'destroy'])
+        ->name('album.destroy');
+
+
+
+
+    Route::get('Type-index', [TypeController::class, 'index'])
+        ->name('type.index');
+
+    Route::get('Type-creer', [TypeController::class, 'create'])
+        ->name('type.create');
+
+    Route::post('store', [TypeController::class, 'store'])
+        ->name('type.store');
+
+    Route::get('Type-show', [TypeController::class, 'show'])
+        ->name('type.show');
+
+    Route::get('Type-edit', [TypeController::class, 'edit'])
+        ->name('type.edit');
+
+    Route::post('Type-update', [TypeController::class, 'update'])
+        ->name('type.update');
+
+    Route::get('Type-destroy', [TypeController::class, 'destroy'])
+        ->name('type.destroy');
+
+                             
 
     Route::get('/createFromStorage', [PhotoController::class, 'createFromStorage'])
         ->name('create_from_storage');

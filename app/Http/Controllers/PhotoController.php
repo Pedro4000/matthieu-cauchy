@@ -16,9 +16,13 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $photos = Photo::paginate(25);
+
+        return view('admin.photo.photo_index',[
+            'photos' => $photos,
+        ]);
     }
 
     /**
@@ -40,31 +44,6 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    public function createFromStorage(Request $request) {
-
-        /*$album = Album::find(1);
-        $directories =  Storage::directories('public/images');
-        $types = Type::all();
-        foreach($directories as &$directory){
-            $directory = explode('/',$directory)[2];
-            $album = new Album();
-            $album->nom = $directory;
-            $album->nom_route = $directory;
-            if(preg_match('/coucou/', $directory)){
-                // books == types[0]
-                $album->type_id = $types[0]->id; 
-            } else {
-                $album->type_id = $types[1]->id;                
-            };
-            $album->save();
-        };
-        die;*/
-        
-        $files = Storage::files('public/images/coucou-magazine1');
-
-        dd($files);
     }
 
     /**
@@ -111,4 +90,46 @@ class PhotoController extends Controller
     {
         //
     }
+
+
+    public function createFromStorage(Request $request) {
+
+        die('ok');
+        $album = Album::find(1);
+        $directories =  Storage::directories('public/images');
+        $types = Type::all();
+        foreach($directories as &$directory){
+            $directory = explode('/',$directory)[2];
+            $album = new Album();
+            $album->nom = $directory;
+            $album->nom_route = $directory;
+            if(preg_match('/coucou/', $directory)){
+                // books == types[0]
+                $album->type_id = $types[0]->id; 
+            } else {
+                $album->type_id = $types[1]->id;                
+            };
+            $album->save();
+        };
+
+        $albums = Album::all();
+
+        foreach ($albums as $album){
+
+            $files = Storage::files('public/images/'.$album->nom);
+            foreach($files as $file) {
+                $nomPhoto = explode('/', $file)[3];
+                $photo = new Photo();
+                $photo->album_id = $album->id;
+                $photo->nom = $nomPhoto;
+                $photo->nom_fichier = $nomPhoto;
+                $photo->save();
+            }         
+        }
+
+
+        die('ok');
+
+    }
+
 }
