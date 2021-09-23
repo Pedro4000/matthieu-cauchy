@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\{Album, Photo, Type};
-use Illuminate\Http\Request;
+use Illuminate\Http\{Request, File, UploadedFile};
 use Illuminate\Support\Facades\Storage;
+
 
 class PhotoController extends Controller
 {
@@ -18,6 +19,7 @@ class PhotoController extends Controller
      */
     public function index(Request $request)
     {
+
         $photos = Photo::paginate(25);
 
         return view('admin.photo.photo_index',[
@@ -32,7 +34,11 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        $albums = Album::all();
+        
+        return view('admin.photo.photo_create',[
+            'albums' => $albums,
+        ]);
     }
 
     /**
@@ -43,7 +49,20 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $album = Album::find($request->get('album'));
+
+        $file = $request->file('file');
+
+        $photo = new Photo();
+        $photo->nom = $request->get('nom');
+        $photo->album_id = $request->get('album');
+        $photo->description = $request->get('description');
+        $photo->nom_fichier = $file->getClientOriginalName();
+
+        if ($photo->save()) {
+            $file->storeAs('public/images/'.$album->nom_route, $photo->nom_fichier);
+            return redirect()->route('admin.photo.create')->with('success', 'photo enregistrée');
+        }
     }
 
     /**

@@ -17,6 +17,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -36,8 +37,8 @@
             <main>
                 @include('admin.sidebar')
                 <div class='content w-3/4'>
+                    @include('include.errors')
                     {{ $slot }}                        
-                    
                 </div>
             </main>
         </div>

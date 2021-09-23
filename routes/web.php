@@ -55,7 +55,7 @@ Route::middleware(['auth'])
     Route::get('photo-creer', [PhotoController::class, 'create'])
         ->name('photo.create');
 
-    Route::post('store', [PhotoController::class, 'store'])
+    Route::post('/photo-store', [PhotoController::class, 'store'])
         ->name('photo.store');
 
     Route::get('photo-show/{id}', [PhotoController::class, 'show'])
