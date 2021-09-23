@@ -73,7 +73,10 @@ body {
   max-width: 45px;
   border: 1px solid black;
 }
-/*
+.photo-frame {
+  max-width: 550px;
+  border: 1px solid black;
+}
 .inputfile {
   width: 0.1px;
   height: 0.1px;
@@ -82,19 +85,12 @@ body {
   position: absolute;
   z-index: -1;
 }
-
 .inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    display: inline-block;
-  cursor: pointer; 
-
+  font-size: 1.25em;
+  font-weight: 700;
+  display: inline-block;
+  cursor: pointer;
 }
-
-.inputfile:focus + label,
-.inputfile + label:hover {
-}
-*/
 
 /*! tailwindcss v2.2.15 | MIT License | https://tailwindcss.com */
 
