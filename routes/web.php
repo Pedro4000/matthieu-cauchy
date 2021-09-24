@@ -61,14 +61,15 @@ Route::middleware(['auth'])
     Route::get('photo-show/{id}', [PhotoController::class, 'show'])
         ->name('photo.show');
 
-    Route::get('photo-edit', [PhotoController::class, 'edit'])
+    Route::get('photo-edit/{id}', [PhotoController::class, 'edit'])
         ->name('photo.edit');
 
     Route::post('photo-update', [PhotoController::class, 'update'])
         ->name('photo.update');
 
-    Route::get('photo-destroy', [PhotoController::class, 'destroy'])
+    Route::post('photo-destroy/', [PhotoController::class, 'destroy'])
         ->name('photo.destroy');
+
 
 
 

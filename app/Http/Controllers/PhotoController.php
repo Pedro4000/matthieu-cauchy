@@ -88,7 +88,11 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $photo = Photo::find($id);
+
+        return view('admin.photo.photo_edit',[
+            'photo' => $photo,
+        ]);      
     }
 
     /**
@@ -111,7 +115,13 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo = Photo::find($id);
+        $album = Album::find($request->get('album'));
+
+        die('ok');
+
+        die('ok');
+        Storage::delete('public/images/'.$album->nom_route, $photo->nom_fichier);
     }
 
 
