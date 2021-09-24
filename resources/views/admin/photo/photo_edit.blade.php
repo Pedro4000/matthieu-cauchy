@@ -38,6 +38,7 @@
                         </form>
                         <div class="flex items-center justify-between w-1/2">
                           <form method="post" action="{{ route('admin.photo.destroy') }}">
+                          @csrf
                             <input class="hidden" name="id" value="{{ $photo->id }}">
                             <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                               supprimer

@@ -113,15 +113,17 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $photo = Photo::find($id);
-        $album = Album::find($request->get('album'));
+        $photo = Photo::find($request->get('id'));
 
-        die('ok');
+        $album = Album::find($photo->album->id);
 
-        die('ok');
+        // todo revoir si ca supprime bien 
         Storage::delete('public/images/'.$album->nom_route, $photo->nom_fichier);
+        $photo->delete();
+
+        return redirect()->route('admin.photo.index')->with('success', 'la photo est bien supprimée fraté');
     }
 
 

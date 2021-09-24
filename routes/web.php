@@ -67,7 +67,7 @@ Route::middleware(['auth'])
     Route::post('photo-update', [PhotoController::class, 'update'])
         ->name('photo.update');
 
-    Route::post('photo-destroy/', [PhotoController::class, 'destroy'])
+    Route::post('photo-destroy', [PhotoController::class, 'destroy'])
         ->name('photo.destroy');
 
 
