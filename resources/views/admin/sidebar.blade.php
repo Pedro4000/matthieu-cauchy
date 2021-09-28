@@ -12,7 +12,7 @@
     </li> 
     <li class="nav-item my-4 ">
       <a class="nav-link p-4{{ (Route::current()->getName() == 'admin.type.index') ? 'active' : '' }}" href="{{ route('admin.type.index') }}" title="gerer les types">
-        <i class="fa-solid fa-hand-middle-finger"></i><span class="d-none d-lg-inline"> type</span>
+        <i class="fas fa-venus-double"></i><span class="d-none d-lg-inline"> type</span>
       </a>
     </li>  
   </ul>

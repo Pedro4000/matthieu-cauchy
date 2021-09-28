@@ -49,7 +49,7 @@ Route::middleware(['auth'])
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])
         ->name('dashboard');
 
-    Route::get('photo-index', [PhotoController::class, 'index'])
+    Route::get('photo-index/{album_id?}', [PhotoController::class, 'index'])
         ->name('photo.index');
 
     Route::get('photo-creer', [PhotoController::class, 'create'])
@@ -72,20 +72,16 @@ Route::middleware(['auth'])
 
 
 
-
     Route::get('album-index', [AlbumController::class, 'index'])
         ->name('album.index');
 
     Route::get('album-creer', [AlbumController::class, 'create'])
         ->name('album.create');
 
-    Route::post('store', [AlbumController::class, 'store'])
+    Route::post('album-store', [AlbumController::class, 'store'])
         ->name('album.store');
 
-    Route::get('album-show', [AlbumController::class, 'show'])
-        ->name('album.show');
-
-    Route::get('album-edit', [AlbumController::class, 'edit'])
+    Route::get('album-edit/{id}', [AlbumController::class, 'edit'])
         ->name('album.edit');
 
     Route::post('album-update', [AlbumController::class, 'update'])
@@ -93,7 +89,6 @@ Route::middleware(['auth'])
 
     Route::get('album-destroy', [AlbumController::class, 'destroy'])
         ->name('album.destroy');
-
 
 
 

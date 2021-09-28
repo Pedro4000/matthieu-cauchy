@@ -1,8 +1,8 @@
 <div class="flash-message">
-@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+@foreach (['error', 'warning', 'success', 'info'] as $msg)
 @php
 $colorMessage = [
-'danger' => 'red',
+'error' => 'red',
 'warning' => 'yellow',
 'success' => 'green',
 'info' => 'gray',

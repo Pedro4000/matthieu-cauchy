@@ -5,20 +5,27 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="w-full ">
                         <form method="post" action="{{ route('admin.photo.update') }}">
+                          @csrf
                           <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                               nom de la photo
                             </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" value="{{ $photo->nom }}">
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" value="{{ $photo->nom }}" name="nom">
+                            <input type="number" readonly value="{{ $photo->id }}" name="id" class="hidden"> 
                           </div>
 
                           <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                               album
                             </label>
-                            <input type='text' value="{{ $photo->album->nom }}">
+                            <select name='album'>
+                              @foreach($albums as $album)
+                                <option value='{{ $album->id }}' {{ $album->id == $photo->album->id ? 'selected' : '' }}>{{ $album->nom }}</option>
+                              @endforeach
+                            </select>
                             <p class="text-red-500 text-xs italic">.</p>
                           </div>
+
                           <div class="flex items-center justify-between mb-4">
                             <img class="photo-frame" src="{{ asset('storage/images/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
                           </div>

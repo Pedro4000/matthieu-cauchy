@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\{Album, Photo, Type};
+use Illuminate\Support\Facades\Storage;
+
 
 class AlbumController extends Controller
 {
@@ -13,7 +16,14 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Album::all();
+        foreach($albums as &$album){
+            $album->lien_image = 'storage/images/'.$album->nom_route.'/'.$album->photos[0]->nom_fichier;
+        }
+
+        return view('admin.album.album_index',[
+            'albums' => $albums,
+        ]);
     }
 
     /**
@@ -23,7 +33,11 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+
+        return view('admin.album.album_create',[
+            'types' => $types,
+        ]);
     }
 
     /**
@@ -34,21 +48,21 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $album = new Album();
+        $album->type_id = $request->get('type');
+        $album->nom = $request->get('nom');
+        $album->nom_route = $request->get('nom_route');
+
+        if($album->save()) {
+            return redirect()->route('admin.album.index')->with('success', 'ok album créé');
+        } else {
+            return redirect(url()->previous())->with('error', 'problème lors de la création');
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
+ 
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -56,7 +70,13 @@ class AlbumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $album = Album::find($id);
+        $types = Type::all();
+
+        return view('admin.album.album_edit',[
+            'album' => $album,
+            'types' => $types
+        ]);
     }
 
     /**
@@ -66,9 +86,14 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $album = Album::find($request->get('id'));
+        dd($request->all(), $album);
+
+        $abum->type_id = $request->get('type');
+        $album->nom = $request->get('nom');
+        $album->description = $request->get('description');
     }
 
     /**
@@ -79,6 +104,6 @@ class AlbumController extends Controller
      */
     public function destroy($id)
     {
-        //
+        die;
     }
 }

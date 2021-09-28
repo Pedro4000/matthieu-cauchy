@@ -1,5 +1,5 @@
 <x-app-layout>    
-    <div class="py-12 w-auto">
+    <div class="py-6 w-auto">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -8,15 +8,18 @@
                   + ajouter
                 </button>
                 </a>
-                <table class="table-auto">
+                <div class='pt-4'>
+                  {{ $photos->links() }}                  
+                </div>
+                <table class="table-auto photo-index-table">
                   <thead>
                     <tr>
-                      <th class='w-1/6'>nom</th>
-                      <th class='w-1/6'>album</th>
+                      <th class='w-1/12'>nom</th>
+                      <th class='w-1/12'>album</th>
                       <th class='w-1/6'>nom du fichier</th>
                       <th class='w-1/6'>couverture</th>
-                      <th class='w-1/6'>description</th>
-                      <th class='w-1/6 text-center'>apercu</th>
+                      <th class='w-1/12'>description</th>
+                      <th class='w-1/12 text-center'>apercu</th>
                     </tr>
                   </thead>
                   <tbody>

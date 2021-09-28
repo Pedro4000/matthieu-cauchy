@@ -18,7 +18,7 @@ class CreatePhotosTable extends Migration
             $table->timestamps();
             $table->foreignId('album_id')->nullable();
             $table->string('nom')->nullable();
-            $table->string('nom_fichier')->nullable();
+            $table->string('nom_fichier')->unique();
             $table->boolean('couverture')->nullable();
             $table->longText('description')->nullable();            
         });
