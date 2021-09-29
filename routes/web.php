@@ -14,20 +14,17 @@ use App\Http\Controllers\CauchyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [CauchyController::class, 'home'])
-    ->name('home');
 
-Route::get('/index', [CauchyController::class, 'index'])
-    ->name('index');
+Route::get('/', [CauchyController::class, 'landing'])->name('landing');
 
-Route::get('/works', [CauchyController::class, 'works'])
-    ->name('works');
+Route::get('/index', [CauchyController::class, 'index'])->name('index');
 
-Route::get('/works/{work}', [CauchyController::class, 'work'])
-    ->name('work');
+Route::get('/works', [CauchyController::class, 'works'])->name('works');
 
-Route::get('/ajax-all', [CauchyController::class, 'ajax'])
-    ->name('ajax-gngn');
+Route::get('/works/{work}', [CauchyController::class, 'work'])->name('work');
+
+Route::get('/ajax-all', [CauchyController::class, 'ajax'])->name('ajax-gngn');
+
 
 Route::get('/getcauchyimages', [CauchyController::class, 'getImages']);
 
