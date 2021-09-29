@@ -17,9 +17,6 @@ class AlbumController extends Controller
     public function index()
     {
         $albums = Album::all();
-        foreach($albums as &$album){
-            $album->lien_image = 'storage/images/'.$album->nom_route.'/'.$album->photos[0]->nom_fichier;
-        }
 
         return view('admin.album.album_index',[
             'albums' => $albums,
@@ -89,11 +86,16 @@ class AlbumController extends Controller
     public function update(Request $request)
     {
         $album = Album::find($request->get('id'));
-        dd($request->all(), $album);
 
-        $abum->type_id = $request->get('type');
+        $album->type_id = $request->get('type') ;
         $album->nom = $request->get('nom');
         $album->description = $request->get('description');
+
+        if($album->save()) {
+            return redirect()->route('admin.album.index')->with('success', 'album modifié');
+        } else {
+            return redirect()->route('admin.album.index')->with('success', 'problème lors de la modif');
+        }    
     }
 
     /**
@@ -102,8 +104,18 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        die;
+        $albumId = $request->get('id');
+
+        $album = Album::find($albumId);
+        
+        foreach($album->photos as $photo) {
+            $photo->delete();
+        }
+        $album->delete();
+        Storage::deleteDirectory('public/images/'.$album->nom_route);
+
+        return redirect()->route('admin.album.index')->with('success', 'album supprimé');
     }
 }

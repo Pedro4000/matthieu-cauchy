@@ -87,7 +87,7 @@ Route::middleware(['auth'])
     Route::post('album-update', [AlbumController::class, 'update'])
         ->name('album.update');
 
-    Route::get('album-destroy', [AlbumController::class, 'destroy'])
+    Route::post('album-destroy', [AlbumController::class, 'destroy'])
         ->name('album.destroy');
 
 
@@ -101,10 +101,7 @@ Route::middleware(['auth'])
     Route::post('store', [TypeController::class, 'store'])
         ->name('type.store');
 
-    Route::get('Type-show', [TypeController::class, 'show'])
-        ->name('type.show');
-
-    Route::get('Type-edit', [TypeController::class, 'edit'])
+    Route::get('Type-edit/{id}', [TypeController::class, 'edit'])
         ->name('type.edit');
 
     Route::post('Type-update', [TypeController::class, 'update'])

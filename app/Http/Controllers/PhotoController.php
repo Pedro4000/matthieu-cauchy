@@ -55,6 +55,10 @@ class PhotoController extends Controller
 
         $file = $request->file('file');
 
+        $validated = $request->validate([
+            'nom' => 'required|unique:photos',
+        ]);
+
 
         // todo faire un slug pour verifier que le nom nexiste pas deja de la photo 
         // sans quoi ca ecrase lancienne photo
@@ -64,7 +68,7 @@ class PhotoController extends Controller
         $photo->description = $request->get('description');
         $photo->nom_fichier = $file->getClientOriginalName();
 
-        if (Storage::exists('public/images/'.$album->nom_route, $photo->nom_fichier)) {
+        if (Storage::exists('public/images/'.$album->nom_route.'/'.$photo->nom_fichier)) {
             return redirect(url()->previous())->with('error', 'il existe déjà une photo avec ce nom dans cet album');
         };
 
@@ -107,7 +111,6 @@ class PhotoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -120,6 +123,7 @@ class PhotoController extends Controller
         $photo->description = $request->get('description');
         $photo->album_id = $request->album;
 
+
         if ($photo->save()) {
             return redirect()->route('admin.photo.index')->with('success', 'la photo a bien été modifiée');
         } else {
@@ -130,7 +134,6 @@ class PhotoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\{Album, Photo, Type};
+use Illuminate\Support\Facades\Storage;
+
 
 class TypeController extends Controller
 {
@@ -13,7 +16,11 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all();
+
+        return view('admin.type.type_index',[
+            'types' => $types,
+        ]);
     }
 
     /**
@@ -23,7 +30,11 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+
+        return view('admin.type.type_create',[
+            'types' => $types,
+        ]);
     }
 
     /**
@@ -34,21 +45,21 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = new Type();
+        $type->type_id = $request->get('type');
+        $type->nom = $request->get('nom');
+        $type->description = $request->get('description');
+
+        if($type->save()) {
+            return redirect()->route('admin.type.index')->with('success', 'ok type créé');
+        } else {
+            return redirect(url()->previous())->with('error', 'problème lors de la création');
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
+ 
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -56,7 +67,13 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $type = Type::find($id);
+        $types = Type::all();
+
+        return view('admin.type.type_edit',[
+            'type' => $type,
+            'types' => $types
+        ]);
     }
 
     /**
@@ -66,9 +83,18 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $type = Type::find($request->get('id'));
+
+        $type->nom = $request->get('nom');
+        $type->description = $request->get('description');
+
+        if($type->save()) {
+            return redirect()->route('admin.type.index')->with('success', 'type modifié');
+        } else {
+            return redirect()->route('admin.type.index')->with('success', 'problème lors de la modif');
+        }
     }
 
     /**
@@ -77,8 +103,18 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $typeId = $request->get('id');
+
+        $type = Type::find($typeId);
+        
+        foreach($type->photos as $photo) {
+            $photo->delete();
+        }
+        $type->delete();
+        Storage::deleteDirectory('public/images/'.$type->nom_route);
+
+        return redirect()->route('admin.type.index')->with('success', 'type supprimé');
     }
 }
