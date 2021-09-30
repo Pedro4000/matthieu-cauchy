@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Serie, Album, Photo, Type};
+use App\Models\{Serie, Album, Photo, Type, APropos};
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\{Request, Response};
 use function PHPUnit\Framework\stringContains;
@@ -35,6 +35,17 @@ class CauchyController extends Controller
             "types" => $types,
         ]);
     }
+
+    public function aPropos(Request $request) {
+
+        $types= Type::all();
+        $apropos = APropos::first();
+
+        return view('a_propos', [
+            "apropos" => $apropos,
+            "types" => $types,
+        ]);
+    }    
 
 
     public function getImages(){

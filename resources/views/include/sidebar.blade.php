@@ -17,7 +17,7 @@
     @endforeach
     </li>
     <li class="sb-secondary pl-2 mt-4">
-      <span class="sb-span">about</span>
+      <a href="{{ route('a_propos') }}"><span class="sb-span">about</span></a>
     </li>
     <li class="sb-secondary pl-2 mt-4">
       <span class="sb-span">contact</span>

@@ -23,6 +23,9 @@ Route::get('/index', [CauchyController::class, 'index'])
 Route::get('/ccs/{album}', [CauchyController::class, 'album'])
     ->name('album');
 
+Route::get('/dmd/a-propos', [CauchyController::class, 'aPropos'])
+    ->name('a_propos');
+
 Route::get('/ajax-all', [CauchyController::class, 'ajax'])
     ->name('ajax-gngn');
 
