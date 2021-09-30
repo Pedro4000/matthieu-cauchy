@@ -14,11 +14,12 @@ $(document).ready(function() {
     $('img').first().css('display', 'block');                      
 
     $('#stage').click({param1: "suivante"}, prochaineImage);
-    $(document).keydown(prochaineImage);
+    $(document).keydown({param1: "suivante"}, prochaineImage);
     let autoChange = setInterval(prochaineImage, 10000, "suivante");
 
     function prochaineImage (event) {
 
+        console.log(event.which);
         if (typeof event.which == 39) {
             event = []
             event.data = [];
@@ -27,7 +28,7 @@ $(document).ready(function() {
         if (typeof event.which == 37) {
             event = []
             event.data = [];
-            event.data.param1 = 'suivante';
+            event.data.param1 = 'precedente';
         }
 
         if (event == 'suivante'){

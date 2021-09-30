@@ -15,5 +15,10 @@
         <i class="fas fa-venus-double"></i><span class="d-none d-lg-inline"> type</span>
       </a>
     </li>  
+    <li class="nav-item my-4 ">
+      <a class="nav-link p-4{{ (Route::current()->getName() == 'admin.a_propos.edit') ? 'active' : '' }}" href="{{ route('admin.a_propos.edit') }}" title="gerer les types">
+        <i class="fab fa-accessible-icon"></i><span class="d-none d-lg-inline"> à propos</span>
+      </a>
+    </li> 
   </ul>
 </div>

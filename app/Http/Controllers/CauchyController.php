@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Serie;
+use App\Models\{Serie, Album, Photo, Type};
 use Illuminate\Support\Facades\App;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Intervention\Image\ImageManagerStatic;
+use Illuminate\Http\{Request, Response};
 use function PHPUnit\Framework\stringContains;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\{Storage, File, DB};
 use Intervention\Image\Filters\FilterInterface;
-use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic;
 
 class CauchyController extends Controller
 {
@@ -21,52 +17,25 @@ class CauchyController extends Controller
     }
     public function home(Request $request){
 
+        $types= Type::all();
+
         $session = $request->session()->has('users');
         return view('home', [
+            "types" => $types,
         ]);
     }
 
-    public function index($category){
+    public function album(string $album) {
 
-        return view('index', [
-            'bla'=>"bzzz"
+        $types= Type::all();
+        $album = Album::where('nom', $album)->get()->first();
+
+        return view('album', [
+            "album" => $album,
+            "types" => $types,
         ]);
     }
 
-    public function works(Request $request){
-        $allFiles=Storage::allFiles('public/images/martha1/');
-        $allFiles=Storage::allFiles('public/images/martha1/');
-        foreach ($allFiles as $allFile) {
-            $image = Storage::get($allFile);
-            $img = ImageManagerStatic::make($image);
-            $img->resize(720,720);
-            $img->save('public/images/'.explode('/',$allFile)[2].'/720x720_'.explode('/',$allFile)[3]);
-           Storage::put('public/images/'.explode('/',$allFile)[2].'/720/'.explode('/',$allFile)[3],$img);
-        }
- 
-         $image = Storage::get("public/images/martha1/03_15_10_2016-copy.jpg");
-
-        return view('works',[]);
-    }
-
-    public function work($work){
-        $i=0;
-        $allFiles=Storage::allFiles('public/images/'.$work.'1/');
-        foreach ($allFiles as $allFile) {
-            if (!str_contains($allFile,'540')){
-                unset($allFiles[$i]);
-            } else {
-                $allFiles[$i]=explode('images/',$allFile)[1];
-            }
-            $i++;
-        }
-        $allFiles = array_values($allFiles);
-
-        return view('work', [
-            "allFiles"=> $allFiles,
-            "work" => $work
-        ]);
-    }
 
     public function getImages(){
         $imgLinks = [];

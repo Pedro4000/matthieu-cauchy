@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Photo extends Model
+class APropos extends Model
 {
-    protected $table = 'photos';
+    protected $table = 'a_propos';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,10 @@ class Photo extends Model
      * @var array
      */
     protected $fillable = [
-
+        'contenu',
+        'couverture',
+        'ordre',
+        'afficher',
     ];
 
     /**
@@ -46,8 +49,4 @@ class Photo extends Model
     ];
 
 
-    public function album()
-    {
-        return $this->belongsTo(Album::class);
-    }    
 }

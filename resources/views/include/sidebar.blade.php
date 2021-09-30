@@ -3,20 +3,18 @@
     <li class="">
       <span class="sb-main">Matthieu<br> Cauchy</span>
     </li>
-    <li class="sb-secondary pl-2 mt-4">
-      <span class="sb-span">works</span>
-      <ul class="sb-ter aplati mt-2 pl-3">
-        <li> <span class="sb-span">martha</span></li>
-        <li> <span class="sb-span">silence</span></li>
-      </ul>
-    </li>
-    <li class="sb-secondary pl-2 mt-4">
-      <span class="sb-span">books</span>
-      <ul class="sb-ter aplati mt-2 pl-3">
-        <li> <span class="sb-span">première-classe</span></li>
-        <li> <span class="sb-span">tomorrowland</span></li>
-        <li> <span class="sb-span">33 midi</span></li>
-      </ul>
+    @foreach($types as $type)
+      <li class="sb-secondary pl-2 mt-4">
+      <span class="sb-span">{{ $type->nom }}</span>
+        @if($type->albums)
+        <ul class="sb-ter aplati mt-2 pl-3">
+          @foreach($type->albums as $album)
+            <li><a href="{{ route('album', [ 'album' => $album->nom ]) }}"><span class="sb-span">{{ $album->nom }}</span></a></li>
+          @endforeach
+        </ul>
+        @endif
+      </li>
+    @endforeach
     </li>
     <li class="sb-secondary pl-2 mt-4">
       <span class="sb-span">about</span>
