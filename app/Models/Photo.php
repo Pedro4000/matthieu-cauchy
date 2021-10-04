@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class APropos extends Model
+class Photo extends Model
 {
-    protected $table = 'a_propos';
+    protected $table = 'photos';
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +47,12 @@ class APropos extends Model
      */
     protected $casts = [
     ];
+
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
 
 
 }
