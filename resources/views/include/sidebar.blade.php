@@ -1,7 +1,7 @@
 <div class="sidebar_content sticky-top" style="padding-top: 10px; margin-top: 25px;">
   <ul class="flex-column">
     <li class="">
-      <span class="sb-main">Matthieu<br> Cauchy</span>
+      <a href="{{ route('home') }}"><span class="sb-main">Matthieu<br> Cauchy</span></a>
     </li>
     @foreach($types as $type)
       <li class="sb-secondary pl-2 mt-4">
