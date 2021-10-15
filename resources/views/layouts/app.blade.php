@@ -16,7 +16,7 @@
 
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+
         <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>
     </head>
     <body class="font-sans antialiased">
@@ -41,6 +41,7 @@
                     {{ $slot }}                        
                 </div>
             </main>
+            @include('include.foot')
         </div>
     </body>
 </html>

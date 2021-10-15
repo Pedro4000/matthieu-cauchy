@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CauchyController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PhotoController;
-use App\Http\Controllers\AlbumController;
-use App\Http\Controllers\TypeController;
+use App\Http\Controllers\{PhotoController, AlbumController, TypeController, DashboardController, CauchyController, AProposController};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +25,11 @@ Route::get('/works/{work}', [CauchyController::class, 'work'])->name('work');
 
 Route::get('/ajax-all', [CauchyController::class, 'ajax'])->name('ajax-gngn');
 
+Route::get('/ccs/{album}', [CauchyController::class, 'album'])
+    ->name('album');
+
+Route::get('/dmd/a-propos', [CauchyController::class, 'aPropos'])
+    ->name('a_propos');
 
 Route::get('/getcauchyimages', [CauchyController::class, 'getImages']);
 
@@ -46,13 +47,15 @@ Route::middleware(['auth'])
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])
         ->name('dashboard');
 
+
+
     Route::get('photo-index/{album_id?}', [PhotoController::class, 'index'])
         ->name('photo.index');
 
     Route::get('photo-creer', [PhotoController::class, 'create'])
         ->name('photo.create');
 
-    Route::post('/photo-store', [PhotoController::class, 'store'])
+    Route::post('photo-store', [PhotoController::class, 'store'])
         ->name('photo.store');
 
     Route::get('photo-show/{id}', [PhotoController::class, 'show'])
@@ -66,6 +69,10 @@ Route::middleware(['auth'])
 
     Route::post('photo-destroy', [PhotoController::class, 'destroy'])
         ->name('photo.destroy');
+
+    Route::get('/createFromStorage', [PhotoController::class, 'createFromStorage'])
+        ->name('create_from_storage');
+
 
 
 
@@ -89,28 +96,40 @@ Route::middleware(['auth'])
 
 
 
-    Route::get('Type-index', [TypeController::class, 'index'])
+
+    Route::get('type-index', [TypeController::class, 'index'])
         ->name('type.index');
 
-    Route::get('Type-creer', [TypeController::class, 'create'])
+    Route::get('type-creer', [TypeController::class, 'create'])
         ->name('type.create');
 
     Route::post('store', [TypeController::class, 'store'])
         ->name('type.store');
 
-    Route::get('Type-edit/{id}', [TypeController::class, 'edit'])
+    Route::get('type-edit/{id}', [TypeController::class, 'edit'])
         ->name('type.edit');
 
-    Route::post('Type-update', [TypeController::class, 'update'])
+    Route::post('type-update', [TypeController::class, 'update'])
         ->name('type.update');
 
-    Route::get('Type-destroy', [TypeController::class, 'destroy'])
+    Route::get('type-destroy', [TypeController::class, 'destroy'])
         ->name('type.destroy');
 
-                             
 
-    Route::get('/createFromStorage', [PhotoController::class, 'createFromStorage'])
-        ->name('create_from_storage');
+
+
+    Route::get('a-propos-index', [AProposController::class, 'index'])
+        ->name('a_propos.index');
+
+    Route::get('a-propos-edit', [AProposController::class, 'edit'])
+        ->name('a_propos.edit');
+
+    Route::post('a-propos-update', [AProposController::class, 'update'])
+        ->name('a_propos.update');
+
+    Route::get('a-propos-destroy', [AProposController::class, 'destroy'])
+        ->name('a_propos.destroy');
+                             
 
 
 });

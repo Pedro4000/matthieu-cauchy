@@ -15,7 +15,10 @@ class Photo extends Model
      * @var array
      */
     protected $fillable = [
-
+        'contenu',
+        'couverture',
+        'ordre',
+        'afficher',
     ];
 
     /**
@@ -49,5 +52,7 @@ class Photo extends Model
     public function album()
     {
         return $this->belongsTo(Album::class);
-    }    
+    }
+
+
 }

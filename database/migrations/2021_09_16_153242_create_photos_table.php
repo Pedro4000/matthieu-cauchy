@@ -19,7 +19,8 @@ class CreatePhotosTable extends Migration
             $table->foreignId('album_id')->nullable();
             $table->string('nom')->nullable();
             $table->string('nom_fichier')->unique();
-            $table->boolean('couverture')->nullable();
+            $table->integer('ordre')->nullable();
+            $table->boolean('afficher')->nullable();
             $table->longText('description')->nullable();            
         });
     }

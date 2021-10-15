@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Serie;
+use App\Models\{Serie, Album, Photo, Type, APropos};
 use Illuminate\Support\Facades\App;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Intervention\Image\ImageManagerStatic;
+use Illuminate\Http\{Request, Response};
 use function PHPUnit\Framework\stringContains;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\{Storage, File, DB};
 use Intervention\Image\Filters\FilterInterface;
-use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic;
 
 class CauchyController extends Controller
 {
@@ -21,21 +17,33 @@ class CauchyController extends Controller
     }
     public function landing(Request $request){
 
+        $types= Type::all();
+
         $session = $request->session()->has('users');
+<<<<<<< HEAD
         dd($session);
 
 
         return view('landing', [
+=======
+        return view('home', [
+            "types" => $types,
+>>>>>>> 6f01cfc66a19b09f6cdbf4d5182891f37f24b4b8
         ]);
     }
 
-    public function index($category){
+    public function album(string $album) {
 
-        return view('index', [
-            'bla'=>"bzzz"
+        $types= Type::all();
+        $album = Album::where('nom', $album)->get()->first();
+
+        return view('album', [
+            "album" => $album,
+            "types" => $types,
         ]);
     }
 
+<<<<<<< HEAD
     public function works(){
   //      $allFiles=Storage::allFiles('public/images/martha1/');
   //      $allFiles=Storage::allFiles('public/images/martha1/');
@@ -51,25 +59,19 @@ class CauchyController extends Controller
 
         return view('works',[]);
     }
+=======
+    public function aPropos(Request $request) {
+>>>>>>> 6f01cfc66a19b09f6cdbf4d5182891f37f24b4b8
 
-    public function work($work){
-        $i=0;
-        $allFiles=Storage::allFiles('public/images/'.$work.'1/');
-        foreach ($allFiles as $allFile) {
-            if (!str_contains($allFile,'540')){
-                unset($allFiles[$i]);
-            } else {
-                $allFiles[$i]=explode('images/',$allFile)[1];
-            }
-            $i++;
-        }
-        $allFiles = array_values($allFiles);
+        $types= Type::all();
+        $apropos = APropos::first();
 
-        return view('work', [
-            "allFiles"=> $allFiles,
-            "work" => $work
+        return view('a_propos', [
+            "apropos" => $apropos,
+            "types" => $types,
         ]);
-    }
+    }    
+
 
     public function getImages(){
         $imgLinks = [];

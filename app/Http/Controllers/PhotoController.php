@@ -153,9 +153,9 @@ class PhotoController extends Controller
 
     public function createFromStorage(Request $request) {
 
-        die('ok');
 
-        /*
+        die('ok');
+        
         $album = Album::find(1);
         $directories =  Storage::directories('public/images');
         $types = Type::all();
@@ -188,7 +188,7 @@ class PhotoController extends Controller
             }         
         }
 
-        */
+        
         die('ok');
 
     }
