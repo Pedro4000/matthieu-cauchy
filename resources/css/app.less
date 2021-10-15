@@ -1,0 +1,125 @@
+body {
+  margin: 0;
+}
+a {
+  text-decoration: none ;
+  color: black;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+main{
+  display: flex;
+  flex-direction:  row;
+  align-items: stretch;
+  height: 100%;
+}
+.sidebar {
+  padding-top: 0;
+  top: 0;
+  min-height: 100%;
+  z-index: 999;
+  font-size: 20px;
+  padding: 20px;
+  width: 15%;
+  height: 100%;
+}
+
+.nav-link:hover{
+  background-color: rgb(240, 240, 240);
+}
+
+
+.sb-main {
+  font-size: 25px;
+  font-weight: lighter;
+}
+
+.hidden{
+  display: none;
+}
+
+body {
+  font-family: 'Daubenton', Fallback, sans-serif !important;
+}
+
+#content{
+}
+
+.sb-secondary{
+  cursor: pointer;
+  padding-left: 20px;
+}
+
+.sb-secondary .sb-ter {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.sb-secondary:hover .sb-ter {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+}
+
+.sb-span:hover{
+  opacity: 0.5;
+  transition-duration: 0.3s;
+}
+
+.sb-main{
+}
+
+#stage{
+    margin: 7vh 28%;
+    width: 650px;
+    text-align: center;
+    position: relative;
+}
+
+#stage img{
+  padding: 10px;
+  background: #fff;
+  width: 600px;
+}
+.apercu{
+  max-width: 45px;
+  border: 1px solid black;
+}
+
+.photo-frame{
+  max-width: 600px;
+  border: 1px solid black;
+}
+
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    display: inline-block;
+  cursor: pointer; 
+
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+}
+
+
+.photo-index-table{
+  tbody{
+    td{
+      font-size: 10px;
+    }
+  }
+}

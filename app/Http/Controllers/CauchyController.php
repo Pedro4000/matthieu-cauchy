@@ -14,8 +14,6 @@ use Intervention\Image\Filters\FilterInterface;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\DB;
 
-
-
 class CauchyController extends Controller
 {
     public function __construct(){
