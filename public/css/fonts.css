@@ -1,0 +1,6 @@
+@font-face {
+ font-family: "Daubenton";
+ src: url("../fonts/webfonts/daubentonwebfont.svg") format("svg"),
+        url("../fonts/webfonts/daubentonwebfont.woff") format("woff"),
+        url("../fonts/webfonts/daubentonwebfont.tff") format("tff");
+}

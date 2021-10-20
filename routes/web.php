@@ -15,7 +15,7 @@ use App\Http\Controllers\{PhotoController, AlbumController, TypeController, Dash
 */
 
 
-Route::get('/', [CauchyController::class, 'landing'])->name('landing');
+Route::get('/', [CauchyController::class, 'home'])->name('home');
 
 Route::get('/index', [CauchyController::class, 'index'])->name('index');
 

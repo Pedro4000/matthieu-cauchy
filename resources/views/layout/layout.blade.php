@@ -4,7 +4,7 @@
     <title>@yield('titre') - {{ Str::replace('_',' ',config('app.name', '')) }}</title>
 </title>
     <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">    
-    <link href="{{ asset('css/fonts/fonts.css') }}" rel="stylesheet">    
+    <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
   </head>
@@ -29,7 +29,7 @@
     </div>
     <div class="footer bg-dark text-cbo-4 text-right text-truncate">
       <p class="m-0 pr-5">
-@include('include.bottombar')
+{{--@include('include.bottombar')--}}
       </p>
     </div>
 @include('include.foot')

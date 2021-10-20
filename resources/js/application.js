@@ -3,6 +3,7 @@ $('img').first().css('display', 'block');
 
 $(document).ready(function() {
 
+
     var imagesArray = [];
     let images = $('img');
     for(keys in images) {
@@ -26,7 +27,7 @@ $(document).ready(function() {
             sens_carrousel = 'suivant';
         }
 
-        if (!sens_carrousel || sens_carrousel == 'suivant') {
+        if (sens_carrousel == 'suivant') {
             console.log('ok');
             lastElement = imagesArray.shift();
             imagesArray.push(lastElement);
@@ -56,5 +57,6 @@ $(document).ready(function() {
         }
     }
 
+    console.log('ok');
 
 }); 

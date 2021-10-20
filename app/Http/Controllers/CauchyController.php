@@ -4,31 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\{Serie, Album, Photo, Type, APropos};
 use Illuminate\Support\Facades\App;
+use Intervention\Image\ImageManagerStatic;
 use Illuminate\Http\{Request, Response};
 use function PHPUnit\Framework\stringContains;
 use Illuminate\Support\Facades\{Storage, File, DB};
 use Intervention\Image\Filters\FilterInterface;
-use Intervention\Image\ImageManagerStatic;
 
 class CauchyController extends Controller
 {
     public function __construct(){
 
     }
-    public function landing(Request $request){
+    public function home(Request $request){
 
         $types= Type::all();
 
         $session = $request->session()->has('users');
-<<<<<<< HEAD
-        dd($session);
 
-
-        return view('landing', [
-=======
         return view('home', [
             "types" => $types,
->>>>>>> 6f01cfc66a19b09f6cdbf4d5182891f37f24b4b8
         ]);
     }
 
@@ -43,7 +37,6 @@ class CauchyController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
     public function works(){
   //      $allFiles=Storage::allFiles('public/images/martha1/');
   //      $allFiles=Storage::allFiles('public/images/martha1/');
@@ -59,9 +52,8 @@ class CauchyController extends Controller
 
         return view('works',[]);
     }
-=======
+
     public function aPropos(Request $request) {
->>>>>>> 6f01cfc66a19b09f6cdbf4d5182891f37f24b4b8
 
         $types= Type::all();
         $apropos = APropos::first();
