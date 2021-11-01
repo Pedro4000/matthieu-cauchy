@@ -1,5 +1,5 @@
-$('img').css('display', 'none');
-$('img').first().css('display', 'block');  
+$('#stage img').css('display', 'none');
+$('#stage img').first().css('display', 'block');  
 
 $(document).ready(function() {
 
@@ -9,8 +9,8 @@ $(document).ready(function() {
         imagesArray[keys] = images[keys];
     }
 
-    $('img').css('display', 'none');
-    $('img').eq(1).css('display', 'block');      
+    $('#stage img').css('display', 'none');
+    $('#stage img').eq(1).css('display', 'block');      
 
     $('#stage').click(prochaineImage);
     $(document).keydown(prochaineImage);
@@ -30,13 +30,13 @@ $(document).ready(function() {
             console.log('ok');
             lastElement = imagesArray.shift();
             imagesArray.push(lastElement);
-              $('img').eq(1).animate({
+              $('#stage img').eq(1).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
-                $('img').first().remove();
-                $('img').css('display', 'none');
-                $('img').eq(1).css('display', 'block');                      
-                //$('img').append().remove();
+                $('#stage img').first().remove();
+                $('#stage img').css('display', 'none');
+                $('#stage img').eq(1).css('display', 'block');                      
+                //$('#stage img').append().remove();
                 $('#stage').append(imagesArray.last()); 
               });                    
         }
@@ -44,13 +44,13 @@ $(document).ready(function() {
         if (sens_carrousel == 'precedent') {
             lastElement = imagesArray.pop();
             imagesArray.unshift(lastElement);
-              $('img').eq(1).animate({
+              $('#stage img').eq(1).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
-                $('img').css('display', 'none');
-                $('img').last().remove();
+                $('#stage img').css('display', 'none');
+                $('#stage img').last().remove();
                 $('#stage').prepend(imagesArray.first()); 
-                $('img').eq(1).css('display', 'block');                      
+                $('#stage img').eq(1).css('display', 'block');                      
                 //$('img').append().remove();
               });                    
         }
