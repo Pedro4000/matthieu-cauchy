@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Vetpreislen'),
             ]);
         DB::table('types')->insert([
-            'nom' => 'Books',
+            'nom' => 'books',
             'description' => 'du papier',
             ]);
         DB::table('types')->insert([
-            'nom' => 'Works',
+            'nom' => 'works',
             'description' => 'des photos',
             ]);        
     }

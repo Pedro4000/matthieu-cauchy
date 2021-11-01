@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Type extends Model
 {
+
     protected $table = 'types';
 
     /**

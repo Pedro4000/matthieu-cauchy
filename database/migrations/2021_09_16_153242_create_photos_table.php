@@ -20,6 +20,8 @@ class CreatePhotosTable extends Migration
             $table->string('nom')->nullable();
             $table->string('nom_fichier')->unique();
             $table->integer('ordre')->nullable();
+            $table->integer('ordre_accueil')->nullable();
+            $table->boolean('accueil')->nullable();
             $table->boolean('afficher')->nullable();
             $table->longText('description')->nullable();            
         });

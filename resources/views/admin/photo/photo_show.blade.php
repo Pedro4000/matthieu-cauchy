@@ -19,14 +19,21 @@
                           <p class="text-red-500 text-xs italic">.</p>
                         </div>
                         <div class="flex items-center justify-between mb-4">
-                          <img class="photo-frame" src="{{ asset('storage/images/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
+                          <img class="photo-frame" src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
+                        </div>
+
+                        <div class="mb-4">
+                          <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                            description
+                          </label>                          
+                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" type="text" disabled value='{{ $photo->description }}'>
                         </div>
 
                         <div class="mb-4">
                           <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                            description
+                            ordre
                           </label>                          
-                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" type="text" disabled value='{{ $photo->description }}'>
+                          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ordre" name="ordre" type="text" disabled value='{{ $photo->ordre }}'>
                         </div>
 
                         <div class="flex items-center justify-between">

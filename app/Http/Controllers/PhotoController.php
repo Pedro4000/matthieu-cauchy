@@ -17,15 +17,27 @@ class PhotoController extends Controller
      */
     public function index(Request $request, int $album_id = null)
     {
-
-        $photos = Photo::paginate(25);
-
-        if ($album_id) {
-            $photos = Photo::where('album_id', $album_id)->paginate(25);
+        $albums = Album::all();
+        foreach ($albums as &$album) {
+            if (!isset($album->nombre_photos)) {
+                $album->nombre_photos = count($album->photos);
+            };
         }
+
+        $albums = $albums->mapWithKeys(function ($item, $key) {
+            return [$item->id => $item];
+        });
+
+        $photos = Photo::paginate(20);
+        foreach($photos as &$photo) {
+            $photo->nombre_photos = $albums[$photo->album_id]->nombre_photos;
+        }
+
+        $nombrePhotosAccueil = Photo::where('accueil', '1')->get();
 
         return view('admin.photo.photo_index',[
             'photos' => $photos,
+            'nombrePhotosAccueil' => $nombrePhotosAccueil,
         ]);
     }
 
@@ -152,34 +164,41 @@ class PhotoController extends Controller
 
 
     public function createFromStorage(Request $request) {
-
-
-        die('ok');
         
-        $album = Album::find(1);
         $directories =  Storage::directories('public/images');
         $types = Type::all();
-        foreach($directories as &$directory){
-            $directory = explode('/',$directory)[2];
-            $album = new Album();
-            $album->nom = $directory;
-            $album->nom_route = $directory;
-            if(preg_match('/coucou/', $directory)){
-                // books == types[0]
-                $album->type_id = $types[0]->id; 
-            } else {
-                $album->type_id = $types[1]->id;                
-            };
-            $album->save();
+        $books = $types[0];
+        $works = $types[1];
+
+        
+        foreach($directories as $directory){
+
+            $subdirectories =  Storage::directories($directory);
+            foreach ($subdirectories as $subdirectory) {
+
+                $nom_album = explode('/',$subdirectory)[3];
+                $album = new Album();
+                $album->nom = $nom_album;
+                $album->nom_route = $nom_album;
+
+                if(preg_match('/books/', $subdirectory)){
+                    $album->type_id = $books->id; 
+                } else {
+                    $album->type_id = $works->id;                
+                };
+                $album->save();
+            }
         };
+        
 
+        // on vient d'enregistrer les albums donc ne pas bouger de place
         $albums = Album::all();
-
+        
         foreach ($albums as $album){
 
-            $files = Storage::files('public/images/'.$album->nom);
+            $files = Storage::files('public/images/'.$album->type->nom.'/'.$album->nom);
             foreach($files as $file) {
-                $nomPhoto = explode('/', $file)[3];
+                $nomPhoto = explode('/', $file)[4];
                 $photo = new Photo();
                 $photo->album_id = $album->id;
                 $photo->nom = $nomPhoto;
@@ -187,7 +206,7 @@ class PhotoController extends Controller
                 $photo->save();
             }         
         }
-
+    
         
         die('ok');
 

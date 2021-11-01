@@ -44,7 +44,7 @@ Route::middleware(['auth'])
     ->prefix('admin')
     ->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    Route::get('/', [DashboardController::class, 'dashboard'])
         ->name('dashboard');
 
 
@@ -70,7 +70,13 @@ Route::middleware(['auth'])
     Route::post('photo-destroy', [PhotoController::class, 'destroy'])
         ->name('photo.destroy');
 
-    Route::get('/createFromStorage', [PhotoController::class, 'createFromStorage'])
+    Route::post('photo-mass-edit', [PhotoController::class, 'massEdit'])
+        ->name('photo.mass_edit');
+
+
+
+
+    Route::get('/createfromstorage', [PhotoController::class, 'createFromStorage'])
         ->name('create_from_storage');
 
 
@@ -112,7 +118,7 @@ Route::middleware(['auth'])
     Route::post('type-update', [TypeController::class, 'update'])
         ->name('type.update');
 
-    Route::get('type-destroy', [TypeController::class, 'destroy'])
+    Route::post('type-destroy', [TypeController::class, 'destroy'])
         ->name('type.destroy');
 
 

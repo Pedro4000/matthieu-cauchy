@@ -14,23 +14,55 @@
                 <table class="table-auto photo-index-table">
                   <thead>
                     <tr>
-                      <th class='w-1/12'>nom</th>
+                      <th class='w-1/6'>nom</th>
                       <th class='w-1/12'>album</th>
                       <th class='w-1/6'>nom du fichier</th>
-                      <th class='w-1/6'>couverture</th>
-                      <th class='w-1/12'>description</th>
-                      <th class='w-1/12 text-center'>apercu</th>
+                      <th class='w-1/6'>description</th>
+                      <th class='w-1/12'>ordre</th>
+                      <th class='w-1/12'>accueil</th>
+                      <th class='w-1/12'>ordre accueil</th>
+                      <th class='w-1/6 text-center'>apercu</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <form method="POST" action="{{ route('admin.photo.mass_edit') }}">
                     @foreach($photos as $photo)                      
                         <tr>
-                          <td><a href="{{ route('admin.photo.show', [ 'id' => $photo->id ] ) }}">{{ $photo->nom }}</a></td>
-                          <td>{{ $photo->album->nom }}</td>
-                          <td>{{ $photo->nom_fichier }}</td>
-                          <td>{{ $photo->couverture }}</td>
-                          <td>{{ $photo->description }}</td>
-                          <td ><a href="{{ route('admin.photo.show', [ 'id' => $photo->id ] ) }}"><img class='apercu' src="{{ asset('storage/images/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}"></a></td>
+                          <td><a href="{{ route('admin.photo.show', [ 'id' => $photo->id ] ) }}">{{ $photo->nom }}</a>
+                          </td>
+                          
+                          <td>{{ $photo->album->nom }}
+                          </td>
+                          
+                          <td>{{ $photo->nom_fichier }}
+                          </td>
+                          
+                          <td>{{ $photo->description }}
+                          </td>
+                          
+                          <td>
+                            <select class='appearance-none text-xs pl-0 pr-4' name="{{ 'ordre_photo_'.$photo->id }}">
+                                <option value="0">0</option>
+                              @for ($i = 1; $i <= $photo->nombre_photos; $i ++)
+                                <option value="{{ $i }}" {{ $photo->ordre == $i ? 'selected' : '' }}>{{ $i }}</option>
+                              @endfor
+                            </select>{{ $photo->accueil }}
+                            {{ $photo->ordre }}
+                          </td>
+
+
+                          <td>
+                            <select class='appearance-none text-xs pl-0 pr-5'>
+                              <option value='0' {{ $photo->accueil == 0 ? 'selected' : '' }}>non</option>
+                              <option value='1' {{ $photo->accueil == 1 ? 'selected' : '' }}>oui</option>
+                            </select>{{ $photo->accueil }}
+                          </td>
+
+                          <td>{{ $photo->ordre_accueil }}
+                          </td>
+                          
+                          <td class='text-center'><a href="{{ route('admin.photo.show', [ 'id' => $photo->id ] ) }}"><img class='apercu' style='display:inline' src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}"></a>
+                          </td>
                         </tr>                    
                     @endforeach
                   </tbody>

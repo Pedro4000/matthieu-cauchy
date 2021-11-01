@@ -25,7 +25,7 @@ section
 
   <div id="stage">
     @foreach($album->photos as $photo)
-      <img src="{{ asset('storage/images/'.$album->nom_route.'/'.$photo->nom_fichier) }}" >
+    <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none">
     @endforeach
   </div>
 

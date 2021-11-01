@@ -23,10 +23,9 @@ home
 @section('content')
 <div class="row col-10">
   <div id="stage">
-    <img src="{{ asset('storage/images/martha1/03_15_10_2016-copy.jpg') }}" style="display:none">
-    <img src="{{ asset('storage/images/coucou-magazine3/_432x540_tomorrowland-cauchy-cavallin-1.jpg') }}" style="display:none" >
-    <img src="{{ asset('storage/images/silence1/_540x540_mb013.jpg') }}"style="display:none" >
-    <img src="{{ asset('storage/images/coucou-magazine1/_432x540_test_selec12.jpg') }}" style="display:none">
+    @foreach ($photos as $photo)
+    <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none">
+    @endforeach
   </div>
 
 </div>

@@ -24,7 +24,9 @@ section
 <div class="row col-10">
 
   <div id="stage">
+    @if($apropos)
     {!! $apropos->contenu !!}
+    @endif
   </div>
 
 </div>

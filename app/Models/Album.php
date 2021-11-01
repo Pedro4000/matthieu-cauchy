@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Album extends Model
 {
+
+
+    const ALBUMS = [
+            ['nom' => 'silence', 'lien' => 'silence', 'type' => 'albums'],
+            ['nom' => 'martha', 'lien' => 'martha', 'type' => 'albums'],
+            ['nom' => 'tomorrowland', 'lien' => 'coucou-magazine/tomorrowland/', 'type' => 'books'],
+            ['nom' => 'premiere classe', 'lien' => 'coucou-magazine/', 'type' => 'books'],
+            ['nom' => '33 midi', 'lien' => 'coucou-magazine/33-midi/', 'type' => 'books'],
+        ];
+
     protected $table = 'albums';
 
     /**

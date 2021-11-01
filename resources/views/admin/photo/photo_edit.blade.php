@@ -27,7 +27,7 @@
                           </div>
 
                           <div class="flex items-center justify-between mb-4">
-                            <img class="photo-frame" src="{{ asset('storage/images/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
+                            <img class="photo-frame" src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
                           </div>
 
                           <div class="mb-4">

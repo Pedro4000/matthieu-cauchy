@@ -45,10 +45,11 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $type = new Type();
-        $type->type_id = $request->get('type');
         $type->nom = $request->get('nom');
-        $type->description = $request->get('description');
+        $type->description = $request->get('type_description');
 
         if($type->save()) {
             return redirect()->route('admin.type.index')->with('success', 'ok type créé');
@@ -106,12 +107,8 @@ class TypeController extends Controller
     public function destroy(Request $request)
     {
         $typeId = $request->get('id');
-
         $type = Type::find($typeId);
         
-        foreach($type->photos as $photo) {
-            $photo->delete();
-        }
         $type->delete();
         Storage::deleteDirectory('public/images/'.$type->nom_route);
 

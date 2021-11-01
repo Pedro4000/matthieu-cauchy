@@ -20,9 +20,11 @@ class CauchyController extends Controller
         $types= Type::all();
 
         $session = $request->session()->has('users');
+        $photos = Photo::all()->take(15);
 
         return view('home', [
             "types" => $types,
+            "photos" => $photos,
         ]);
     }
 
@@ -66,25 +68,44 @@ class CauchyController extends Controller
 
 
     public function getImages(){
-        $imgLinks = [];
-        $homepage = file_get_contents('http://matthieucauchy.com/coucou-magazine/');
 
-        preg_match_all("{<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesimg, PREG_SET_ORDER);
-        preg_match_all("{<a\s[^>]*?href\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesa, PREG_SET_ORDER);
-        $matchesimg = array_merge($matchesimg,$matchesa);
+        $albums = [
+            ['nom' => 'silence', 'lien' => 'silence', 'type' => 'works'],
+            ['nom' => 'martha', 'lien' => 'martha', 'type' => 'works'],
+            ['nom' => 'tomorrowland', 'lien' => 'coucou-magazine/tomorrowland/', 'type' => 'books'],
+            ['nom' => 'premiere classe', 'lien' => 'coucou-magazine/', 'type' => 'books'],
+            ['nom' => '33 midi', 'lien' => 'coucou-magazine/33-midi/', 'type' => 'books'],
+        ];
 
-        foreach ($matchesimg as $val) {
-//            preg_match_all('{([0-9]{1,3})x([0-9]{1,3})}ims',$val[1],$minimatch,PREG_SET_ORDER);
-            $explodedLink = explode('/', $val[1]);
-            if (is_array($explodedLink) && count($explodedLink) > 2 && $explodedLink[1] == 'storage') {
-                array_push($imgLinks, 'http://matthieucauchy.com' . $val[1]);
+        foreach($albums as $album) {
+
+            $matchesimg = [];
+            $imgLinks = [];
+            $matchesa = [];
+
+            $homepage = file_get_contents('http://matthieucauchy.com/'.$album['lien']);
+
+            preg_match_all("{<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesimg, PREG_SET_ORDER);
+            preg_match_all("{<a\s[^>]*?href\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>}ims", $homepage, $matchesa, PREG_SET_ORDER);
+            $matchesimg = array_merge($matchesimg,$matchesa);
+
+            foreach ($matchesimg as $val) {
+    //            preg_match_all('{([0-9]{1,3})x([0-9]{1,3})}ims',$val[1],$minimatch,PREG_SET_ORDER);
+                $explodedLink = explode('/', $val[1]);
+                if (is_array($explodedLink) && count($explodedLink) > 2 && $explodedLink[1] == 'storage') {
+                    array_push($imgLinks, 'http://matthieucauchy.com' . $val[1]);
+                }
+            }
+
+            foreach ($imgLinks as $img) {
+                $nomPhoto = explode('/',$img)[6];
+                $content = file_get_contents($img);
+                Storage::put('public/images/'.$album['type'].'/'.$album['nom'].'/'.$nomPhoto,$content);
             }
         }
-        foreach ($imgLinks as $img) {
-            $content = file_get_contents($img);
-            Storage::put('public/images/'.explode('/',$img)[5].'/'.explode('/',$img)[6],$content);
-        }
 
+
+        die('ok');
         return view('showImages', [
             'imgLinks' => $imgLinks
         ]);
