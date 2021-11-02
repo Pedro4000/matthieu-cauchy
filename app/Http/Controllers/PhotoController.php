@@ -33,11 +33,8 @@ class PhotoController extends Controller
             $photo->nombre_photos = $albums[$photo->album_id]->nombre_photos;
         }
 
-        $nombrePhotosAccueil = Photo::where('accueil', '1')->get();
-
         return view('admin.photo.photo_index',[
             'photos' => $photos,
-            'nombrePhotosAccueil' => $nombrePhotosAccueil,
         ]);
     }
 
@@ -80,12 +77,12 @@ class PhotoController extends Controller
         $photo->description = $request->get('description');
         $photo->nom_fichier = $file->getClientOriginalName();
 
-        if (Storage::exists('public/images/'.$album->nom_route.'/'.$photo->nom_fichier)) {
+        if (Storage::exists('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier)) {
             return redirect(url()->previous())->with('error', 'il existe déjà une photo avec ce nom dans cet album');
         };
 
         if ($photo->save()) {
-            $file->storeAs('public/images/'.$album->nom_route, $photo->nom_fichier);
+            $file->storeAs('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route, $photo->nom_fichier);
             return redirect()->route('admin.photo.create')->with('success', 'photo enregistrée');
         }
     }
@@ -156,10 +153,18 @@ class PhotoController extends Controller
         $album = Album::find($photo->album->id);
 
         // todo revoir si ca supprime bien 
-        Storage::delete('public/images/'.$album->nom_route, $photo->nom_fichier);
-        $photo->delete();
 
-        return redirect()->route('admin.photo.index')->with('success', 'la photo est bien supprimée fraté');
+        $files = Storage::get('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
+
+        if (Storage::exists('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier)) {
+            Storage::delete('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
+            $photo->delete();
+            return redirect()->route('admin.photo.index')->with('success', 'la photo est bien supprimée fraté');
+        } else {
+            return redirect()->route('admin.photo.index')->with('error', 'oopsie ca a buggé');        
+        } 
+
+
     }
 
 
