@@ -17,6 +17,7 @@ class PhotoController extends Controller
      */
     public function index(Request $request, int $album_id = null)
     {
+        
         $albums = Album::all();
         foreach ($albums as &$album) {
             if (!isset($album->nombre_photos)) {

@@ -1,6 +1,17 @@
 body {
   margin: 0;
+  //background-color: #84DBF0
+  background: linear-gradient(to right, #84DBF0 50%, pink 50%);
+  background-size: 200% 100%;
+  background-position:left bottom;
 }
+
+/*body:hover{
+  transition:all 1s ease;
+  background-position:right bottom;
+
+}*/
+
 a {
   text-decoration: none ;
   color: black;
@@ -24,7 +35,8 @@ main{
   font-size: 20px;
   padding: 20px;
   width: 15%;
-  height: 100%;
+  height: 60vh;
+  vertical-align: middle;
 }
 
 .nav-link:hover{
@@ -42,7 +54,7 @@ main{
 }
 
 body {
-  font-family: 'Daubenton', Fallback, sans-serif !important;
+  font-family: 'DIN', Fallback, sans-serif !important;
 }
 
 #content{
@@ -122,4 +134,27 @@ body {
       font-size: 10px;
     }
   }
+}
+
+.premiere_galerie{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.premiere-galerie-image:hover{
+  opacity: .3;
+  transition: 300ms;
+}
+
+
+/* Centered text */
+.centered-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:white;
+  font-size: 20px;
+  font-size: bold;
 }

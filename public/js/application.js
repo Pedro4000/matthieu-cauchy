@@ -15,6 +15,7 @@ $(document).ready(function() {
     $('#stage').click(prochaineImage);
     $(document).keydown(prochaineImage);
     let autoChange = setInterval(prochaineImage, 10000, "suivante");
+    var sens_carrousel = 'suivante';
 
     function prochaineImage (event) {
 

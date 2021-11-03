@@ -4,3 +4,10 @@
         url("../fonts/webfonts/daubentonwebfont.woff") format("woff"),
         url("../fonts/webfonts/daubentonwebfont.tff") format("tff");
 }
+
+@font-face {
+ font-family: "Din";
+ src: url("../fonts/din/DIN.svg") format("svg"),
+        url("../fonts/din/DIN.woff") format("woff"),
+        url("../fonts/din/DIN.tff") format("tff");
+}

@@ -21,11 +21,36 @@ home
 @endsection
 
 @section('content')
-<div class="row col-10">
-  <div id="stage">
-    @foreach ($photos as $photo)
+<div class="row col-11" style="height:80vh">
+  <div class='topbarr text-center'>
+    <div class='inline-block w-1/4 h-10'>
+      <p>Bio</p>
+    </div>
+    <div class='inline-block w-1/4 h-10'>
+      <p class="project_click_background">Projects</p>
+    </div>
+    <div class='inline-block w-1/4 h-10'>
+      <p class="text-center "><img src="{{ asset('storage/icons/envelope.png') }}" class="w-1/4 inline"></p>
+    </div>
+  </div>
+  <div class="w-1/3 text-center">
+
+    <div class="inline-block premiere_galerie">
+      <img src="{{ asset('storage/images/works/silence/mb013.jpg') }}" class="inline-block h-60 premiere-galerie-image">
+      <div class="centered-title">SILENCE</div>
+    </div>
+    {{--@foreach ($photos as $photo)_432x540_test_selec18.jpg
     <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none">
-    @endforeach
+    @endforeach--}}
+  </div>
+
+  <div class="w-1/3 text-center">
+    <div class="inline-block" style="position:absolute;"><img src="{{ asset('storage/images/works/martha/martha_n.jpg') }}" class="inline-block  h-60"></div>
+  </div>
+
+
+  <div class="w-1/3 text-center">
+    <div class="ml-2/3 inline-block"><img src="{{ asset('storage/squaez.jpg') }}" class="inline-block  h-60"></div>
   </div>
 
 </div>
