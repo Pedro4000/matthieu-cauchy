@@ -57,5 +57,16 @@ $(document).ready(function() {
         }
     }
 
+    /*$('.project_click_background').click(function(){
+      $( "#book" ).css(
+          transition:all 1s ease,
+          background-position:right bottom;
+        )
+    });*/
+
+    /*body:hover{
+      transition:all 1s ease;
+      background-position:right bottom;
+    }*/
 
 }); 

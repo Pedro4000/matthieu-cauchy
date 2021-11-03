@@ -10,18 +10,20 @@
   </head>
   <body>
     <header>
-      <div class="navbar navbar-expand-md navbar-dark fixed-top">
-@include('include.topbar')
+      <div class="row">
+        <div class="col-3 col-md-1 col-lg-2 sidebar pl-4 pr-0">
+          <div id="sidebar_sticky" class="sticky-top">
+  @yield('sidebar')
+          </div>
+        </div>        
+        <div class="col-9 col-md-11">
+  @include('include.topbar')
+        </div>
       </div>
     </header>
     <div id="haut_de_page" role="main" class="main container-fluid">
       <div class="row">
-        <div class="col-1 col-lg-2 sidebar pl-4 pr-0">
-          <div id="sidebar_sticky" class="sticky-top">
-@yield('sidebar')
-          </div>
-        </div>
-        <div id="content" class="col-11 col-lg-10 px-4">
+        <div id="content" class="col-11 cold m col-lg-10 px-4">
 @yield('headcontent')
 @yield('content')
         </div>

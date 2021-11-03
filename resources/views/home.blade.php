@@ -22,17 +22,7 @@ home
 
 @section('content')
 <div class="row col-11" style="height:80vh">
-  <div class='topbarr text-center'>
-    <div class='inline-block w-1/4 h-10'>
-      <p>Bio</p>
-    </div>
-    <div class='inline-block w-1/4 h-10'>
-      <p class="project_click_background">Projects</p>
-    </div>
-    <div class='inline-block w-1/4 h-10'>
-      <p class="text-center "><img src="{{ asset('storage/icons/envelope.png') }}" class="w-1/4 inline"></p>
-    </div>
-  </div>
+  
   <div class="w-1/3 text-center">
 
     <div class="inline-block premiere_galerie">
@@ -50,7 +40,7 @@ home
 
 
   <div class="w-1/3 text-center">
-    <div class="ml-2/3 inline-block"><img src="{{ asset('storage/squaez.jpg') }}" class="inline-block  h-60"></div>
+    <div class="ml-2/3 inline-block"><img src="{{ asset('storage/images/works/martha/martha_n.jpg') }}" class="inline-block  h-60"></div>
   </div>
 
 </div>
