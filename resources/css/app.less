@@ -5,7 +5,24 @@ body {
   background: linear-gradient(to right, #84DBF0 50%, pink 50%);
   background-size: 200% 100%;
   background-position:left bottom;
+  transition:all 1s ease;
 }
+
+
+
+.bottom-right-class {
+  background-position:right bottom;
+}
+
+.opaque{
+  opacity: 0;
+}
+
+.de-transparant-a-visible{
+  opacity: 1;
+  transition: all 1s;
+}
+
 
 a {
   text-decoration: none ;
@@ -88,7 +105,6 @@ img {
 }
 
 #stage img{
-  padding: 10px;
   background: #fff;
   width: 600px;
 }
@@ -156,13 +172,17 @@ img {
   font-size: bold;
 }
 
-
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 768px) {
 
 
   .sidebar {
     height: 10vh;
     background-color: red;
+  }
+
+  #stage{
+      margin: 7vh 16%;
+      width: 100%;
   }
 
 

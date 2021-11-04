@@ -24,12 +24,17 @@ class PhotoController extends Controller
                 $album->nombre_photos = count($album->photos);
             };
         }
-
         $albums = $albums->mapWithKeys(function ($item, $key) {
             return [$item->id => $item];
         });
 
-        $photos = Photo::paginate(20);
+        if($album_id){
+            $photos = Photo::where('album_id', $album_id)->paginate(20);
+        } else {
+            $photos = Photo::paginate(20);
+        }
+
+
         foreach($photos as &$photo) {
             $photo->nombre_photos = $albums[$photo->album_id]->nombre_photos;
         }

@@ -20,18 +20,22 @@ class CauchyController extends Controller
         $types= Type::all();
 
         $session = $request->session()->has('users');
-        $photos = Photo::all()->take(15);
+        $albums = Album::all();
+        foreach ($albums as $album) {
+            $albumTries[$album->type->nom][$album->nom] = $album;
+        }
+        $albums = $albumTries;
 
         return view('home', [
             "types" => $types,
-            "photos" => $photos,
+            'albums' => $albums,
         ]);
     }
 
-    public function album(string $album) {
+    public function album(string $album_nom) {
 
         $types= Type::all();
-        $album = Album::where('nom', $album)->get()->first();
+        $album = Album::where('nom', $album_nom)->get()->first();
 
         return view('album', [
             "album" => $album,

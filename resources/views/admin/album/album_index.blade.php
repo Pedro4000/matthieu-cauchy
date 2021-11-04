@@ -24,7 +24,7 @@
                           <td>{{ $album->nom }}</td>
                           <td>{{ $album->nom_route }}</td>
                           <td>{{ $album->type->nom }}</td>
-                          <td><a href="{{ route('admin.photo.index', ['album_id' => $album->id] ) }}"><img class='apercu' src="{{ count($album->photos) > 0 ? asset('storage/images/'.$album->nom_route.'/'.$album->photos->first()->nom_fichier) : '' }}"></a></td>
+                          <td><a href="{{ route('admin.photo.index', ['album_id' => $album->id] ) }}"><img class='apercu' src="{{ count($album->photos) > 0 ? asset('storage/images/'.$album->type->nom.'/'.$album->nom_route.'/'.$album->photos->first()->nom_fichier) : '' }}"></a></td>
                           <td><a href="{{ route('admin.album.edit', ['id' => $album->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
                         </tr>                    
                     @endforeach

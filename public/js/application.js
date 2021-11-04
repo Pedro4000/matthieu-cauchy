@@ -3,8 +3,14 @@ $('#stage img').first().css('display', 'block');
 
 $(document).ready(function() {
 
+
+    /********************************************
+    *   Pour la diapo des images
+    */
+
+
     var imagesArray = [];
-    let images = $('img');
+    let images = $('#stage img');
     for(keys in images) {
         imagesArray[keys] = images[keys];
     }
@@ -57,16 +63,36 @@ $(document).ready(function() {
         }
     }
 
-    /*$('.project_click_background').click(function(){
-      $( "#book" ).css(
-          transition:all 1s ease,
-          background-position:right bottom;
-        )
-    });*/
 
-    /*body:hover{
-      transition:all 1s ease;
-      background-position:right bottom;
-    }*/
+    /**********************************************************************
+    *   Pour les effets de transition dans la homepage
+    */
+
+    $('.project_click_background').click(function(){
+        $('body').addClass('bottom-right-class');
+
+         setTimeout(function(){ 
+            $('body').removeClass('bottom-right-class');
+          }, 1000);
+
+         setTimeout(function(){ 
+            $('.projects_div').removeClass('d-none');
+            $('.projects_div').addClass('opaque');
+            $('.projects_div').addClass('de-transparant-a-visible');
+          }, 2000);         
+
+    });
+
+
+
+    /**********************************************************************
+    *   Pour enregister le mass edit formulaire
+    */
+
+    $('#photo_mass_edit_cta').click(function(){
+      $('#photo_mass_edit_form').submit();
+    });
+
+
 
 }); 
