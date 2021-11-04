@@ -23,7 +23,7 @@
     </header>
     <div id="haut_de_page" role="main" class="main container-fluid">
       <div class="row">
-        <div id="content" class="col-11 cold m col-lg-10 px-4">
+        <div id="content" class="col-11 cold col-lg-10 px-4 mt-6 mx-auto">
 @yield('headcontent')
 @yield('content')
         </div>

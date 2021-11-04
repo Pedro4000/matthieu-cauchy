@@ -1,4 +1,4 @@
-<div class='text-center'>
+<div class='text-center pt-4 md:pt-0'>
   <div class='inline-block w-1/4 h-10'>
     <p>Bio</p>
   </div>

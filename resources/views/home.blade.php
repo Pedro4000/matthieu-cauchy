@@ -21,12 +21,10 @@ home
 @endsection
 
 @section('content')
-<div class="row col-11" style="height:80vh">
-  
-  <div class="w-1/3 text-center">
-
+<div class="row col-start-1 col-10 m-auto projects_div d-none">
+  <div class="w-1/2 md:w-1/3 text-center d-flex align-items-start h-60">
     <div class="inline-block premiere_galerie">
-      <img src="{{ asset('storage/images/works/silence/mb013.jpg') }}" class="inline-block h-60 premiere-galerie-image">
+      <img src="{{ asset('storage/images/works/silence/mb013.jpg') }}" class="inline-block premiere-galerie-image">
       <div class="centered-title">SILENCE</div>
     </div>
     {{--@foreach ($photos as $photo)_432x540_test_selec18.jpg
@@ -34,13 +32,19 @@ home
     @endforeach--}}
   </div>
 
-  <div class="w-1/3 text-center">
-    <div class="inline-block" style="position:absolute;"><img src="{{ asset('storage/images/works/martha/martha_n.jpg') }}" class="inline-block  h-60"></div>
+  <div class="w-1/2 md:w-1/3 text-center d-flex align-items-end h-60">
+    <div class="inline-block premiere_galerie">
+      <img src="{{ asset('storage/images/works/martha/martha_n.jpg') }}" class="inline-block premiere-galerie-image">
+      <div class="centered-title">MARTHA</div>      
+    </div>
   </div>
 
 
-  <div class="w-1/3 text-center">
-    <div class="ml-2/3 inline-block"><img src="{{ asset('storage/images/works/martha/martha_n.jpg') }}" class="inline-block  h-60"></div>
+  <div class="w-1/2 md:w-1/3 text-center d-flex align-items-start h-60">
+    <div class="inline-block premiere_galerie">
+      <img src="{{ asset('storage/images/books/premiere classe/squaez.jpg') }}" class="inline-block premiere-galerie-image">
+      <div class="centered-title">COUCOU-MAGAZINE</div>            
+    </div>
   </div>
 
 </div>
