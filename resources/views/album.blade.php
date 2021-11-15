@@ -21,14 +21,20 @@ section
 @endsection
 
 @section('content')
-<div class="row col-10">
+<div class="row">
 
-  <div id="stage">
+  <div id="stage" class="">
     @foreach($album->photos as $photo)
     <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none">
     @endforeach
   </div>
 
+</div>
+<div class="retour">
+  <a href="{{ route('home', [ 'section_display' => 'projects' ]) }}">
+    {{-- <img src="{{ asset('storage/favicon/left-arrow.png') }}" class="fleche-retour"> retour --}}
+    <i class="fas fa-long-arrow-alt-left"></i> retour
+  </a>
 </div>
 @endsection
 

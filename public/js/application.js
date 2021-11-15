@@ -76,7 +76,7 @@ $(document).ready(function() {
           }, 1000);
 
          setTimeout(function(){ 
-            $('.projects_div').removeClass('d-none');
+            $('.projects_div').removeClass('hidden-away');
             $('.projects_div').addClass('opaque');
             $('.projects_div').addClass('de-transparant-a-visible');
           }, 2000);         
@@ -93,6 +93,6 @@ $(document).ready(function() {
       $('#photo_mass_edit_form').submit();
     });
 
-
+    console.log('ok');
 
 }); 

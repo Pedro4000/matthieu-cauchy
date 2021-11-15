@@ -9,6 +9,15 @@ body {
 }
 
 
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+a:hover {
+  color : inherit;
+}
+
 
 .bottom-right-class {
   background-position:right bottom;
@@ -46,6 +55,16 @@ img {
     height: auto;
 }
 
+.home-input{
+  border: 1px dotted gray;
+  border-radius: 3px;
+  background: transparent !important;
+}
+
+.contact_message{
+  height: 30vh;
+}
+
 .sidebar {
   padding-top: 0;
   top: 0;
@@ -69,6 +88,12 @@ img {
 
 .hidden{
   display: none;
+}
+
+.hidden-away{
+  position: absolute;
+  top: -500%;
+  left: -500%;
 }
 
 #content{
@@ -155,9 +180,17 @@ img {
   color: white;
 }
 
-.premiere-galerie-image:hover{
-  opacity: .3;
-  transition: 300ms;
+.premiere-galerie-lien:hover{
+  .premiere-galerie-image{
+    opacity: .3;
+    transition: 300ms;
+
+  }
+}
+
+.fleche-retour {
+  background-color: #84DBF0;
+  background-blend-mode: multiply;
 }
 
 
@@ -181,8 +214,14 @@ img {
   }
 
   #stage{
-      margin: 7vh 16%;
+      margin: 10vh auto;
       width: 100%;
+  }
+
+  .retour{
+    position: absolute;
+    bottom: 7%;
+    right: 5%;
   }
 
 

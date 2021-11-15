@@ -25,10 +25,12 @@ class CauchyController extends Controller
             $albumTries[$album->type->nom][$album->nom] = $album;
         }
         $albums = $albumTries;
+        $aPropos = APropos::all()->last();
 
         return view('home', [
-            "types" => $types,
+            'types' => $types,
             'albums' => $albums,
+            'aPropos' => $aPropos,
         ]);
     }
 
@@ -38,8 +40,8 @@ class CauchyController extends Controller
         $album = Album::where('nom', $album_nom)->get()->first();
 
         return view('album', [
-            "album" => $album,
-            "types" => $types,
+            'album' => $album,
+            'types' => $types,
         ]);
     }
 
@@ -65,8 +67,8 @@ class CauchyController extends Controller
         $apropos = APropos::first();
 
         return view('a_propos', [
-            "apropos" => $apropos,
-            "types" => $types,
+            'apropos' => $apropos,
+            'types' => $types,
         ]);
     }    
 
