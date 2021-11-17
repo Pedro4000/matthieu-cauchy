@@ -28,11 +28,13 @@ Route::get('/ajax-all', [CauchyController::class, 'ajax'])->name('ajax-gngn');
 Route::get('/ccs/{album_nom}', [CauchyController::class, 'album'])
     ->name('album');
 
-Route::get('/dmd/a-propos', [CauchyController::class, 'aPropos'])
-    ->name('a_propos');
+Route::get('/contact-store', [CauchyController::class, 'contact'])
+    ->name('contact.form');
 
 Route::get('/getcauchyimages', [CauchyController::class, 'getImages']);
 
+Route::get('/dmd/a-propos', [CauchyController::class, 'aPropos'])
+    ->name('a_propos');
 
 Route::get('/welcome', function () {
     return view('welcome');

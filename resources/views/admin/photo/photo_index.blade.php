@@ -53,13 +53,12 @@
                             </td>
                             
                             <td>
-                              <select class='appearance-none text-xs pl-0 pr-4' name="{{ 'ordre_photo_'.$photo->id }}">
+                              <select class='appearance-none text-xs pl-0 pr-4' name="{{ 'ordrePhoto_'.$photo->id }}">
                                   <option value="0">0</option>
                                 @for ($i = 1; $i <= $photo->nombre_photos; $i ++)
                                   <option value="{{ $i }}" {{ $photo->ordre == $i ? 'selected' : '' }}>{{ $i }}</option>
                                 @endfor
-                              </select>{{ $photo->accueil }}
-                              {{ $photo->ordre }}
+                              </select>
                             </td>
 
 
@@ -71,10 +70,10 @@
                             </td>
 
                             <td>
-                              <select class='appearance-none text-xs pl-0 pr-5' name="{{ 'ordre_accueil_'.$photo->id }}">
+                              <select class='appearance-none text-xs pl-0 pr-5' name="{{ 'ordreAccueil_'.$photo->id }}">
                                 <option value="0">0</option>
                                 @for($i = 1; $i <= 15; $i++)
-                                  <option value="{{ $i }}" {{ $photo->ordre_accueil == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                  <option value="{{ $i }}" {{ $photo->ordreAccueil == $i ? 'selected' : '' }}>{{ $i }}</option>
                                 @endfor
                               </select>
                             </td>

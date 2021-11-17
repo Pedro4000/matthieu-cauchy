@@ -138,7 +138,6 @@ class PhotoController extends Controller
         $photo->description = $request->get('description');
         $photo->album_id = $request->album;
 
-
         if ($photo->save()) {
             return redirect()->route('admin.photo.index')->with('success', 'la photo a bien été modifiée');
         } else {
@@ -171,6 +170,30 @@ class PhotoController extends Controller
         } 
 
 
+    }
+
+    public function massEdit(Request $request) {
+
+
+        $masseEditArray = [];
+
+        foreach($request->all() as $inputName => $inputValue) {
+
+            if(in_array(explode('_', $inputName)[0] ,['accueil', 'ordreAccueil', 'ordrePhoto'])) {                
+                $photoId = explode('_', $inputName)[1];
+                $masseEditArray[$photoId][explode('_', $inputName)[0]] = $inputValue;
+            }
+        }
+        foreach($masseEditArray as $photoId => $photoInputs) {
+
+            $photo = Photo::find($photoId);
+            $photo->accueil = $photoInputs['accueil'];
+            $photo->ordre_accueil = $photoInputs['ordreAccueil'];
+            $photo->ordre = $photoInputs['ordrePhoto'];
+            $photo->save();
+        }
+
+        return redirect()->back();
     }
 
 

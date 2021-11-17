@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     $('#stage').click(prochaineImage);
     $(document).keydown(prochaineImage);
-    let autoChange = setInterval(prochaineImage, 10000, "suivante");
+    let autoChange = setInterval(prochaineImage, 16000, "suivante");
     var sens_carrousel = 'suivante';
 
     function prochaineImage (event) {
@@ -69,20 +69,70 @@ $(document).ready(function() {
     */
 
     $('.project_click_background').click(function(){
-        $('body').addClass('bottom-right-class');
+      $('body').addClass('bottom-right-class');
 
-         setTimeout(function(){ 
-            $('body').removeClass('bottom-right-class');
-          }, 1000);
+        $('.contact_form_div').addClass('opaque');
+        $('.contact_form_div').removeClass('de-transparant-a-visible');
+        $('.a_propos_div').addClass('opaque');
+        $('.a_propos_div').removeClass('de-transparant-a-visible');
 
-         setTimeout(function(){ 
-            $('.projects_div').removeClass('hidden-away');
-            $('.projects_div').addClass('opaque');
-            $('.projects_div').addClass('de-transparant-a-visible');
-          }, 2000);         
+       setTimeout(function(){ 
+          $('body').removeClass('bottom-right-class');
+          $('.contact_form_div').addClass('hidden-away');
+          $('.a_propos_div').addClass('hidden-away');          
+        }, 800);
+
+       setTimeout(function(){ 
+          $('.projects_div').removeClass('hidden-away');
+          $('.projects_div').addClass('opaque');
+          $('.projects_div').addClass('de-transparant-a-visible');
+        }, 1600); 
+
+        setTimeout(function(){ 
+          $('.projects_div').removeClass('hidden-away');
+          $('.projects_div').addClass('opaque');
+          $('.projects_div').addClass('de-transparant-a-visible');
+        }, 1600); 
+    });
+
+
+    $('.bio_click').click(function(){
+
+        $('.contact_form_div').removeClass('de-transparant-a-visible');
+        $('.contact_form_div').addClass('opaque');
+        $('.projects_div').removeClass('de-transparant-a-visible');        
+        $('.projects_div').addClass('opaque');
+        
+        setTimeout(function(){ 
+          $('.contact_form_div').addClass('hidden-away');
+          $('.projects_div').addClass('hidden-away');
+          $('.a_propos_div').removeClass('hidden-away');                    
+          $('.a_propos_div').removeClass('opaque');                    
+          $('.a_propos_div').addClass('de-transparant-a-visible');                              
+        }, 800);                
 
     });
 
+    $('.contact_click').click(function(){
+
+        $('.a_propos_div').removeClass('de-transparant-a-visible');
+        $('.projects_div').removeClass('de-transparant-a-visible');        
+        $('.a_propos_div').addClass('opaque');
+        $('.projects_div').addClass('opaque');
+        
+        setTimeout(function(){ 
+          $('.projects_div').addClass('hidden-away');
+          $('.a_propos_div').addClass('hidden-away');
+          $('.contact_form_div').removeClass('hidden-away');                    
+          $('.contact_form_div').removeClass('opaque');                    
+          $('.contact_form_div').addClass('de-transparant-a-visible');                              
+        }, 800);                
+
+    });
+
+
+// contact_form_div
+// a_propos_div
 
 
     /**********************************************************************

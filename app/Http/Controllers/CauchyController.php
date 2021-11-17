@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\{Serie, Album, Photo, Type, APropos};
-use Illuminate\Support\Facades\App;
-use Intervention\Image\ImageManagerStatic;
 use Illuminate\Http\{Request, Response};
-use function PHPUnit\Framework\stringContains;
-use Illuminate\Support\Facades\{Storage, File, DB};
+use Illuminate\Support\Facades\{Storage, File, DB, App};
+use Intervention\Image\ImageManagerStatic;
 use Intervention\Image\Filters\FilterInterface;
+use function PHPUnit\Framework\stringContains;
 
 class CauchyController extends Controller
 {
@@ -21,16 +21,27 @@ class CauchyController extends Controller
 
         $session = $request->session()->has('users');
         $albums = Album::all();
-        foreach ($albums as $album) {
+        $photosCouv = Photo::where('accueil', 1)->get();
+        $photosCouv = $photosCouv->mapWithKeys(function ($item, $key) {
+            return [$item->album_id => $item];
+        });
+
+        foreach ($albums as &$album) {
+            if(isset($photosCouv[$album->id])){
+                $album->couv = $photosCouv[$album->id];
+            }
             $albumTries[$album->type->nom][$album->nom] = $album;
         }
         $albums = $albumTries;
         $aPropos = APropos::all()->last();
+        $planets = Storage::files('public/favicon/planets');
+
 
         return view('home', [
             'types' => $types,
             'albums' => $albums,
             'aPropos' => $aPropos,
+            'planets' => $planets,
         ]);
     }
 
@@ -70,7 +81,24 @@ class CauchyController extends Controller
             'apropos' => $apropos,
             'types' => $types,
         ]);
-    }    
+    }  
+
+    public function contact(Request $request) {
+
+        $validated = $request->validate([
+            'contact_name' => 'required|string',
+            'contact_message' => 'required|string',
+        ]);
+
+        // Mail::to('matthieucauchy@contact.com')->send(new ContactMail($validated['contact_name'], $validated['contact_message']));
+        // return new ContactMail($validated['contact_name'], $validated['contact_message']);
+
+        return redirect()->route('home' ,[
+            'section_display' => 'contact',
+            'message' => 'ok',
+        ]);
+
+    } 
 
 
     public function getImages(){

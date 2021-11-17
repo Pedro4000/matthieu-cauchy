@@ -4,30 +4,20 @@ body {
   background: linear-gradient(to right, #84DBF0 50%, pink 50%);
   background-size: 200% 100%;
   background-position: left bottom;
-  transition: all 1s ease;
-}
-a {
-  color: inherit;
-  /* blue colors for links too */
-  text-decoration: inherit;
-  /* no underline */
-}
-a:hover {
-  color: inherit;
+  transition: all 800ms ease;
 }
 .bottom-right-class {
   background-position: right bottom;
 }
-.opaque {
-  opacity: 0;
-}
-.de-transparant-a-visible {
-  opacity: 1;
-  transition: all 1s;
-}
 a {
+  /* blue colors for links too */
+  text-decoration: inherit;
+  /* no underline */
   text-decoration: none ;
-  color: black;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
 }
 ul {
   list-style-type: none;
@@ -43,6 +33,17 @@ img {
   max-width: 100%;
   max-height: 100%;
   height: auto;
+}
+.pointer:hover {
+  cursor: pointer;
+}
+.opaque {
+  opacity: 0;
+  transition: all 800ms;
+}
+.de-transparant-a-visible {
+  opacity: 1;
+  transition: all 800ms;
 }
 .home-input {
   border: 1px dotted gray;
