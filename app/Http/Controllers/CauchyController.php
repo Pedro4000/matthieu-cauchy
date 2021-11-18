@@ -34,8 +34,12 @@ class CauchyController extends Controller
         }
         $albums = $albumTries;
         $aPropos = APropos::all()->last();
+
         $planets = Storage::files('public/favicon/planets');
 
+        foreach ($planets as &$planet) {
+            $planet = str_replace('public', 'storage', $planet);
+        }
 
         return view('home', [
             'types' => $types,

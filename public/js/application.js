@@ -115,6 +115,10 @@ $(document).ready(function() {
 
     $('.contact_click').click(function(){
 
+        $('.coucou_liens').removeClass('hidden-away');
+        $('coucou_liens a').each(function(){
+            hide($(this));
+        })
         $('.a_propos_div').removeClass('de-transparant-a-visible');
         $('.projects_div').removeClass('de-transparant-a-visible');        
         $('.a_propos_div').addClass('opaque');
@@ -131,10 +135,6 @@ $(document).ready(function() {
     });
 
 
-// contact_form_div
-// a_propos_div
-
-
     /**********************************************************************
     *   Pour enregister le mass edit formulaire
     */
@@ -143,6 +143,32 @@ $(document).ready(function() {
       $('#photo_mass_edit_form').submit();
     });
 
-    console.log('ok');
+
+    /**********************************************************************
+    *   Pour l'affichage des liens vers les coucou mags
+    */
+
+    $('#coucou_image').click(function(){
+        var i = 1;
+        $('.coucou_liens').removeClass('hidden-away');
+        $('.coucou_liens a').each(function(){
+            reveal($(this), i);
+            i++;
+        });
+
+    });
+
+    function reveal (element, i) {
+        setTimeout(function() { 
+            element.removeClass('opaque');     
+            element.addClass('de-transparant-a-visible');
+        },i*500);
+    };
+
+    function hide (element) {
+        element.addClass('opaque');     
+        element.removeClass('de-transparant-a-visible');        
+    }
+
 
 }); 

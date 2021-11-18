@@ -33,7 +33,7 @@ section
 <div class="retour">
   <a href="{{ route('home', [ 'section_display' => 'projects' ]) }}">
     {{-- <img src="{{ asset('storage/favicon/left-arrow.png') }}" class="fleche-retour"> retour --}}
-    <i class="fas fa-long-arrow-alt-left"></i> retour
+    <i class="fas fa-long-arrow-alt-left"></i> back
   </a>
 </div>
 @endsection

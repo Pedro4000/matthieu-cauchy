@@ -30,7 +30,7 @@ main {
   height: 100%;
 }
 img {
-  max-width: 100%;
+  width: 65%;
   max-height: 100%;
   height: auto;
 }
@@ -95,14 +95,14 @@ img {
   transition-duration: 0.3s;
 }
 #stage {
-  margin: 7vh 28%;
+  margin: 2vh 28% 0vh;
   width: 650px;
   text-align: center;
   position: relative;
 }
 #stage img {
   background: #fff;
-  width: 600px;
+  width: 70%;
 }
 .apercu {
   max-width: 45px;
@@ -138,10 +138,6 @@ img {
   opacity: 0.3;
   transition: 300ms;
 }
-.fleche-retour {
-  background-color: #84DBF0;
-  background-blend-mode: multiply;
-}
 /* Centered text */
 .centered-title {
   position: absolute;
@@ -152,19 +148,29 @@ img {
   font-size: 20px;
   font-size: bold;
 }
+.retour {
+  position: absolute;
+  bottom: 5%;
+  right: 27%;
+}
 @media only screen and (max-width: 768px) {
   .sidebar {
     height: 10vh;
     background-color: red;
   }
   #stage {
-    margin: 10vh auto;
+    margin: 1vh auto;
     width: 100%;
   }
   .retour {
-    position: absolute;
     bottom: 7%;
     right: 5%;
+  }
+  img {
+    width: 100%;
+  }
+  #stage img {
+    width: 100%;
   }
 }
 
