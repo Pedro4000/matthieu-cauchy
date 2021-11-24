@@ -7,7 +7,7 @@ $(document).ready(function() {
     /********************************************
     *   Pour la diapo des images
     */
-
+console.log($(window).width());
 
     var imagesArray = [];
     let images = $('#stage img');
