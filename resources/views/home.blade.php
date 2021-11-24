@@ -23,7 +23,7 @@ home
 @section('content')
 <div class="row col-11 m-auto projects_div lg:justify-end {{ app('request')->input('section_display') == 'projects' ? '' : 'hidden-away opaque' }}">
  @foreach($albums['works'] as $work)
-  <div class="w-1/2 md:w-1/3 text-center d-flex {{ $loop->index % 2 == 0  ? 'align-items-start' : 'align-items-end' }} h-72 lg:h-96">
+  <div class="w-1/2 lg:w-1/3 text-center d-flex {{ $loop->index % 2 == 0  ? 'align-items-start' : 'align-items-end' }} h-72 lg:h-96">
     <div class="inline-block premiere_galerie">
       <a href="{{ route('album', ['album_nom' => $albums['works']['martha']->nom ]) }}" class="premiere-galerie-lien">
         <img src="{{ asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier) }}" class="inline-block premiere-galerie-image">
@@ -33,7 +33,7 @@ home
   </div>
 @endforeach
 
-  <div class="w-1/2 md:w-1/3 text-center flex lg:justify-end lg:items-start {{ count($albums['works']) % 2 == 0  ? 'align-items-start' : 'align-items-end' }} h-72 lg:h-96">
+  <div class="w-1/2 lg:w-1/3 text-center flex lg:justify-end lg:items-start {{ count($albums['works']) % 2 == 0  ? 'align-items-start' : 'align-items-end' }} h-72 lg:h-96">
     <div id="coucou_image" class="inline-block premiere_galerie">
       <div class="premiere-galerie-lien">
         <img src="{{ asset('storage/images/books/premiere classe/squaez.jpg') }}" class="inline-block premiere-galerie-image">
@@ -42,7 +42,7 @@ home
     </div>
   </div>
 
-  <div class="w-1/2 md:w-1/3 flex flex-col items-start coucou_liens hidden-away {{ count($albums['works']) % 2 == 0  ? 'justify-end' : 'justify-start' }}  lg:justify-start lg:items-center h-72">
+  <div class="w-1/2 lg:w-1/3 flex flex-col items-start coucou_liens hidden-away {{ count($albums['works']) % 2 == 0  ? 'justify-end' : 'justify-start' }}  lg:justify-start lg:items-center h-72">
       @foreach($albums['books'] as $book)
         <a href="{{ route('album', ['album_nom' => $book->nom ]) }}" class="text-left opaque">
           <p class="d-flex align-items-center w-100 my-3"><img class="mx-2" style="width:30px; border-radius: 50%; padding: 2px" src="{{ asset($planets[rand(0, count($planets)-1) ]) }}">{{ $book->nom }}</p>

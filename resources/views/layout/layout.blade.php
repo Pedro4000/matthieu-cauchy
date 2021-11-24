@@ -13,7 +13,7 @@
   <body>
     <header>
       <div class="row w-100">
-        <div class="col-3 col-md-1 col-lg-2 sidebar pl-4 pr-0">
+        <div class="col-3 col-lg-1 col-xl-2 sidebar pl-4 pr-0">
           <div id="sidebar_sticky" class="sticky-top">
   @yield('sidebar')
           </div>
