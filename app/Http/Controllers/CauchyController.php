@@ -30,7 +30,9 @@ class CauchyController extends Controller
             if(isset($photosCouv[$album->id])){
                 $album->couv = $photosCouv[$album->id];
             }
-            $albumTries[$album->type->nom][$album->nom] = $album;
+            if ($album->type){
+                $albumTries[$album->type->nom][$album->nom] = $album;
+            }
         }
         $albums = $albumTries;
         $aPropos = APropos::all()->last();

@@ -83,6 +83,9 @@ class PhotoController extends Controller
         $photo->description = $request->get('description');
         $photo->nom_fichier = $file->getClientOriginalName();
 
+        if (!$album->type) {
+            return redirect(url()->previous())->with('error', 'il faut que cet album appartienne à un type de contenu');
+        }
         if (Storage::exists('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier)) {
             return redirect(url()->previous())->with('error', 'il existe déjà une photo avec ce nom dans cet album');
         };
