@@ -20,9 +20,6 @@ Route::name('cauchy.')
                     ->middleware('guest')
                     ->name('register');
 
-    Route::post('/register', [RegisteredUserController::class, 'store'])
-                    ->middleware('guest');
-
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                     ->middleware('guest')
                     ->name('login');

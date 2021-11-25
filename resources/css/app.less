@@ -132,6 +132,8 @@ img{
     width: 650px;
     text-align: center;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 #stage img{
@@ -190,7 +192,11 @@ img{
   .premiere-galerie-image{
     opacity: .3;
     transition: 300ms;
-
+    box-shadow: 0px 0px 22px gray;
+  }
+  .centered-title{
+    font-size: 21px;
+    transition: 300ms;
   }
 }
 
@@ -211,11 +217,11 @@ img{
   right: 27%;
 }
 
-@media only screen and (max-width: 980px) {
+.home-main-element{
+  height: 18rem;
+}
 
-  body{
-    background: red;
-  }
+@media only screen and (max-width: 980px) {
 
   .sidebar {
     height: 10vh;
@@ -239,5 +245,10 @@ img{
   #stage img{  
     width: 100%;
   }  
+
+  .home-main-element {
+    height: 32vh;
+  }
+
 
 }

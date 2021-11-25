@@ -99,6 +99,8 @@ img {
   width: 650px;
   text-align: center;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 #stage img {
   background: #fff;
@@ -137,6 +139,11 @@ img {
 .premiere-galerie-lien:hover .premiere-galerie-image {
   opacity: 0.3;
   transition: 300ms;
+  box-shadow: 0px 0px 22px gray;
+}
+.premiere-galerie-lien:hover .centered-title {
+  font-size: 21px;
+  transition: 300ms;
 }
 /* Centered text */
 .centered-title {
@@ -153,10 +160,10 @@ img {
   bottom: 5%;
   right: 27%;
 }
+.home-main-element {
+  height: 18rem;
+}
 @media only screen and (max-width: 980px) {
-  body {
-    background: red;
-  }
   .sidebar {
     height: 10vh;
     background-color: red;
@@ -174,6 +181,9 @@ img {
   }
   #stage img {
     width: 100%;
+  }
+  .home-main-element {
+    height: 32vh;
   }
 }
 
