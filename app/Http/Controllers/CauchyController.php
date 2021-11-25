@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
 use App\Models\{Serie, Album, Photo, Type, APropos};
+use App\Mail\{ContactMail};
 use Illuminate\Http\{Request, Response};
 use Illuminate\Support\Facades\{Storage, File, DB, App};
 use Intervention\Image\ImageManagerStatic;
