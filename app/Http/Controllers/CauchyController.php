@@ -21,7 +21,9 @@ class CauchyController extends Controller
 
         $session = $request->session()->has('users');
         $albums = Album::all();
-        $photosCouv = Photo::where('accueil', 1)->get();
+        $photoAccueil = Photo::where('accueil', 1)->get()->first();
+
+        $photosCouv = Photo::where('couverture', 1)->get();
         $photosCouv = $photosCouv->mapWithKeys(function ($item, $key) {
             return [$item->album_id => $item];
         });
@@ -48,6 +50,7 @@ class CauchyController extends Controller
             'albums' => $albums,
             'aPropos' => $aPropos,
             'planets' => $planets,
+            'photoAccueil' => $photoAccueil,
         ]);
     }
 

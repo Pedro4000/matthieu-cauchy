@@ -22,6 +22,7 @@ class CreatePhotosTable extends Migration
             $table->integer('ordre')->nullable();
             $table->integer('ordre_accueil')->nullable();
             $table->boolean('accueil')->nullable();
+            $table->boolean('couverture')->nullable();
             $table->boolean('afficher')->nullable();
             $table->longText('description')->nullable();            
         });

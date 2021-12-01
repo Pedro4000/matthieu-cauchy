@@ -182,16 +182,17 @@ class PhotoController extends Controller
 
         foreach($request->all() as $inputName => $inputValue) {
 
-            if(in_array(explode('_', $inputName)[0] ,['accueil', 'ordreAccueil', 'ordrePhoto'])) {                
+            if(in_array(explode('_', $inputName)[0] ,['accueil', 'couverture', 'ordrePhoto'])) {                
                 $photoId = explode('_', $inputName)[1];
                 $masseEditArray[$photoId][explode('_', $inputName)[0]] = $inputValue;
             }
         }
+
         foreach($masseEditArray as $photoId => $photoInputs) {
 
             $photo = Photo::find($photoId);
             $photo->accueil = $photoInputs['accueil'];
-            $photo->ordre_accueil = $photoInputs['ordreAccueil'];
+            $photo->couverture = $photoInputs['couverture'];
             $photo->ordre = $photoInputs['ordrePhoto'];
             $photo->save();
         }

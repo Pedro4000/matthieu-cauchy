@@ -31,7 +31,7 @@
                         <th class='w-1/6'>description</th>
                         <th class='w-1/12'>ordre</th>
                         <th class='w-1/12'>accueil</th>
-                        <th class='w-1/12'>ordre accueil</th>
+                        <th class='w-1/12'>couverture</th>
                         <th class='w-1/6 text-center'>apercu</th>
                       </tr>
                     </thead>
@@ -70,11 +70,9 @@
                             </td>
 
                             <td>
-                              <select class='appearance-none text-xs pl-0 pr-5' name="{{ 'ordreAccueil_'.$photo->id }}">
-                                <option value="0">0</option>
-                                @for($i = 1; $i <= 15; $i++)
-                                  <option value="{{ $i }}" {{ $photo->ordreAccueil == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                @endfor
+                              <select class='appearance-none text-xs pl-0 pr-5' name="{{ 'couverture_'.$photo->id }}">
+                                <option value='0' {{ $photo->couverture == 0 ? 'selected' : '' }}>non</option>
+                                <option value='1' {{ $photo->couverture == 1 ? 'selected' : '' }}>oui</option>
                               </select>
                             </td>
                             

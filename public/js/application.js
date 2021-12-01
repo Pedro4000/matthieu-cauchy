@@ -7,7 +7,7 @@ $(document).ready(function() {
     /********************************************
     *   Pour la diapo des images
     */
-console.log($(window).width());
+    
 
     var imagesArray = [];
     let images = $('#stage img');
@@ -67,17 +67,23 @@ console.log($(window).width());
     /**********************************************************************
     *   Pour les effets de transition dans la homepage
     */
-
+  
     $('.project_click_background').click(function(){
-      $('body').addClass('bottom-right-class');
 
+      let couleurFond = $('body').css('background-image');
+      let couleurGauche = couleurFond.split('to right, ')[1].split(' 50%')[0];
+      $('body').css('background-image', 'linear-gradient(to right, '+couleurGauche+' 50%, pink 50%)');
+      $('body').toggleClass('bottom-left-class');
+
+
+        $('#stageAccueil').addClass('opaque');        
         $('.contact_form_div').addClass('opaque');
         $('.contact_form_div').removeClass('de-transparant-a-visible');
         $('.a_propos_div').addClass('opaque');
         $('.a_propos_div').removeClass('de-transparant-a-visible');
 
        setTimeout(function(){ 
-          $('body').removeClass('bottom-right-class');
+          $('#stageAccueil').addClass('hidden-away');        
           $('.contact_form_div').addClass('hidden-away');
           $('.a_propos_div').addClass('hidden-away');          
         }, 800);
@@ -88,16 +94,12 @@ console.log($(window).width());
           $('.projects_div').addClass('de-transparant-a-visible');
         }, 1600); 
 
-        setTimeout(function(){ 
-          $('.projects_div').removeClass('hidden-away');
-          $('.projects_div').addClass('opaque');
-          $('.projects_div').addClass('de-transparant-a-visible');
-        }, 1600); 
     });
 
 
     $('.bio_click').click(function(){
 
+        $('#stageAccueil').addClass('opaque hidden-away');        
         $('.contact_form_div').removeClass('de-transparant-a-visible');
         $('.contact_form_div').addClass('opaque');
         $('.projects_div').removeClass('de-transparant-a-visible');        
@@ -119,6 +121,7 @@ console.log($(window).width());
         $('coucou_liens a').each(function(){
             hide($(this));
         })
+        $('#stageAccueil').addClass('opaque hidden-away');
         $('.a_propos_div').removeClass('de-transparant-a-visible');
         $('.projects_div').removeClass('de-transparant-a-visible');        
         $('.a_propos_div').addClass('opaque');

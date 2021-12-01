@@ -9,6 +9,9 @@ body {
 .bottom-right-class {
   background-position: right bottom;
 }
+.bottom-left-class {
+  background-position: left bottom;
+}
 a {
   /* blue colors for links too */
   text-decoration: inherit;
@@ -61,7 +64,6 @@ img {
   font-size: 20px;
   padding: 20px;
   vertical-align: middle;
-  background-color: blue;
 }
 .nav-link:hover {
   background-color: #f0f0f0;
@@ -102,9 +104,18 @@ img {
   display: flex;
   justify-content: center;
 }
-#stage img {
+#stageAccueil {
+  margin: 2vh 28% 0vh;
+  width: 650px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+#stage img,
+#stageAccueil img {
   background: #fff;
-  width: 70%;
+  width: 80%;
 }
 .apercu {
   max-width: 45px;
@@ -166,7 +177,6 @@ img {
 @media only screen and (max-width: 980px) {
   .sidebar {
     height: 10vh;
-    background-color: red;
   }
   #stage {
     margin: 1vh auto;
