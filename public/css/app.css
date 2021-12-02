@@ -3,7 +3,6 @@ body {
   margin: 0;
   background: linear-gradient(to right, #84DBF0 50%, pink 50%);
   background-size: 200% 100%;
-  background-position: left bottom;
   transition: all 800ms ease;
 }
 .bottom-right-class {

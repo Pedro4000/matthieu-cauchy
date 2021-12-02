@@ -24,7 +24,7 @@ home
 @section('content')
 
 @if(isset($photoAccueil))
-  <div id="stageAccueil">
+  <div id="stageAccueil" class="{{  app('request')->input('section_display') ? 'hidden-away opaque' : '' }}" style="{{ app('request')->input('section_display') ? 'position:absolute' : '' }}" >
     <img src="{{ asset('storage/images/'.$photoAccueil->album->type->nom.'/'.$photoAccueil->album->nom_route.'/'.$photoAccueil->nom_fichier) }}">
   </div>
 @endif

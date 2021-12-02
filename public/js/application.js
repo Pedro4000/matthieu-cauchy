@@ -67,8 +67,87 @@ $(document).ready(function() {
     /**********************************************************************
     *   Pour les effets de transition dans la homepage
     */
+
+    var tableauCouleurFond = {
+      'project_click_background' : 
+      {
+        couleur : 'pink',
+        divPasLiees : '.contact_form_div, .a_propos_div',
+        divLiee : '.projects_div',
+      },
+      'bio_click' : 
+      {
+        couleur : '#AFA59B',
+        divPasLiees : '.contact_form_div, .projects_div',
+        divLiee : '.a_propos_div',
+      },
+      'contact_click' : 
+      {
+        couleur : '#FFB612',
+        divPasLiees : '.a_propos_div, .projects_div',
+        divLiee : '.contact_form_div',
+      },
+    };
+
+    var navItemClique = '';
+
+    $('.project_click_background, .bio_click, .contact_click').click(function(){
+
+        // la première fois, on cache l'image d'accueil
+        if (!$('#stageAccueil').hasClass('opaque')) {
+          $('#stageAccueil').addClass('opaque');
+          setTimeout(function(){ 
+            $('#stageAccueil').css('position', 'absolute');
+            $('#stageAccueil').addClass('hidden-away');        
+          }, 800);          
+        }
+
+        if ($(this).attr('class').match('project_click_background')) {
+          navItemClique = 'project_click_background';
+        } else if ($(this).attr('class').match('bio_click')) {
+          navItemClique = 'bio_click';
+        } else {
+          navItemClique = 'contact_click';
+        }
+
+        // on cache et on affiche les bonnes div
+        $(tableauCouleurFond[navItemClique].divPasLiees).addClass('opaque');
+        $(tableauCouleurFond[navItemClique].divPasLiees).removeClass('de-transparant-a-visible');
+
+        setTimeout(function(){ 
+
+          $(tableauCouleurFond[navItemClique].divPasLiees).addClass('hidden-away');
+          $(tableauCouleurFond[navItemClique].divLiee).removeClass('hidden-away opaque');                    
+          $(tableauCouleurFond[navItemClique].divLiee).addClass('de-transparant-a-visible');                              
+        }, 800);    
+
+      let couleurFond = $('body').css('background-image');
+      let couleurGauche = couleurFond.split('to right, ')[1].split(' 50%')[0];
+      let couleurDroite = couleurFond.split('to right, ')[1].split(' 50%')[1].substr(2);
+
+      //$('body').css('background-image', 'linear-gradient(to right, #FFB612 50%, rgb(255, 255, 0) 50%)');
+
+
+      if ($('body').hasClass('bottom-left-class')) {
+        $('body').css('background-image', 'linear-gradient(to right, '+couleurGauche+' 50%, '+tableauCouleurFond[navItemClique].couleur+' 50%)');
+      } else {
+        $('body').css('background-image', 'linear-gradient(to right, '+tableauCouleurFond[navItemClique].couleur+' 50%, '+couleurDroite+' 50%)');
+      }
+      $('body').toggleClass('bottom-left-class');
+      console.log($('body').css('background-image'));
+
+
+        /* ici pour les liens des coucous mags
+        $('.coucou_liens').removeClass('hidden-away');
+        $('coucou_liens a').each(function(){
+            hide($(this));
+        })
+        */
+
+    });
   
-    $('.project_click_background').click(function(){
+  
+    /*$('.project_click_background').click(function(){
 
       let couleurFond = $('body').css('background-image');
       let couleurGauche = couleurFond.split('to right, ')[1].split(' 50%')[0];
@@ -76,40 +155,28 @@ $(document).ready(function() {
       $('body').toggleClass('bottom-left-class');
 
 
-        $('#stageAccueil').addClass('opaque');        
-        $('.contact_form_div').addClass('opaque');
-        $('.contact_form_div').removeClass('de-transparant-a-visible');
-        $('.a_propos_div').addClass('opaque');
-        $('.a_propos_div').removeClass('de-transparant-a-visible');
+
+        $('.contact_form_div, .a_propos_div').addClass('opaque');
+        $('.contact_form_div, .a_propos_div').removeClass('de-transparant-a-visible');
 
        setTimeout(function(){ 
-          $('#stageAccueil').addClass('hidden-away');        
-          $('.contact_form_div').addClass('hidden-away');
-          $('.a_propos_div').addClass('hidden-away');          
+          $('.contact_form_div, .a_propos_div').addClass('hidden-away');        
         }, 800);
-
        setTimeout(function(){ 
           $('.projects_div').removeClass('hidden-away');
-          $('.projects_div').addClass('opaque');
-          $('.projects_div').addClass('de-transparant-a-visible');
+          $('.projects_div').addClass('opaque de-transparant-a-visible');
         }, 1600); 
-
     });
 
 
     $('.bio_click').click(function(){
 
-        $('#stageAccueil').addClass('opaque hidden-away');        
-        $('.contact_form_div').removeClass('de-transparant-a-visible');
-        $('.contact_form_div').addClass('opaque');
-        $('.projects_div').removeClass('de-transparant-a-visible');        
-        $('.projects_div').addClass('opaque');
+        $('.contact_form_div, .projects_div').removeClass('de-transparant-a-visible');
+        $('.contact_form_div, .projects_div').addClass('opaque');
         
         setTimeout(function(){ 
-          $('.contact_form_div').addClass('hidden-away');
-          $('.projects_div').addClass('hidden-away');
-          $('.a_propos_div').removeClass('hidden-away');                    
-          $('.a_propos_div').removeClass('opaque');                    
+          $('.contact_form_div, .projects_div').addClass('hidden-away');
+          $('.a_propos_div').removeClass('hidden-away opaque');                    
           $('.a_propos_div').addClass('de-transparant-a-visible');                              
         }, 800);                
 
@@ -117,26 +184,18 @@ $(document).ready(function() {
 
     $('.contact_click').click(function(){
 
-        $('.coucou_liens').removeClass('hidden-away');
-        $('coucou_liens a').each(function(){
-            hide($(this));
-        })
-        $('#stageAccueil').addClass('opaque hidden-away');
-        $('.a_propos_div').removeClass('de-transparant-a-visible');
-        $('.projects_div').removeClass('de-transparant-a-visible');        
-        $('.a_propos_div').addClass('opaque');
-        $('.projects_div').addClass('opaque');
+
+        $('.a_propos_div, .projects_div').removeClass('de-transparant-a-visible');
+        $('.a_propos_div, .projects_div').addClass('opaque');
         
         setTimeout(function(){ 
-          $('.projects_div').addClass('hidden-away');
-          $('.a_propos_div').addClass('hidden-away');
-          $('.contact_form_div').removeClass('hidden-away');                    
-          $('.contact_form_div').removeClass('opaque');                    
+          $('.projects_div, .a_propos_div').addClass('hidden-away');
+          $('.contact_form_div').removeClass('hidden-away opaque');                    
           $('.contact_form_div').addClass('de-transparant-a-visible');                              
         }, 800);                
 
     });
-
+    */
 
     /**********************************************************************
     *   Pour enregister le mass edit formulaire
