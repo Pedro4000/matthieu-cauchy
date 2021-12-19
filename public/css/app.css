@@ -103,7 +103,7 @@ img {
   justify-content: center;
 }
 #stageAccueil {
-  margin: 2vh 28% 0vh;
+  margin: 0vh 28% 0vh;
   width: 650px;
   text-align: center;
   position: relative;
