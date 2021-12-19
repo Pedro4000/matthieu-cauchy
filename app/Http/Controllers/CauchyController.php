@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use App\Models\{Serie, Album, Photo, Type, APropos};
 use Illuminate\Http\{Request, Response};
-use Illuminate\Support\Facades\{Storage, File, DB, App};
+use Illuminate\Support\Facades\{Storage, File, DB, App, Mail};
 use Intervention\Image\ImageManagerStatic;
 use Intervention\Image\Filters\FilterInterface;
 use function PHPUnit\Framework\stringContains;
