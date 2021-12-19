@@ -10,7 +10,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
   </head>
-  <body class="bottom-right-class">
+  <body class="bottom-right-class" style="{{ Route::currentRouteName() != 'home' ? 'background: rgb(249, 249, 251)'
+ : '' }}">
     <header>
       <div class="row w-100">
         <div class="col-3 col-lg-1 col-xl-2 sidebar pl-4 pr-0">

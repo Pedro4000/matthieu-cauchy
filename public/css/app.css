@@ -1,7 +1,7 @@
 body {
   font-family: 'DIN', Fallback, sans-serif !important;
   margin: 0;
-  background: linear-gradient(to right, #84DBF0 50%, pink 50%);
+  background: linear-gradient(to right, #84DBF0 50%, #84DBF0 50%);
   background-size: 200% 100%;
   transition: all 800ms ease;
 }
@@ -32,7 +32,6 @@ main {
   height: 100%;
 }
 img {
-  width: 65%;
   max-height: 100%;
   height: auto;
 }
@@ -111,8 +110,25 @@ img {
   display: flex;
   justify-content: center;
 }
-#stage img,
+@media only screen and (max-width: 980px) {
+  #stageAccueil {
+    margin: auto;
+    width: 100%;
+  }
+}
+.coucou_liens {
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 980px) {
+  .coucou_liens {
+    font-size: 2.5rem;
+  }
+}
 #stageAccueil img {
+  background: #fff;
+  width: 80%;
+}
+#stage img {
   background: #fff;
   width: 80%;
 }
@@ -155,6 +171,9 @@ img {
   font-size: 21px;
   transition: 300ms;
 }
+.premiere-galerie-image {
+  width: 100%;
+}
 /* Centered text */
 .centered-title {
   position: absolute;
@@ -169,9 +188,6 @@ img {
   position: absolute;
   bottom: 5%;
   right: 27%;
-}
-.home-main-element {
-  height: 18rem;
 }
 @media only screen and (max-width: 980px) {
   .sidebar {
@@ -192,7 +208,7 @@ img {
     width: 100%;
   }
   .home-main-element {
-    height: 38vh;
+    height: 30vh;
   }
 }
 

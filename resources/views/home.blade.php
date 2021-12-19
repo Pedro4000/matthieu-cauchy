@@ -31,18 +31,18 @@ home
 
 <div class="row col-11 m-auto projects_div d-flex lg:justify-end {{ app('request')->input('section_display') == 'projects' ? '' : 'hidden-away opaque' }}">
  @foreach($albums['works'] as $work)
-  <div class="w-1/2 lg:w-1/3 text-center d-flex home-main-element align-center">
-    <div class="inline-block premiere_galerie">
+  <div class="w-1/2 lg:w-1/3 text-center d-flex home-main-element">
+    <div class="inline-block premiere_galerie d-flex items-center">
       <a href="{{ route('album', ['album_nom' => $albums['works']['martha']->nom ]) }}" class="premiere-galerie-lien">
-        <img src="{{ asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier) }}" class="inline-block premiere-galerie-image">
+        <img src="{{ isset($work->couv) ? asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier) : '' }}" class="inline-block premiere-galerie-image">
         <div class="centered-title">{{ Str::of($work->nom)->upper() }}</div>
       </a>
     </div>
   </div>
 @endforeach
 
-  <div class="w-1/2 lg:w-1/3 text-center flex lg:justify-end lg:items-start pointer home-main-element align-center">
-    <div id="coucou_image" class="inline-block premiere_galerie">
+  <div class="w-1/2 lg:w-1/3 text-center flex lg:justify-end lg:items-start pointer home-main-element">
+    <div id="coucou_image" class="inline-block premiere_galerie d-flex items-center">
       <div class="premiere-galerie-lien">
         <img src="{{ asset('storage/images/books/premiere classe/squaez.jpg') }}" class="inline-block premiere-galerie-image">
         <div class="centered-title">COUCOU-MAGAZINE</div>            
@@ -50,7 +50,7 @@ home
     </div>
   </div>
 
-  <div class="w-1/2 lg:w-1/3 flex flex-col items-start coucou_liens hidden-away home-main-element {align-center lg:justify-start lg:items-center">
+  <div class="w-1/2 lg:w-1/3 d-flex flex-col coucou_liens hidden-away home-main-element justify-center lg:justify-start items-start lg:items-center">
       @foreach($albums['books'] as $book)
         <a href="{{ route('album', ['album_nom' => $book->nom ]) }}" class="text-left opaque">
           <p class="d-flex align-items-center w-100 my-3"><img class="mx-2" style="width:30px; border-radius: 50%; padding: 2px" src="{{ asset($planets[rand(0, count($planets)-1) ]) }}">{{ $book->nom }}</p>
