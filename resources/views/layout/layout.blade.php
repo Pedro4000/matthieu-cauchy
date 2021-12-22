@@ -19,7 +19,7 @@
   @yield('sidebar')
           </div>
         </div>     
-        <div class="col-9 {{ Route::currentRouteName() != 'home' ? 'hidden-away' : ''}}">
+        <div class="col-9  sm:mt-0 mt-4 {{ Route::currentRouteName() != 'home' ? 'hidden-away' : ''}}">
   @include('include.topbar')
         </div>
       </div>

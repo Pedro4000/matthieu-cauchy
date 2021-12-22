@@ -112,7 +112,7 @@ img {
 }
 @media only screen and (max-width: 980px) {
   #stageAccueil {
-    margin: auto;
+    margin-top: 6vh;
     width: 100%;
   }
 }
@@ -184,10 +184,22 @@ img {
   font-size: 20px;
   font-size: bold;
 }
+@media only screen and (max-width: 980px) {
+  .centered-title,
+  .retour {
+    font-size: 2em;
+  }
+}
 .retour {
   position: absolute;
   bottom: 5%;
   right: 27%;
+}
+@media only screen and (max-width: 980px) {
+  .a-propos,
+  .contact-div {
+    font-size: 2em;
+  }
 }
 @media only screen and (max-width: 980px) {
   .sidebar {

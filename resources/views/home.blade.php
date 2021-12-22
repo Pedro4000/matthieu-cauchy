@@ -64,7 +64,7 @@ home
     {!! $aPropos->contenu !!}
 </div>
 
-<div class="col-11 contact_form_div m-auto  {{ app('request')->input('section_display') == 'contact' ? '' : 'hidden-away opaque' }}">
+<div class="col-11 contact_form_div m-auto contact-div {{ app('request')->input('section_display') == 'contact' ? '' : 'hidden-away opaque' }}">
 
   @if( app('request')->input('message') == 'ok')
     <div class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow alert alert-success alert-dismissible fade show d-flex justify-content-between" role="alert">

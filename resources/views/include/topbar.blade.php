@@ -1,4 +1,4 @@
-<div class='text-center pt-4 lg:pt-0 text-5xl lg:text-base flex justify-between'>
+<div class='text-center pt-4 lg:pt-0 text-5xl lg:text-base flex justify-around'>
   <div class='inline-block w-1/4 h-10'>
     <p class="inline p-3 pointer bio_click">Bio</p>
   </div>
