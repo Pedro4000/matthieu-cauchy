@@ -24,8 +24,9 @@ section
 <div class="row">
 
   <div id="stage" class="">
+    <div class='slider_component blabla' style="display:none">{{ $album->description }}</div>
     @foreach($album->photos as $photo)
-    <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none">
+    <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none" class="slider_component">
     @endforeach
   </div>
 

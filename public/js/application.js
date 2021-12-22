@@ -10,13 +10,13 @@ $(document).ready(function() {
     
 
     var imagesArray = [];
-    let images = $('#stage img');
+    let images = $('#stage .slider_component');
     for(keys in images) {
         imagesArray[keys] = images[keys];
     }
 
-    $('#stage img').css('display', 'none');
-    $('#stage img').eq(1).css('display', 'block');      
+    $('#stage .slider_component').css('display', 'none');
+    $('#stage .slider_component').eq(0).css('display', 'block');      
 
     $('#stage').click(prochaineImage);
     $(document).keydown(prochaineImage);
@@ -37,13 +37,13 @@ $(document).ready(function() {
             console.log('ok');
             lastElement = imagesArray.shift();
             imagesArray.push(lastElement);
-              $('#stage img').eq(1).animate({
+              $('#stage .slider_component').eq(1).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
-                $('#stage img').first().remove();
-                $('#stage img').css('display', 'none');
-                $('#stage img').eq(1).css('display', 'block');                      
-                //$('#stage img').append().remove();
+                $('#stage .slider_component').first().remove();
+                $('#stage .slider_component').css('display', 'none');
+                $('#stage .slider_component').eq(1).css('display', 'block');                      
+                //$('#stage .slider_component').append().remove();
                 $('#stage').append(imagesArray.last()); 
               });                    
         }
@@ -51,14 +51,14 @@ $(document).ready(function() {
         if (sens_carrousel == 'precedent') {
             lastElement = imagesArray.pop();
             imagesArray.unshift(lastElement);
-              $('#stage img').eq(1).animate({
+              $('#stage .slider_component').eq(1).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
-                $('#stage img').css('display', 'none');
-                $('#stage img').last().remove();
+                $('#stage .slider_component').css('display', 'none');
+                $('#stage .slider_component').last().remove();
                 $('#stage').prepend(imagesArray.first()); 
-                $('#stage img').eq(1).css('display', 'block');                      
-                //$('img').append().remove();
+                $('#stage .slider_component').eq(1).css('display', 'block');                      
+                //$('.slider_component').append().remove();
               });                    
         }
     }
