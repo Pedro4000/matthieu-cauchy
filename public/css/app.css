@@ -125,25 +125,28 @@ img {
   }
 }
 #stageAccueil img {
-  border: 5px solid red;
+  border: 5px solid blue;
   background: #fff;
-  width: 80%;
+  width: 50%;
 }
-@media only screen and (max-width: 1200) {
+@media screen and (max-width: 980px) {
   #stageAccueil img {
-    border: 5px solid blue;
-    width: 68%;
+    width: 100%;
   }
 }
-@media only screen and (min-width: 1500) {
+@media screen and (max-width: 1200px) {
   #stageAccueil img {
-    border: 5px solid pink;
-    width: 95%;
+    width: 80%;
+  }
+}
+@media screen and (max-width: 1800px) {
+  #stageAccueil img {
+    width: 60%;
   }
 }
 #stage .slider_component {
   background: #fff;
-  width: 80%;
+  width: 45%;
 }
 .apercu {
   max-width: 45px;
@@ -197,7 +200,7 @@ img {
   font-size: 20px;
   font-size: bold;
 }
-@media only screen and (max-width: 980px) {
+@media screen and (max-width: 980px) {
   .centered-title,
   .retour {
     font-size: 2em;
@@ -208,13 +211,13 @@ img {
   bottom: 5%;
   right: 27%;
 }
-@media only screen and (max-width: 980px) {
+@media screen and (max-width: 980px) {
   .a-propos,
   .contact-div {
     font-size: 2em;
   }
 }
-@media only screen and (max-width: 980px) {
+@media screen and (max-width: 980px) {
   .sidebar {
     height: 10vh;
   }
