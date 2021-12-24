@@ -217,7 +217,7 @@ $(document).ready(function() {
             reveal($(this), i);
             i++;
         });
-
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     });
 
     function reveal (element, i) {

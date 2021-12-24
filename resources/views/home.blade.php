@@ -50,7 +50,7 @@ home
     </div>
   </div>
 
-  <div class="w-full lg:w-1/3 mb-4 lg:mb-0  d-flex flex-col coucou_liens hidden-away home-main-element justify-center lg:justify-start items-start lg:items-center">
+  <div class="w-full lg:w-1/3 mb-4 lg:mb-0  d-flex flex-col coucou_liens hidden-away home-main-element justify-center lg:justify-start items-center">
       @foreach($albums['books'] as $book)
         <a href="{{ route('album', ['album_nom' => $book->nom ]) }}" class="text-left opaque">
           <p class="d-flex align-items-center w-100 my-3"><img class="mx-2" style="width:30px; border-radius: 50%; padding: 2px" src="{{ asset($planets[rand(0, count($planets)-1) ]) }}">{{ $book->nom }}</p>
