@@ -129,20 +129,35 @@ img{
 
 #stage{
     margin: 2vh auto 0vh;
-    width: 70%;
-    text-align: center;
+    height: 60vh;
+    width: auto;
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;    
 }
+
+
+@media only screen and (max-width: 980px) {
+    #stage {
+      height:60vh;
+  }
+    #stage img{  
+      width: 100%;
+      height: auto;
+    }       
+}
+
 
 #stageAccueil{
     margin: 0vh auto 0vh;
-    width: 70%;
-    text-align: center;
+    height: 60vh;
+    width: auto;
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;    
+
 }
 
 @media only screen and (max-width: 980px) {
@@ -162,35 +177,6 @@ img{
   }
 }
 
-
-
-#stageAccueil img{
-  background: #fff;
-  width: 50%;
-}
-
-@media screen and (max-width: 980px) {
-  #stageAccueil img{
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  #stageAccueil img{
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 1800px) {
-  #stageAccueil img{
-    width: 60%;
-  }
-}
-
-#stage .slider_component{
-  background: #fff;
-  width: 45%;
-}
 
 .apercu{
   max-width: 45px;
@@ -308,13 +294,4 @@ img{
   img{
     width: 100%;
   }
-
-  #stage img{  
-    width: 100%;
-  }  
-
-  .home-main-element {
-    height: 30vh;
-  }
-
 }
