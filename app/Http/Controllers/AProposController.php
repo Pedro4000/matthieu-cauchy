@@ -11,18 +11,22 @@ class AProposController extends Controller
 {
 
      /**
-     * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $apropos = APropos::get();
+
+        return view('admin.apropos.a_propos_index',[
+            'apropos' => $apropos,
+        ]);
+    }
+    /**
+     *
      */
     public function edit()
     {
         $apropos = APropos::first();
-        if(!$apropos){
-            $apropos = new Apropos();
-            $apropos->save();
-        }
 
         return view('admin.apropos.a_propos_edit',[
             'apropos' => $apropos,
@@ -33,16 +37,16 @@ class AProposController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $apropos = APropos::first();
-        $apropos->contenu = $request->get('contenu') ;
+        $apropos = APropos::find($request->id);
+        $apropos->contenu = $request->get('a_propos_editor');
+        $apropos->langue = $request->get('langue');
 
         if($apropos->save()) {
-            return redirect()->route('admin.a_propos.edit')->with('success', 'apropos modifié');
+            return redirect()->route('admin.a_propos.index')->with('success', 'apropos modifié');
         } else {
             return redirect()->route('admin.a_propos.edit')->with('error', 'problème lors de la modif');
         }    
@@ -64,7 +68,6 @@ class AProposController extends Controller
             $photo->delete();
         }
         $apropos->delete();
-        Storage::deleteDirectory('public/images/'.$apropos->nom_route);
 
         return redirect()->route('admin.apropos.index')->with('success', 'apropos supprimé');
     }

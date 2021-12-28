@@ -110,7 +110,6 @@ class TypeController extends Controller
         $type = Type::find($typeId);
         
         $type->delete();
-        Storage::deleteDirectory('public/images/'.$type->nom_route);
 
         return redirect()->route('admin.type.index')->with('success', 'type supprimé');
     }

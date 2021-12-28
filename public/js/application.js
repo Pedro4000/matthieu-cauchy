@@ -4,15 +4,64 @@ $('#stage img').first().css('display', 'block');
 $(document).ready(function() {
 
 
+
+      
+    /**********************************************************************
+    *   fonction pour detecter le swipe en vanilla js
+    */
+
+     document.addEventListener('touchstart', handleTouchStart, false);        
+     document.addEventListener('touchmove', handleTouchMove, false);
+     
+     var xDown = null;                                                        
+     var yDown = null;
+     
+     function getTouches(evt) {
+       return evt.touches ||             // browser API
+              evt.originalEvent.touches; // jQuery
+     }                                                     
+                                                                              
+     function handleTouchStart(evt) {
+         const firstTouch = getTouches(evt)[0];                                      
+         xDown = firstTouch.clientX;                                      
+         yDown = firstTouch.clientY;                                      
+     };                                                
+                                                                              
+     function handleTouchMove(evt) {
+         if ( ! xDown || ! yDown ) {
+             return;
+         }
+     
+         var xUp = evt.touches[0].clientX;                                    
+         var yUp = evt.touches[0].clientY;
+         var swipe;
+     
+         var xDiff = xDown - xUp;
+         var yDiff = yDown - yUp;
+                                                                              
+         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+             if ( xDiff > 0 ) {
+              swipe = {which : 1};
+              $('#stage').click(prochaineImage.call(this, swipe)); 
+            } else {
+              swipe = {which : 37};
+              $('#stage').click(prochaineImage.call(this, swipe));
+             }                       
+         } else {
+             if ( yDiff > 0 ) {
+                 /* down swipe */ 
+             } else { 
+                 /* up swipe */
+             }                                                                 
+         }
+         /* reset values */
+         xDown = null;
+         yDown = null;                                             
+     };
+
     /********************************************
     *   Pour la diapo des images
     */
-    $(document).on( "swipe", swipeSlider );
-
-
-    function swipeSlider(event) {
-      console.log('ok');
-    }
 
     var imagesArray = [];
     let images = $('#stage .slider_component');
@@ -21,11 +70,12 @@ $(document).ready(function() {
     }
 
     $('#stage .slider_component').css('display', 'none');
-    $('#stage .slider_component').eq(0).css('display', 'block');      
+    $('#stage .slider_component').eq(1).css('display', 'block');      
 
     $('#stage').click(prochaineImage);
     $(document).keydown(prochaineImage);
-    let autoChange = setInterval(prochaineImage, 16000, "suivante");
+    
+    //let autoChange = setInterval(prochaineImage, 16000, "suivante");
     var sens_carrousel = 'suivante';
 
     function prochaineImage (event) {
@@ -44,10 +94,10 @@ $(document).ready(function() {
               $('#stage .slider_component').eq(1).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
+                
                 $('#stage .slider_component').first().remove();
                 $('#stage .slider_component').css('display', 'none');
                 $('#stage .slider_component').eq(1).css('display', 'block');                      
-                //$('#stage .slider_component').append().remove();
                 $('#stage').append(imagesArray.last()); 
               });                    
         }
@@ -62,7 +112,6 @@ $(document).ready(function() {
                 $('#stage .slider_component').last().remove();
                 $('#stage').prepend(imagesArray.first()); 
                 $('#stage .slider_component').eq(1).css('display', 'block');                      
-                //$('.slider_component').append().remove();
               });                    
         }
     }
@@ -193,7 +242,6 @@ $(document).ready(function() {
     */
 
     $('.hamburger-click, .navhamburger > .pate-hamburger').click(function() {
-      console.log('ok');
       if ($('.navhamburger').hasClass('expanded')) {
         $('.hamburger-expand, .hamburger-shrink').toggleClass('hidden');
         $('.navhamburger').height(0);
@@ -202,8 +250,6 @@ $(document).ready(function() {
         $('.navhamburger').height($(window).height()-$('header').height());
       }
       $('.navhamburger').toggleClass('expanded');
-    })
-
-    
+    })   
 
 }); 

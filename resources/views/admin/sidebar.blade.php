@@ -16,7 +16,7 @@
       </a>
     </li>  
     <li class="nav-item my-5">
-      <a class="nav-link p-4 {{ (Route::current()->getName() == 'admin.a_propos.edit') ? 'sidebar-active' : '' }}" href="{{ route('admin.a_propos.edit') }}" title="gerer les types">
+      <a class="nav-link p-4 {{ (Route::current()->getName() == 'admin.a_propos.index') ? 'sidebar-active' : '' }}" href="{{ route('admin.a_propos.index') }}" title="gerer les types">
         <i class="fab fa-accessible-icon"></i><span class="hidden lg:inline"> à propos</span>
       </a>
     </li> 

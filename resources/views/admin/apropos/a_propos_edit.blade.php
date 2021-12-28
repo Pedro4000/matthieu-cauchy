@@ -6,20 +6,33 @@
                     <div class="w-full ">
                         <form method="post" action="{{ route('admin.a_propos.update') }}">
                           @csrf
+
+                          @php $champ = 'langue' @endphp
                           <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                              
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ $champ }}">
+                              langue
                             </label>
-                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="textarea" name="contenu" id="a_propos_editor">{!! $apropos->contenu !!}</textarea>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="{{ $champ }}" type="text" value="{{ $apropos->langue }}" name="{{ $champ }}">
+                            <input type="number" value="{{ $apropos->id }}" name="id" class="hidden"> 
                           </div>
 
-                          <div class="flex items-center justify-between pb-4 w-1/4">
-                            <a href="{{ url()->previous() }}"> <button class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="button"></a>
-                              annuler
-                            </button>
-                            <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                              enregistrer
-                            </button>
+                          <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="a_propos_editor">
+                              texte
+                            </label>
+                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="textarea" name="a_propos_editor" id="a_propos_editor">{!! $apropos->contenu !!}</textarea>
+                          </div>
+
+                          <div class="flex items-center justify-between pb-4">
+                            <div class="flex">
+                              <a class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" href="{{ url()->previous() }}">annuler</a>          
+                              <button class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="submit">
+                                enregistrer
+                              </button>
+                            </div>
+                            <div class="flex">
+                              <a class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" href="{{ url()->previous() }}">supprimer</a>                                
+                            </div>
                           </div>
                         </form>
                     </div>

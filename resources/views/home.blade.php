@@ -32,7 +32,7 @@ home
 <div id="album-div" class="m-auto flex flex-wrap flex-col lg:flex-row projects_div {{ app('request')->input('section_display') == 'projects' ? '' : 'hidden-away opaque' }}">
  @foreach($albums['works'] as $work)
   <div class="w-full lg:w-1/3 mb-7 px-3 text-center flex home-main-element">
-    <div class="inline-block premiere_galerie flex items-center">
+    <div class="inline-block premiere_galerie flex items-center w-full">
       <a href="{{ route('album', ['album_nom' => $albums['works']['martha']->nom ]) }}" class="premiere-galerie-lien">
         <img src="{{ isset($work->couv) ? asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier) : '' }}" class="inline-block premiere-galerie-image">
         <div class="centered-title">{{ Str::of($work->nom)->upper() }}</div>
@@ -76,11 +76,11 @@ home
     @csrf
     <div class="mb-2 grid">
       <label class="col-span-12 text-center" for="contact_name">Nom</label>
-      <input type="text" name="contact_name" class="col-span-12 home-input text-5xl">
+      <input type="text" name="contact_name" class="col-span-12 home-input text-5xl lg:text-xl">
     </div>
     <div class="mb-7 grid">
       <label class="col-span-12 text-center" for="contact_message">Message</label>
-      <textarea name="contact_message" class="col-span-12 contact_message home-input text-5xl"></textarea>    
+      <textarea name="contact_message" class="col-span-12 contact_message home-input text-5xl lg:text-xl"></textarea>    
     </div>
     <div class="mb-2 text-right ">
       <button type="submit">Envoyer </button>
