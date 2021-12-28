@@ -8,7 +8,7 @@
                   + ajouter
                 </button>
                 </a>
-                <table class="table-auto photo-index-table">
+                <table class="table-auto photo-index-table text-left">
                   <thead>
                     <tr>
                       <th class='w-1/12'>nom</th>

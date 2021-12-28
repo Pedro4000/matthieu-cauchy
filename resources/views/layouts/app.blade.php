@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">        
+        <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">        
         <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
 
 
@@ -42,5 +43,6 @@
             </main>
             @include('include.foot')
         </div>
+        @stack('scripts')
     </body>
 </html>

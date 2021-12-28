@@ -74,7 +74,6 @@ class PhotoController extends Controller
             'nom' => 'required|unique:photos',
         ]);
 
-
         // todo faire un slug pour verifier que le nom nexiste pas deja de la photo 
         // sans quoi ca ecrase lancienne photo
         $photo = new Photo();
@@ -146,8 +145,6 @@ class PhotoController extends Controller
         } else {
             return redirect(url()->previous())->with('error', 'poti problème lors de la modification');
         }
-
-
     }
 
     /**
@@ -159,8 +156,6 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($request->get('id'));
         $album = Album::find($photo->album->id);
-
-        // todo revoir si ca supprime bien 
 
         $files = Storage::get('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
 
@@ -180,7 +175,7 @@ class PhotoController extends Controller
 
         $masseEditArray = [];
 
-        foreach($request->all() as $inputName => $inputValue) {
+        foreach ($request->all() as $inputName => $inputValue) {
 
             if(in_array(explode('_', $inputName)[0] ,['accueil', 'couverture', 'ordrePhoto'])) {                
                 $photoId = explode('_', $inputName)[1];
@@ -188,9 +183,31 @@ class PhotoController extends Controller
             }
         }
 
-        foreach($masseEditArray as $photoId => $photoInputs) {
+        foreach ($masseEditArray as $photoId => $photoInputs) {
 
             $photo = Photo::find($photoId);
+
+            // si on a un input avec 1 pour la photo d'accueil, on enleve tous les autres, pour eviter les doublons, attention cependant cest le 
+            // dernier id qui prend, donc si on est sur la même page avec deux oui, cest juste la derniere photo qui prendra
+            if ($photoInputs['accueil']) {
+                $anciennesPhotoAccueil = Photo::where('accueil', '=', 1)->get();
+                foreach ($anciennesPhotoAccueil as $anciennePhotoAccueil) {
+                    if ($anciennePhotoAccueil->id != $photo->id) {
+                        $anciennePhotoAccueil->accueil = 0;
+                        $anciennePhotoAccueil->save();       
+                    }
+                }
+            }
+            if ($photoInputs['couverture']) {
+                $anciennesPhotoCouvertures = Photo::where('couverture', '=', 1)->where('album_id', $photo->album->id)->get();
+                foreach ($anciennesPhotoCouvertures as $anciennePhotoCouvertures) {
+                    if ($anciennePhotoCouvertures->id != $photo->id) {
+                        $anciennePhotoCouvertures->couverture = 0;
+                        $anciennePhotoCouvertures->save();       
+                    }
+                }
+            }
+
             $photo->accueil = $photoInputs['accueil'];
             $photo->couverture = $photoInputs['couverture'];
             $photo->ordre = $photoInputs['ordrePhoto'];
@@ -244,10 +261,7 @@ class PhotoController extends Controller
                 $photo->save();
             }         
         }
-    
-        
-        die('ok');
-
+        die('fini');
     }
 
 }

@@ -5,7 +5,7 @@
 </title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>    
-    <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">    
+    <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">   
     <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
@@ -26,6 +26,7 @@
     </header>
     <div id="haut_de_page" role="main" class="main container-fluid">
       <div class="row">
+@include('include.navhamburger')
         <div id="content" class="col-12 cold col-lg-10 px-4 mt-6 mx-auto">
 @yield('headcontent')
 @yield('content')

@@ -74,23 +74,45 @@ home
   <form class="contact-form row m-auto" action="{{ route('contact.form') }}">
     @csrf
     <div class="mb-2 row">
-      <label class="col-12 text-center" for="contact_name">Name</label>
-      <input type="text" name="contact_name" class="col-12 home-input">
+      <label class="col-12 text-center" for="contact_name">Nom</label>
+      <input type="text" name="contact_name" class="col-12 home-input text-5xl">
     </div>
     <div class="mb-4 row">
       <label class="col-12 text-center" for="contact_message">Message</label>
-      <textarea name="contact_message" class="col-12 contact_message home-input"></textarea>    
+      <textarea name="contact_message" class="col-12 contact_message home-input text-5xl"></textarea>    
     </div>
     <div class="mb-2 text-right ">
-      <button type="submit">Send </button>
+      <button type="submit">Envoyer </button>
     </div>
   </form>
   <div class="mt-5">
-    <p class="text-center">or</p>
+    <p class="text-center">ou</p>
     <p class="text-center">+33 6 79 68 07 68</p>
   </div>
 
 </div>
 @endsection
 
+@push('scripts')
+    <script>
+      $(document).ready(function() {
 
+        function affichageHamburger() {
+          console.log('ok');
+          if ($(window).width() > 980) {
+            width = $(window).width();
+            $('.hamburger-nav').addClass('d-none');
+            $('.desktop-nav').removeClass('d-none');
+          } else {
+            $('.hamburger-nav').removeClass('d-none');
+            $('.desktop-nav').addClass('d-none');            
+          }
+        };
+
+        new affichageHamburger();
+        $(window).resize(affichageHamburger);
+        
+
+      });      
+    </script>
+@endpush

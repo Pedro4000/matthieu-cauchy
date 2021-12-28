@@ -34,7 +34,6 @@ $(document).ready(function() {
         }
 
         if (!sens_carrousel || sens_carrousel == 'suivant') {
-            console.log('ok');
             lastElement = imagesArray.shift();
             imagesArray.push(lastElement);
               $('#stage .slider_component').eq(1).animate({
@@ -94,6 +93,8 @@ $(document).ready(function() {
     $('.project_click_background, .bio_click, .contact_click').click(function(){
 
         // la première fois, on cache l'image d'accueil
+        $(".active").removeClass('active');
+        $(this).addClass('active');
         if (!$('#stageAccueil').hasClass('opaque')) {
           $('#stageAccueil').addClass('opaque');
           setTimeout(function(){ 
@@ -134,7 +135,6 @@ $(document).ready(function() {
         $('body').css('background-image', 'linear-gradient(to right, '+tableauCouleurFond[navItemClique].couleur+' 50%, '+couleurDroite+' 50%)');
       }
       $('body').toggleClass('bottom-left-class');
-      console.log($('body').css('background-image'));
 
 
         /* ici pour les liens des coucous mags
@@ -146,56 +146,6 @@ $(document).ready(function() {
 
     });
   
-  
-    /*$('.project_click_background').click(function(){
-
-      let couleurFond = $('body').css('background-image');
-      let couleurGauche = couleurFond.split('to right, ')[1].split(' 50%')[0];
-      $('body').css('background-image', 'linear-gradient(to right, '+couleurGauche+' 50%, pink 50%)');
-      $('body').toggleClass('bottom-left-class');
-
-
-
-        $('.contact_form_div, .a_propos_div').addClass('opaque');
-        $('.contact_form_div, .a_propos_div').removeClass('de-transparant-a-visible');
-
-       setTimeout(function(){ 
-          $('.contact_form_div, .a_propos_div').addClass('hidden-away');        
-        }, 800);
-       setTimeout(function(){ 
-          $('.projects_div').removeClass('hidden-away');
-          $('.projects_div').addClass('opaque de-transparant-a-visible');
-        }, 1600); 
-    });
-
-
-    $('.bio_click').click(function(){
-
-        $('.contact_form_div, .projects_div').removeClass('de-transparant-a-visible');
-        $('.contact_form_div, .projects_div').addClass('opaque');
-        
-        setTimeout(function(){ 
-          $('.contact_form_div, .projects_div').addClass('hidden-away');
-          $('.a_propos_div').removeClass('hidden-away opaque');                    
-          $('.a_propos_div').addClass('de-transparant-a-visible');                              
-        }, 800);                
-
-    });
-
-    $('.contact_click').click(function(){
-
-
-        $('.a_propos_div, .projects_div').removeClass('de-transparant-a-visible');
-        $('.a_propos_div, .projects_div').addClass('opaque');
-        
-        setTimeout(function(){ 
-          $('.projects_div, .a_propos_div').addClass('hidden-away');
-          $('.contact_form_div').removeClass('hidden-away opaque');                    
-          $('.contact_form_div').addClass('de-transparant-a-visible');                              
-        }, 800);                
-
-    });
-    */
 
     /**********************************************************************
     *   Pour enregister le mass edit formulaire
@@ -232,5 +182,23 @@ $(document).ready(function() {
         element.removeClass('de-transparant-a-visible');        
     }
 
+    
+    /**********************************************************************
+    *   Pour le calcul de la hauteru du menu hamburger
+    */
+
+    $('.hamburger-click, .navhamburger > .pate-hamburger').click(function() {
+      console.log('ok');
+      if ($('.navhamburger').hasClass('expanded')) {
+        $('.hamburger-expand, .hamburger-shrink').toggleClass('d-none');
+        $('.navhamburger').height(0);
+      } else {
+        $('.hamburger-expand, .hamburger-shrink').toggleClass('d-none');
+        $('.navhamburger').height($(window).height()-$('header').height());
+      }
+      $('.navhamburger').toggleClass('expanded');
+    })
+
+    
 
 }); 

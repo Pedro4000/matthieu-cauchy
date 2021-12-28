@@ -101,8 +101,6 @@ img{
   left: -500%;
 }
 
-#content{
-}
 
 .sb-secondary{
   cursor: pointer;
@@ -124,8 +122,6 @@ img{
   transition-duration: 0.3s;
 }
 
-.sb-main{
-}
 
 #stage{
     margin: 2vh auto 0vh;
@@ -206,11 +202,6 @@ img{
 
 }
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-}
-
-
 .photo-index-table{
   tbody{
     td{
@@ -249,7 +240,6 @@ img{
   transform: translate(-50%, -50%);
   color:white;
   font-size: 20px;
-  font-size: bold;
 }
 
 @media screen and (max-width: 980px) {
@@ -258,6 +248,31 @@ img{
   }
 }
 
+.bio_click, .contact_click, .project_click_background{
+  transition: 300ms;
+}
+
+.bio_click.active, .contact_click.active, .project_click_background.active{
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.bio_click:hover, .contact_click:hover, .project_click_background:hover{
+  opacity: 0.5;
+}
+
+.navhamburger{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  font-size: 4em;
+  transition: 600ms;
+  overflow: hidden;
+  height: 0;
+}
 
 .retour{
   position: absolute;
@@ -265,13 +280,22 @@ img{
   right: 27%;
 }
 
-.a-propos{
-
+.hamburger-click:hover{
+  opacity: 0.5;
 }
+
 @media screen and (max-width: 980px) {
-  .a-propos, .contact-div {
-    font-size: 2em;
+  .a-propos{
+    font-size: 3em;
   }
+  .contact-div {
+    font-size: 3em;
+  }
+}
+
+
+.navhamburger {
+  background: rgb(249, 249, 251);
 }
 
 

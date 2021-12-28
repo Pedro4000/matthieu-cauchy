@@ -22,7 +22,7 @@
                   <div class='pt-4'>
                     {{ $photos->links() }}                  
                   </div>
-                  <table class="table-auto photo-index-table">
+                  <table class="table-auto photo-index-table text-left mt-4">
                     <thead>
                       <tr>
                         <th class='w-1/6'>nom</th>
@@ -53,7 +53,7 @@
                             </td>
                             
                             <td>
-                              <select class='appearance-none text-xs pl-0 pr-4' name="{{ 'ordrePhoto_'.$photo->id }}">
+                              <select class='appearance-none text-xs select-pierre' name="{{ 'ordrePhoto_'.$photo->id }}">
                                   <option value="0">0</option>
                                 @for ($i = 1; $i <= $photo->nombre_photos; $i ++)
                                   <option value="{{ $i }}" {{ $photo->ordre == $i ? 'selected' : '' }}>{{ $i }}</option>
@@ -61,16 +61,15 @@
                               </select>
                             </td>
 
-
                             <td>
-                              <select class='appearance-none text-xs pl-0 pr-5' name="{{ 'accueil_'.$photo->id }}">
+                              <select class='appearance-none text-xs select-pierre' name="{{ 'accueil_'.$photo->id }}">
                                 <option value='0' {{ $photo->accueil == 0 ? 'selected' : '' }}>non</option>
                                 <option value='1' {{ $photo->accueil == 1 ? 'selected' : '' }}>oui</option>
                               </select>
                             </td>
 
                             <td>
-                              <select class='appearance-none text-xs pl-0 pr-5' name="{{ 'couverture_'.$photo->id }}">
+                              <select class='appearance-none text-xs select-pierre' name="{{ 'couverture_'.$photo->id }}">
                                 <option value='0' {{ $photo->couverture == 0 ? 'selected' : '' }}>non</option>
                                 <option value='1' {{ $photo->couverture == 1 ? 'selected' : '' }}>oui</option>
                               </select>

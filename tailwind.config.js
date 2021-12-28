@@ -22,4 +22,7 @@ module.exports = {
     },
 
     plugins: [require('@tailwindcss/forms')],
+    stats: {
+        children: true,
+    },
 };
