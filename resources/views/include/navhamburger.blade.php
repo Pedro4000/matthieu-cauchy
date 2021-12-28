@@ -1,4 +1,4 @@
-<div class="navhamburger">
+<div class="navhamburger w-full">
     <div class='inline-block w-1/4 pt-4 my-3 pate-hamburger'>
         <p class="project_click_background inline p-3 pointer">Projets</p>
     </div>

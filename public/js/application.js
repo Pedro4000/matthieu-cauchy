@@ -7,7 +7,12 @@ $(document).ready(function() {
     /********************************************
     *   Pour la diapo des images
     */
-    
+    $(document).on( "swipe", swipeSlider );
+
+
+    function swipeSlider(event) {
+      console.log('ok');
+    }
 
     var imagesArray = [];
     let images = $('#stage .slider_component');
@@ -190,10 +195,10 @@ $(document).ready(function() {
     $('.hamburger-click, .navhamburger > .pate-hamburger').click(function() {
       console.log('ok');
       if ($('.navhamburger').hasClass('expanded')) {
-        $('.hamburger-expand, .hamburger-shrink').toggleClass('d-none');
+        $('.hamburger-expand, .hamburger-shrink').toggleClass('hidden');
         $('.navhamburger').height(0);
       } else {
-        $('.hamburger-expand, .hamburger-shrink').toggleClass('d-none');
+        $('.hamburger-expand, .hamburger-shrink').toggleClass('hidden');
         $('.navhamburger').height($(window).height()-$('header').height());
       }
       $('.navhamburger').toggleClass('expanded');

@@ -60,7 +60,7 @@ img {
   min-height: 100%;
   z-index: 999;
   font-size: 20px;
-  padding: 20px;
+  padding: 1.25em;
   vertical-align: middle;
 }
 .nav-link:hover {
@@ -132,7 +132,7 @@ img {
 }
 @media only screen and (max-width: 980px) {
   .coucou_liens {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 }
 .apercu {
@@ -223,14 +223,14 @@ img {
 .retour {
   position: absolute;
   bottom: 5%;
-  right: 27%;
+  right: 5%;
 }
 .hamburger-click:hover {
   opacity: 0.5;
 }
 @media screen and (max-width: 980px) {
   .a-propos {
-    font-size: 3em;
+    font-size: 2.5em;
   }
   .contact-div {
     font-size: 3em;

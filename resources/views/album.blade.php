@@ -13,9 +13,9 @@ section
 @endsection
 
 @section('headcontent')
-<div class="d-flex justify-content-end pt-1">
+<div class="flex justify-content-end pt-1">
 </div>
-<div class="d-flex mb-1 flex-column">
+<div class="flex mb-1 flex-column">
   <h1 class="h2"></h1>
 </div>
 @endsection
