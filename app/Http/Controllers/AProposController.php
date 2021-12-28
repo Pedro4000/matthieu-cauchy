@@ -21,6 +21,7 @@ class AProposController extends Controller
             'apropos' => $apropos,
         ]);
     }
+
     /**
      *
      */
@@ -51,6 +52,25 @@ class AProposController extends Controller
             return redirect()->route('admin.a_propos.edit')->with('error', 'problème lors de la modif');
         }    
     }
+
+    /**
+     *
+     */
+    public function create()
+    {
+        return view('admin.apropos.a_propos_create',[
+        ]);
+    }
+
+
+    /**
+     *
+     */
+    public function store()
+    {
+
+
+    }    
 
     /**
      * Remove the specified resource from storage.

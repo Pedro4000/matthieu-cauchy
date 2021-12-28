@@ -132,6 +132,9 @@ Route::middleware(['auth'])
         Route::get('a-propos-destroy', [AProposController::class , 'destroy'])
             ->name('a_propos.destroy');
 
+        Route::get('a-propos-store', [AProposController::class , 'store'])
+            ->name('a_propos.store');
+
 
 
     
