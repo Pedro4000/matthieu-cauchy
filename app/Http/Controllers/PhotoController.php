@@ -136,9 +136,19 @@ class PhotoController extends Controller
     public function update(Request $request)
     {
         $photo = Photo::find($request->get('id'));
+
+        if ($photo->nom != $request->get('nom') || $photo->description != $request->get('description') || $photo->album_id != $request->album) {
+
+            $nouvelAlbum = Album::find($request->get('album'));
+            Storage::move(
+                'public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier, 
+                'public/images/'.$nouvelAlbum->type->nom.'/'.$nouvelAlbum->nom_route.'/'.$photo->nom_fichier
+            );
+        }
+
         $photo->nom = $request->get('nom');
         $photo->description = $request->get('description');
-        $photo->album_id = $request->album;
+        $photo->album_id = $request->album;        
 
         if ($photo->save()) {
             return redirect()->route('admin.photo.index')->with('success', 'la photo a bien été modifiée');
@@ -224,8 +234,7 @@ class PhotoController extends Controller
         $types = Type::all();
         $books = $types[0];
         $works = $types[1];
-
-        
+       
         foreach($directories as $directory){
 
             $subdirectories =  Storage::directories($directory);

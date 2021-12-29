@@ -106,9 +106,9 @@ class TypeController extends Controller
      */
     public function destroy(Request $request)
     {
+
         $typeId = $request->get('id');
-        $type = Type::find($typeId);
-        
+        $type = Type::find($typeId);        
         $type->delete();
 
         return redirect()->route('admin.type.index')->with('success', 'type supprimé');

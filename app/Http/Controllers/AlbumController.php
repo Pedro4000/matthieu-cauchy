@@ -79,7 +79,11 @@ class AlbumController extends Controller
     public function update(Request $request)
     {
         $album = Album::find($request->get('id'));
-
+        if($album->type_id != $request->get('type')) {
+            $oldType = Type::find($album->type_id);
+            $newType = Type::find($request->get('type'));
+            Storage::move('public/images/'.$album->type->nom.'/'.$album->nom_route, 'public/images/'.$newType->nom.'/'.$album->nom_route);
+        }       
         $album->type_id = $request->get('type') ;
         $album->nom = $request->get('nom');
         $album->description = $request->get('description');
@@ -100,8 +104,8 @@ class AlbumController extends Controller
     public function destroy(Request $request)
     {
         $albumId = $request->get('id');
-
         $album = Album::find($albumId);
+        $directory = Storage::deleteDirectory('public/images/'.$album->type->nom.'/'.$album->nom_route);
         
         foreach($album->photos as $photo) {
             $photo->delete();

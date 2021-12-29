@@ -10,10 +10,6 @@ Route::get('/', [CauchyController::class , 'home'])->name('home');
 
 Route::get('/index', [CauchyController::class , 'index'])->name('index');
 
-Route::get('/works', [CauchyController::class , 'works'])->name('works');
-
-Route::get('/works/{work}', [CauchyController::class , 'work'])->name('work');
-
 Route::get('/ajax-all', [CauchyController::class , 'ajax'])->name('ajax-gngn');
 
 Route::get('/ccs/{album_nom}', [CauchyController::class , 'album'])
@@ -23,9 +19,6 @@ Route::get('/contact-store', [CauchyController::class , 'contact'])
     ->name('contact.form');
 
 Route::get('/getcauchyimages', [CauchyController::class , 'getImages']);
-
-Route::get('/dmd/a-propos', [CauchyController::class , 'aPropos'])
-    ->name('a_propos');
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -123,16 +116,16 @@ Route::middleware(['auth'])
         Route::get('a-propos-create', [AProposController::class , 'create'])
             ->name('a_propos.create');
 
-        Route::get('a-propos-edit', [AProposController::class , 'edit'])
+        Route::get('a-propos-edit/{id}', [AProposController::class , 'edit'])
             ->name('a_propos.edit');
 
         Route::post('a-propos-update', [AProposController::class , 'update'])
             ->name('a_propos.update');
 
-        Route::get('a-propos-destroy', [AProposController::class , 'destroy'])
+        Route::post('a-propos-destroy', [AProposController::class , 'destroy'])
             ->name('a_propos.destroy');
 
-        Route::get('a-propos-store', [AProposController::class , 'store'])
+        Route::post('a-propos-store', [AProposController::class , 'store'])
             ->name('a_propos.store');
 
 

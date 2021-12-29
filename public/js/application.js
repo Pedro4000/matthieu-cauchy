@@ -3,8 +3,6 @@ $('#stage img').first().css('display', 'block');
 
 $(document).ready(function() {
 
-
-
       
     /**********************************************************************
     *   fonction pour detecter le swipe en vanilla js
@@ -251,5 +249,18 @@ $(document).ready(function() {
       }
       $('.navhamburger').toggleClass('expanded');
     })   
+
+    /**********************************************************************
+    *   Pour afficher la bonne langue de la bio
+    */
+
+    $('.a-propos-langue').click(function(){
+      var nouvelleLangue = $(this).data('langue');
+      $('.a-propos-langue').removeClass('hidden');
+      $(this).addClass('hidden');
+      $('.a-propos-texte').addClass('hidden');
+      $(".a-propos-texte[data-langue='"+nouvelleLangue+"']").removeClass('hidden');
+    });
+
 
 }); 

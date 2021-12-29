@@ -12,7 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.less('resources/css/app.less', 'public/css')
-    .less('resources/css/admin.less', 'public/css/admin');
+    .less('resources/css/admin.less', 'public/css/admin')
+    .less('resources/css/modal-back.less', 'public/css')
+    .less('resources/css/modal-front.less', 'public/css');
 
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),

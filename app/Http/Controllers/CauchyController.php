@@ -37,8 +37,8 @@ class CauchyController extends Controller
             }
         }
         $albums = $albumTries;
-        $aPropos = APropos::all()->last();
-
+        $AllAPropos = APropos::all();
+        
         $planets = Storage::files('public/favicon/planets');
 
         foreach ($planets as &$planet) {
@@ -48,7 +48,7 @@ class CauchyController extends Controller
         return view('home', [
             'types' => $types,
             'albums' => $albums,
-            'aPropos' => $aPropos,
+            'AllAPropos' => $AllAPropos,
             'planets' => $planets,
             'photoAccueil' => $photoAccueil,
         ]);
@@ -64,33 +64,6 @@ class CauchyController extends Controller
             'types' => $types,
         ]);
     }
-
-    public function works(){
-  //      $allFiles=Storage::allFiles('public/images/martha1/');
-  //      $allFiles=Storage::allFiles('public/images/martha1/');
-/*        foreach ($allFiles as $allFile) {
-            $image = Storage::get($allFile);
-            $img = ImageManagerStatic::make($image);
-            $img->resize(720,720);
-            $img->save('public/images/'.explode('/',$allFile)[2].'/720x720_'.explode('/',$allFile)[3]);
-           Storage::put('public/images/'.explode('/',$allFile)[2].'/720/'.explode('/',$allFile)[3],$img);
-        } */
-
-        $image = Storage::get("public/images/martha1/03_15_10_2016-copy.jpg");
-
-        return view('works',[]);
-    }
-
-    public function aPropos(Request $request) {
-
-        $types= Type::all();
-        $apropos = APropos::first();
-
-        return view('a_propos', [
-            'apropos' => $apropos,
-            'types' => $types,
-        ]);
-    }  
 
     public function contact(Request $request) {
 

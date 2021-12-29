@@ -15,19 +15,19 @@ class AProposController extends Controller
      */
     public function index()
     {
-        $apropos = APropos::get();
+        $aproposTous = APropos::get();
 
         return view('admin.apropos.a_propos_index',[
-            'apropos' => $apropos,
+            'aproposTous' => $aproposTous,
         ]);
     }
 
     /**
      *
      */
-    public function edit()
+    public function edit(Request $request, $id = null)
     {
-        $apropos = APropos::first();
+        $apropos = APropos::find($id);
 
         return view('admin.apropos.a_propos_edit',[
             'apropos' => $apropos,
@@ -66,10 +66,17 @@ class AProposController extends Controller
     /**
      *
      */
-    public function store()
+    public function store(Request $request)
     {
+        $apropos = new APropos();
+        $apropos->contenu = $request->get('a_propos_editor');
+        $apropos->langue = $request->get('langue');
 
-
+        if($apropos->save()) {
+            return redirect()->route('admin.a_propos.index')->with('success', 'apropos crée');
+        } else {
+            return redirect()->route('admin.a_propos.create')->with('error', 'problème lors de la création');
+        }    
     }    
 
     /**
@@ -81,14 +88,12 @@ class AProposController extends Controller
     public function destroy(Request $request)
     {
         $aproposId = $request->get('id');
-
         $apropos = Apropos::find($aproposId);
-        
-        foreach($apropos->photos as $photo) {
-            $photo->delete();
-        }
-        $apropos->delete();
 
-        return redirect()->route('admin.apropos.index')->with('success', 'apropos supprimé');
+        if($apropos->delete()) {
+            return redirect()->route('admin.a_propos.index')->with('success', 'apropos supprimé');
+        } else {
+            return redirect()->route('admin.a_propos.create')->with('error', 'problème lors de la suppression');
+        }   
     }
 }

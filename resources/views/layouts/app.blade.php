@@ -12,7 +12,9 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">        
         <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">        
+        <link href="{{ asset('css/modal-back.css') }}" rel="stylesheet">    
         <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
+
 
 
         <!-- Scripts -->

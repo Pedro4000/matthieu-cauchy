@@ -16,10 +16,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($apropos as $apropo)                      
+                        @foreach($aproposTous as $apropos)                      
                             <tr>
-                            <td>{{ $apropo->langue }}</td>
-                            <td><a href="{{ route('admin.a_propos.edit', ['id' => $apropo->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
+                            <td>{{ $apropos->langue }}</td>
+                            <td><a href="{{ route('admin.a_propos.edit', ['id' => $apropos->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
                             </tr>                    
                         @endforeach
                     </tbody>

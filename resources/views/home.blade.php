@@ -62,7 +62,18 @@ home
 </div>
 
 <div class="row mx-8 m-auto mb-5 a_propos_div a-propos hidden-away opaque">
-    {!! $aPropos->contenu !!}
+  <div class="a-propos-langues-div mb-4 text-right">
+      @foreach ($AllAPropos as $aPropos)
+        <span class="a-propos-langue pointer underline mr-2 text-lg {{ $loop->first ? 'hidden' : '' }}" data-langue={{ $aPropos->langue }}>
+          {!! $aPropos->langue !!}
+        </span>
+      @endforeach
+  </div>
+  @foreach ($AllAPropos as $aPropos)
+    <span class="a-propos-texte {{ $loop->first ? '' : 'hidden' }}" data-langue={{ $aPropos->langue }}>
+      {!! $aPropos->contenu !!} 
+    </span>
+  @endforeach
 </div>
 
 <div class="contact_form_div contact-div mx-8 {{ app('request')->input('section_display') == 'contact' ? '' : 'hidden-away opaque' }}">

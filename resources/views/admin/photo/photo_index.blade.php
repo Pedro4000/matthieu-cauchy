@@ -33,6 +33,7 @@
                         <th class='w-1/12'>accueil</th>
                         <th class='w-1/12'>couverture</th>
                         <th class='w-1/6 text-center'>apercu</th>
+                        <th class='w-1/6 text-center'>modifier</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -40,7 +41,7 @@
                         @csrf
                         @foreach($photos as $photo)                      
                           <tr>
-                            <td><a href="{{ route('admin.photo.show', [ 'id' => $photo->id ] ) }}">{{ $photo->nom }}</a>
+                            <td><a href="{{ route('admin.photo.edit', [ 'id' => $photo->id ] ) }}">{{ $photo->nom }}</a>
                             </td>
                             
                             <td>{{ $photo->album->nom }}
@@ -75,8 +76,11 @@
                               </select>
                             </td>
                             
-                            <td class='text-center'><a href="{{ route('admin.photo.show', [ 'id' => $photo->id ] ) }}"><img class='apercu' style='display:inline' src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}"></a>
+                            <td class='text-center'><img class='apercu' style='display:inline' src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
                             </td>
+
+                            <td><a href="{{ route('admin.photo.edit', ['id' => $photo->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
+
                           </tr>                    
                         @endforeach
                       </form>
