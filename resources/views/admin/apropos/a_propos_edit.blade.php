@@ -69,7 +69,6 @@
 
     </div>
 </x-app-layout>
-
 <script>
 
   $(document).ready(function() {

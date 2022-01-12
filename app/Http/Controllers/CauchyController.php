@@ -28,6 +28,14 @@ class CauchyController extends Controller
             return [$item->album_id => $item];
         });
 
+        $idsBooks = Album::select('id')->where('type_id', Type::where('nom', 'books')->first()->id)->get()->toArray();
+        foreach ($idsBooks as $id) {
+            if (isset($photosCouv[$id['id']])) {
+                $photoCouvCoucou = $photosCouv[$id['id']];
+                break;
+            }
+        }
+
         foreach ($albums as &$album) {
             if(isset($photosCouv[$album->id])){
                 $album->couv = $photosCouv[$album->id];
@@ -51,6 +59,7 @@ class CauchyController extends Controller
             'AllAPropos' => $AllAPropos,
             'planets' => $planets,
             'photoAccueil' => $photoAccueil,
+            'photoCouvCoucou' => $photoCouvCoucou,
         ]);
     }
 

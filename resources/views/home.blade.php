@@ -45,7 +45,7 @@ home
   <div class="w-full lg:w-1/3 mb-7 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element">
     <div id="coucou_image" class="inline-block premiere_galerie flex items-center w-full">
       <div class="premiere-galerie-lien w-full">
-        <img src="{{ asset('storage/images/books/premiere classe/squaez.jpg') }}" class="inline-block premiere-galerie-image">
+        <img src="{{ isset($photoCouvCoucou) ? asset('storage/images/'.$photoCouvCoucou->album->type->nom.'/'.$photoCouvCoucou->album->nom_route.'/'.$photoCouvCoucou->nom_fichier) : '' }}" class="inline-block premiere-galerie-image">
         <div class="centered-title">COUCOU-MAGAZINE</div>            
       </div>
     </div>

@@ -39,7 +39,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
                               description
                             </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" value="{{ $album->description }}" name="description" >
+                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" name="description" >{!! $album->description !!}</textarea>
                           </div>
 
 
@@ -56,39 +56,48 @@
                           </div>
 
                         </form>
-                        <div class="flex items-center justify-between w-1/2">
-                        </div>
-                      </div>
                     </div>
+                </div>
             </div>
-          </div>
-
-        <!-- Modal suppression -->
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2>Attention</h2>
-              <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-              <p class='m-2'>Confirmez vous la suppression, cela va supprimer toutes les photos de l'album ?</p>
-              <div class="flex justify-end">
-                <button type="button" class="fermer bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">annuler</button>   
-                <form method="post" action="{{ route('admin.album.destroy') }}">
-                @csrf
-                  <input class="hidden" name="id" value="{{ $album->id }}">
-                  <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    supprimer
-                  </button>
-                </form>
-              </div>
-            </div>
-            {{--<div class="modal-footer">
-              <h3></h3>
-            </div>--}}
-          </div>
-        </div>            
-
         </div>
-      </x-app-layout>
-      
+    </div>
+
+    <!-- Modal suppression -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Attention</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p class='m-2'>Confirmez vous la suppression, cela va supprimer toutes les photos de l'album ?</p>
+          <div class="flex justify-end">
+            <button type="button" class="fermer bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">annuler</button>   
+            <form method="post" action="{{ route('admin.album.destroy') }}">
+            @csrf
+              <input class="hidden" name="id" value="{{ $album->id }}">
+              <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                supprimer
+              </button>
+            </form>
+          </div>
+        </div>
+        {{--<div class="modal-footer">
+          <h3></h3>
+        </div>--}}
+      </div>
+    </div>            
+
+</x-app-layout>
+<script>
+
+  $(document).ready(function() {
+
+    ClassicEditor
+        .create( document.querySelector( '#description' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+  });
+
+</script>
