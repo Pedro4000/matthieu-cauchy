@@ -164,7 +164,7 @@ img {
   text-align: center;
   color: white;
 }
-.premiere-galerie-lien:hover .premiere-galerie-image {
+.premiere-galerie-lien:hover .premiere_galerie {
   opacity: 0.3;
   transition: 300ms;
   box-shadow: 0px 0px 22px gray;
@@ -172,9 +172,15 @@ img {
 .premiere-galerie-lien:hover .centered-title {
   font-size: 21px;
   transition: 300ms;
+  opacity: 1;
 }
-.premiere-galerie-lien {
+.premiere-galerie-lien,
+.premiere_galerie {
   width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
 }
 .premiere-galerie-image {
   width: 100%;

@@ -171,7 +171,10 @@ $(document).ready(function() {
 
           $(tableauCouleurFond[navItemClique].divPasLiees).addClass('hidden-away');
           $(tableauCouleurFond[navItemClique].divLiee).removeClass('hidden-away opaque');                    
-          $(tableauCouleurFond[navItemClique].divLiee).addClass('de-transparant-a-visible');                              
+          $(tableauCouleurFond[navItemClique].divLiee).addClass('de-transparant-a-visible');     
+          
+          $('.premiere-galerie-lien').height($('.premiere-galerie-lien').width())
+          $('.premiere_galerie').height($('.premiere_galerie').width())
         }, 800);    
 
       let couleurFond = $('body').css('background-image');
