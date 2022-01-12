@@ -41,6 +41,7 @@ class PhotoController extends Controller
 
         return view('admin.photo.photo_index',[
             'photos' => $photos,
+            'albumId' => $album_id ?? null,
         ]);
     }
 
@@ -116,7 +117,7 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $photo = Photo::find($id);
         $albums = Album::all();
@@ -137,6 +138,9 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($request->get('id'));
 
+        $albumRedirection = $request->get('albumRedirection');
+        $numeroPage = $request->get('page') ?? 1;
+
         if ($photo->nom != $request->get('nom') || $photo->description != $request->get('description') || $photo->album_id != $request->album) {
 
             $nouvelAlbum = Album::find($request->get('album'));
@@ -151,7 +155,11 @@ class PhotoController extends Controller
         $photo->album_id = $request->album;        
 
         if ($photo->save()) {
-            return redirect()->route('admin.photo.index')->with('success', 'la photo a bien été modifiée');
+            if (isset($albumRedirection)) {
+                return redirect()->route('admin.photo.index', [ 'album_id' => $albumRedirection, 'page' => $numeroPage ])->with('success', 'la photo a bien été modifiée');
+            } else {
+                return redirect()->route('admin.photo.index', [ 'page' => $numeroPage ])->with('success', 'la photo a bien été modifiée');
+            }
         } else {
             return redirect(url()->previous())->with('error', 'poti problème lors de la modification');
         }
@@ -166,13 +174,20 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($request->get('id'));
         $album = Album::find($photo->album->id);
+        $albumRedirection = $request->get('albumRedirection');
+        $numeroPage = $request->get('page') ?? 1;        
 
         $files = Storage::get('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
 
         if (Storage::exists('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier)) {
+
             Storage::delete('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
             $photo->delete();
-            return redirect()->route('admin.photo.index')->with('success', 'la photo est bien supprimée fraté');
+            if (isset($albumRedirection)) {
+                return redirect()->route('admin.photo.index', [ 'album_id' => $albumRedirection, 'page' => $numeroPage ])->with('success', 'la photo est bien supprimée fraté');
+            } else {
+                return redirect()->route('admin.photo.index', [ 'page' => $numeroPage ])->with('success', 'la photo a bien été modifiée');
+            }
         } else {
             return redirect()->route('admin.photo.index')->with('error', 'oopsie ca a buggé');        
         } 

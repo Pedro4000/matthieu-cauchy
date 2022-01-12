@@ -28,7 +28,7 @@
                             </label>
                             <select name='type'>
                               @foreach($types as $type)
-                                <option value='{{ $type->id }}' {{ !$album->type ? '' : $album->type->id == $type->id ? 'selected' :'' }}>{{ $type->nom }}</option>
+                                <option value='{{ $type->id }}' {{ !$album->type ? '' : ( $album->type->id == $type->id ? 'selected' :'') }}>{{ $type->nom }}</option>
                               @endforeach
                             </select>
                             <p class="text-red-500 text-xs italic">.</p>

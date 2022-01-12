@@ -79,7 +79,7 @@
                             <td class='text-center'><img class='apercu' style='display:inline' src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
                             </td>
 
-                            <td><a href="{{ route('admin.photo.edit', ['id' => $photo->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
+                            <td><a href="{{ route('admin.photo.edit', ['id' => $photo->id, 'albumRedirection' => $albumId, 'page' => request()->input('page') ] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
 
                           </tr>                    
                         @endforeach
