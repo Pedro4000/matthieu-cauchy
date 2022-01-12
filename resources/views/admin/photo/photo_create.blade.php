@@ -25,8 +25,7 @@
                           <p class="text-red-500 text-xs italic">.</p>
                         </div>
                         <div class="flex items-center justify-between mb-4">
-                          <input type="file" name="file" id="file" class="inputfile" accept="jpg, jpeg, png"/>
-                          <label for="file" class="p-1 bg-transparent text-gray-600 font-semibold border border-gray-600 rounded"><i class="fas fa-upload"></i> photo ici fdp</label>
+                          <input type="file" name="file" id="file" class="" accept="jpg, jpeg, png"/>
                         </div>
 
                         <div class="mb-4">

@@ -33,7 +33,7 @@ home
  @foreach($albums['works'] as $work)
   <div class="w-full lg:w-1/3 mb-7 px-3 text-center flex home-main-element">
     <div class="inline-block premiere_galerie flex items-center w-full">
-      <a href="{{ route('album', ['album_nom' => $albums['works']['martha']->nom ]) }}" class="premiere-galerie-lien">
+      <a href="{{ route('album', ['album_nom' => $work->nom ]) }}" class="premiere-galerie-lien">
         <img src="{{ isset($work->couv) ? asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier) : '' }}" class="inline-block premiere-galerie-image">
         <div class="centered-title">{{ Str::of($work->nom)->upper() }}</div>
       </a>
