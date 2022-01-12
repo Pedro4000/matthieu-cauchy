@@ -51,11 +51,6 @@ section
     </div>
     <div class="modal-body">
       <p class='m-2'>{!! $album->description !!}</p>
-      <div class="flex justify-end">
-        <p>
-          {!! $album->description !!}
-        </p>
-      </div>
     </div>
     {{--<div class="modal-footer">
       <h3></h3>
