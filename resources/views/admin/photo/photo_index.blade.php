@@ -55,7 +55,7 @@
                             
                             <td>
                               <select class='appearance-none text-xs select-pierre' name="{{ 'ordrePhoto_'.$photo->id }}">
-                                  <option value="0">0</option>
+                                  <option value="{{ $photo->nombre_photos }}">{{ $photo->nombre_photos }}</option>
                                 @for ($i = 1; $i <= $photo->nombre_photos; $i ++)
                                   <option value="{{ $i }}" {{ $photo->ordre == $i ? 'selected' : '' }}>{{ $i }}</option>
                                 @endfor

@@ -41,6 +41,7 @@ section
   </a>
 </div>
 
+@if ($album->description != '')
 
 <!-- Modal texte -->
 <div id="myModal" class="modal text-4xl lg:text-base">
@@ -56,7 +57,8 @@ section
       <h3></h3>
     </div>--}}
   </div>
-</div>            
+</div>       
+@endif     
 @endsection
 
 

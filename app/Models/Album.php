@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\{DB};
+
 
 class Album extends Model
 {
@@ -59,7 +61,10 @@ class Album extends Model
 
     public function photos()
     {
-        return $this->hasMany(Photo::class);
+        return $this->hasMany(Photo::class)->orderBy(DB::raw('ISNULL(ordre), ordre'), 'ASC');;
+    }
+
+    public function photosTriees() {
     }
 
     public function type()

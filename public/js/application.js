@@ -68,7 +68,7 @@ $(document).ready(function() {
     }
 
     $('#stage .slider_component').css('display', 'none');
-    $('#stage .slider_component').eq(1).css('display', 'block');      
+    $('#stage .slider_component').eq(0).css('display', 'block');      
 
     $('#stage').click(prochaineImage);
     $(document).keydown(prochaineImage);
@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     function prochaineImage (event) {
 
-        if (event.which == 37) {
+      if (event.which == 37) {
             sens_carrousel = 'precedent'
         }
 
@@ -89,13 +89,13 @@ $(document).ready(function() {
         if (!sens_carrousel || sens_carrousel == 'suivant') {
             lastElement = imagesArray.shift();
             imagesArray.push(lastElement);
-              $('#stage .slider_component').eq(1).animate({
+              $('#stage .slider_component').eq(0).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
                 
                 $('#stage .slider_component').first().remove();
                 $('#stage .slider_component').css('display', 'none');
-                $('#stage .slider_component').eq(1).css('display', 'block');                      
+                $('#stage .slider_component').eq(0).css('display', 'block');                      
                 $('#stage').append(imagesArray.last()); 
               });                    
         }
@@ -103,13 +103,13 @@ $(document).ready(function() {
         if (sens_carrousel == 'precedent') {
             lastElement = imagesArray.pop();
             imagesArray.unshift(lastElement);
-              $('#stage .slider_component').eq(1).animate({
+              $('#stage .slider_component').eq(0).animate({
                 opacity: "toggle",
               }, 50, "linear", function() {
                 $('#stage .slider_component').css('display', 'none');
                 $('#stage .slider_component').last().remove();
                 $('#stage').prepend(imagesArray.first()); 
-                $('#stage .slider_component').eq(1).css('display', 'block');                      
+                $('#stage .slider_component').eq(0).css('display', 'block');                      
               });                    
         }
     }
