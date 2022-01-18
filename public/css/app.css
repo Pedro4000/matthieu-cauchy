@@ -223,7 +223,7 @@ img {
   align-items: center;
   position: absolute;
   z-index: 2;
-  font-size: 4em;
+  font-size: 6em;
   transition: 600ms;
   overflow: hidden;
   height: 0;

@@ -78,7 +78,7 @@ home
 
   @if( app('request')->input('message') == 'ok')
     <div class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow alert alert-success alert-dismissible fade show flex justify-content-between" role="alert">
-      <strong> sent !</strong>
+      <strong> envoyé !</strong>
     </div>
   @endif
   <form class="contact-form grid m-auto" action="{{ route('contact.form') }}">

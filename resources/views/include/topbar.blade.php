@@ -1,4 +1,4 @@
-<div class='text-center pt-8 text-xl lg:text-xl flex justify-around hidden desktop-nav'>	
+<div class='text-center pt-8 text-8xl lg:text-xl flex justify-around hidden desktop-nav'>	
   <div class='inline-block w-1/4 h-10'>
     <p class="project_click_background inline p-3 pointer">Projets</p>
   </div>
@@ -10,7 +10,7 @@
   </div>  
 </div>
 
-<div class='text-right pt-6 lg:pt-0 text-6xl lg:hidden pointer hamburger-nav'>	
+<div class='text-right pt-6 lg:pt-0 text-8xl lg:hidden pointer hamburger-nav'>	
   <div class='inline-block pr-10 hamburger-click'>
     <label class="hamburger-expand">☰</label>
     <label class="hamburger-shrink hidden">X</label>
