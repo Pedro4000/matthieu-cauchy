@@ -62,7 +62,7 @@ home
 <div class="row mx-8 m-auto mb-5 a_propos_div a-propos hidden-away opaque">
   <div class="a-propos-langues-div mb-4 text-right">
       @foreach ($AllAPropos as $aPropos)
-        <span class="a-propos-langue pointer underline mr-2 text-lg {{ $loop->first ? 'hidden' : '' }}" data-langue={{ $aPropos->langue }}>
+        <span class="a-propos-langue pointer underline mr-2 text-4xl lg:text-lg {{ $loop->first ? 'hidden' : '' }}" data-langue={{ $aPropos->langue }}>
           {!! $aPropos->langue !!}
         </span>
       @endforeach
