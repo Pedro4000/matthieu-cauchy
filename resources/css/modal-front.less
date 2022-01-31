@@ -27,14 +27,31 @@
   padding: 0;
   border: 1px solid #888;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: animatetop;
-          animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-          animation-duration: 0.4s;
   position: absolute;
   box-sizing: border-box;
   transition: 300ms;
+  margin-top: 6em;
 }
+
+@media only screen and (min-width: 980px) {
+  .modal-content {
+    -webkit-animation-name: animatetop;
+            animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .modal-content {
+    -webkit-animation-name: animatetopmobile;
+            animation-name: animatetopmobile;
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+    height: 100vh;
+  }
+}
+
 /* The Close Button */
 .close {
   color: #aaa;
@@ -91,28 +108,32 @@
 }
 
 
-@media only screen and (max-width: 980px) {
-  /* Add Animation */
-  @-webkit-keyframes animatetop {
-    from {
-      opacity: 0;
-      height: 0%;
-    }
-    to {
-      opacity: 1;
-      height: inherit;
-    }
+@-webkit-keyframes animatetopmobile {
+  from {
+    opacity: 0;
+    height: 0%;
+    margin-top: 0rem;
+    top : 100%;
   }
-  @keyframes animatetop {
-    from {
-      opacity: 0;
-      height: 0%;
-    }
-    to {
-      opacity: 1;
-      height: inherit;
-    }      
+  to {
+    opacity: 1;
+    height: 100%;
+    margin-top: 6em;
+    top : 0%;
+
   }
+}
+@keyframes animatetopmobile {
+  from {
+    opacity: 0;
+    height: 0%;
+    margin-top: 0rem;
+  }
+  to {
+    margin-top: 6em;
+    opacity: 1;
+    height: 100%;
+  }      
 }
 
 
