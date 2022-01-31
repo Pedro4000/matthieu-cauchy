@@ -225,6 +225,16 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: $(document).height() }, 1000);
     });
 
+    $('#coucou_image').on('tap', function(){
+      var i = 1;
+      $('.coucou_liens').removeClass('hidden-away');
+      $('.coucou_liens a').each(function(){
+          reveal($(this), i);
+          i++;
+      });
+      $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+  });
+
     function reveal (element, i) {
         setTimeout(function() { 
             element.removeClass('opaque');     
