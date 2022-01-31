@@ -31,7 +31,7 @@ section
 
 </div>
 @if ($album->description != '')
-  <button id="modalButton" type="button" class="album-description-cta hover:bg-gray-100 text-gray font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2 text-4xl lg:text-base">idée</button>                                
+  <button id="modalButton" type="button" class="album-description-cta hover:bg-gray-100 text-gray font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2 text-4xl lg:text-base">texte</button>                                
 @endif
 
 <div class="retour text-4xl lg:text-base py-2 px-4">
@@ -44,13 +44,13 @@ section
 @if ($album->description != '')
 
 <!-- Modal texte -->
-<div id="myModal" class="modal text-4xl lg:text-base">
-  <div class="modal-content w-3/4 lg:w-4/12">
-    <div class="modal-header">
-      <h2></h2>
+<div id="myModal" class="modal text-6xl lg:text-base">
+  <div class="modal-content lg:w-1/4 lg:h-full">
+    <div class="modal-header p-8">
+      <h2><b>{{ $album->nom ?? '' }}</b></h2>
       <span class="close fermer">&times;</span>
     </div>
-    <div class="modal-body">
+    <div class="modal-body p-8 leading-relaxed lg:leading-normal">
       <p class='m-2'>{!! $album->description !!}</p>
     </div>
     {{--<div class="modal-footer">

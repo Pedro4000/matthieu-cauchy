@@ -59,7 +59,7 @@ class CauchyController extends Controller
             'AllAPropos' => $AllAPropos,
             'planets' => $planets,
             'photoAccueil' => $photoAccueil,
-            'photoCouvCoucou' => $photoCouvCoucou,
+            'photoCouvCoucou' => $photoCouvCoucou ?? null,
         ]);
     }
 

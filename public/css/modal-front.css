@@ -31,6 +31,9 @@
   animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
+  position: absolute;
+  box-sizing: border-box;
+  transition: 300ms;
 }
 /* The Close Button */
 .close {
@@ -46,21 +49,16 @@
 }
 /* Modal Header */
 .modal-header {
-  padding: 10px 16px;
   background-color: #fefefe;
-  color: white;
+  color: black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 /* Modal Body */
-.modal-body {
-  padding: 14px 16px;
-}
 /* Modal Footer */
 .modal-footer {
-  padding: 10px 16px;
   background-color: #ffc97b;
   color: white;
   display: flex;
@@ -72,17 +70,44 @@
 @-webkit-keyframes animatetop {
   from {
     opacity: 0;
+    width: 0%;
   }
   to {
     opacity: 1;
+    width: 20%;
   }
 }
 @keyframes animatetop {
   from {
     opacity: 0;
+    width: 0%;
   }
   to {
     opacity: 1;
+    width: 20%;
+  }
+}
+@media only screen and (max-width: 980px) {
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {
+      opacity: 0;
+      height: 0%;
+    }
+    to {
+      opacity: 1;
+      height: inherit;
+    }
+  }
+  @keyframes animatetop {
+    from {
+      opacity: 0;
+      height: 0%;
+    }
+    to {
+      opacity: 1;
+      height: inherit;
+    }
   }
 }
 

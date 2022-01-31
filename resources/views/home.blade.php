@@ -43,9 +43,11 @@ home
 
   <div class="w-full lg:w-1/3 mb-7 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element">
     <div id="coucou_image" class="premiere-galerie-lien inline-block flex items-center w-full">
-      <div class="w-full premiere_galerie" style="background-image: url({{ isset($photoCouvCoucou) ? "'".asset('storage/images/'.$photoCouvCoucou->album->type->nom.'/'.$photoCouvCoucou->album->nom_route.'/'.$photoCouvCoucou->nom_fichier)."'" : ''  }})">
-      </div>
-      <div class="centered-title">COUCOU-MAGAZINE</div>            
+      @if (isset($photoCouvCoucou))
+        <div class="w-full premiere_galerie" style="background-image: url({{ isset($photoCouvCoucou) ? "'".asset('storage/images/'.$photoCouvCoucou->album->type->nom.'/'.$photoCouvCoucou->album->nom_route.'/'.$photoCouvCoucou->nom_fichier)."'" : ''  }})">
+        </div>
+        <div class="centered-title">COUCOU-MAGAZINE</div>        
+      @endif    
     </div>
   </div>
 
