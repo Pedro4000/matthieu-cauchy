@@ -45,7 +45,7 @@ section
 
 <!-- Modal texte -->
 <div id="myModal" class="modal text-4xl lg:text-base">
-  <div class="modal-content lg:w-1/4 lg:h-full">
+  <div class="modal-content lg:w-1/4 lg:min-h-full">
     <div class="modal-header p-2 text-8xl lg:text-base">
       <h2><b></b></h2>
       <span class="close fermer">&times;</span>

@@ -41,6 +41,7 @@ home
       
 @endforeach
 
+  {{--
   <div class="w-full lg:w-1/3 mb-7 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element">
     <div id="coucou_image" class="premiere-galerie-lien inline-block flex items-center w-full">
       @if (isset($photoCouvCoucou))
@@ -58,7 +59,7 @@ home
         </a>  
       @endforeach
   </div>
-
+--}}
 </div>
 
 <div class="row mx-8 m-auto mb-5 a_propos_div a-propos hidden-away opaque">

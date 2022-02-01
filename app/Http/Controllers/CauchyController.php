@@ -18,7 +18,7 @@ class CauchyController extends Controller
     public function home(Request $request){
 
         $types= Type::all();
-
+        
         $session = $request->session()->has('users');
         $albums = Album::all();
         $photoAccueil = Photo::where('accueil', 1)->get()->first();
