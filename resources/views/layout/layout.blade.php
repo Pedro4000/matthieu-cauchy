@@ -28,7 +28,7 @@
     <div id="haut_de_page" role="main" class="main container-fluid">
       <div class="">
 @include('include.navhamburger')
-        <div id="content" class="w-full lg:w-4/5 mx-auto px-8 mt-6">
+        <div id="content" class="w-full lg:w-2/3 mx-auto px-8 mt-6">
 @yield('headcontent')
 @yield('content')
         </div>
