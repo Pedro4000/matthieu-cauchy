@@ -102,6 +102,12 @@ img {
   justify-content: center;
   align-items: center;
 }
+.left-click:hover {
+  cursor: w-resize;
+}
+.right-click:hover {
+  cursor: e-resize;
+}
 @media only screen and (max-width: 980px) {
   #stage {
     height: 60vh;

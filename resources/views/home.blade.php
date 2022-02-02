@@ -31,7 +31,7 @@ home
 
 <div id="album-div" class="m-auto flex flex-wrap flex-col lg:flex-row projects_div {{ app('request')->input('section_display') == 'projects' ? '' : 'hidden-away opaque' }}">
  @foreach($albums['works'] as $work)
-  <div class="w-full lg:w-1/3 mb-7 px-3 text-center flex home-main-element">
+  <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
     <a href="{{ route('album', ['album_nom' => $work->nom ]) }}" class="premiere-galerie-lien">
       <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ isset($work->couv) ? "'".asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier)."'" : ''  }})">
       </div>
@@ -40,6 +40,17 @@ home
   </div>
       
 @endforeach
+
+
+  <a href='https://coucoumagazine.fr/' target="_blank" class="w-full lg:w-1/2 mb-7 lg:mb-0 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element lg:p-6">
+    <div id="" class="premiere-galerie-lien inline-block flex items-center w-full">
+      @if (isset($photoCouvCoucou))
+        <div class="w-full premiere_galerie" style="background-image: url({{ isset($photoCouvCoucou) ? "'".asset('storage/images/'.$photoCouvCoucou->album->type->nom.'/'.$photoCouvCoucou->album->nom_route.'/'.$photoCouvCoucou->nom_fichier)."'" : ''  }})">
+        </div>
+        <div class="centered-title">COUCOU-MAGAZINE</div>        
+      @endif    
+    </div>
+  </a>
 
   {{--
   <div class="w-full lg:w-1/3 mb-7 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element">
