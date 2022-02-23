@@ -9,6 +9,7 @@
     <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/modal-front.css') }}" rel="stylesheet">    
+    <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">    
     <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
   </head>
   <body class="bottom-right-class" style="{{ Route::currentRouteName() != 'home' ? 'background: rgb(249, 249, 251)'

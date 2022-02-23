@@ -26,12 +26,13 @@ section
   <div id="stage" class="relative">
     @foreach($album->photos as $photo)
     <div class="absolute w-full h-full flex">
+      
       <span class='left-click w-1/2 h-full next-image'>
-
       </span>
+
       <span class='right-click w-1/2 h-full previous-image'>
-
       </span>
+
     </div>
     <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none" class="slider_component">
     @endforeach

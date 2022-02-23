@@ -29,9 +29,9 @@ class PhotoController extends Controller
         });
 
         if($album_id){
-            $photos = Photo::where('album_id', $album_id)->paginate(20);
+            $photos = Photo::where('album_id', $album_id)->get();
         } else {
-            $photos = Photo::paginate(20);
+            $photos = Photo::get();
         }
 
 
@@ -70,6 +70,7 @@ class PhotoController extends Controller
         $album = Album::find($request->get('album'));
 
         $file = $request->file('file');
+                $albumRedirection = $request->get('albumRedirection');
 
         $validated = $request->validate([
             'nom' => 'required|unique:photos',

@@ -19,79 +19,89 @@
                     </div>
                     
                   </div>
-                  <div class='pt-4'>
-                    {{ $photos->links() }}                  
+                  <div class='grid grid-cols-2 lg:grid-cols-6 mt-2 dropzone'>
+                    @php $i = 0 @endphp
+                    @foreach ($photos as $photo) 
+                      <div class="flex flex-col items-center bloc_photo_pour_ordre relative">
+                        <div class="absolute w-full h-full flex">
+                          <span class='w-1/2 h-full drag-left span-photo-order' data-number="{{ $i }}">
+                          </span>
+                          @php $i++ @endphp
+                          <span class='w-1/2 h-full drag-right span-photo-order' data-number="{{ $i }}">
+                          </span>     
+                          @php $i++ @endphp                 
+                        </div>
+                        <a draggable="true" href="{{ route('admin.photo.edit', ['id' => $photo->id]) }}" class='photo-link-box'>
+                          <i class="fa-solid fa-xmark absolute"></i>
+                          <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" class="bg-center h-100 photo-thumb">
+                        </a>
+                        <div class="flex justify-around my-2">
+                          <div class="flex flex-col">
+                            <input type="checkbox" name="{{ 'couverture_'.$photo->id }}" id="{{ 'couverture_'.$photo->id }}" class="">
+                            <label class="form-check-label inline-block text-gray-800" for="{{ 'couverture_'.$photo->id }}" aria-describedby="label">
+                              Couverture
+                            </label>
+                            <input type="checkbox" name="{{ 'accueil'.$photo->id }}" id="{{ 'accueil'.$photo->id }}" class="">
+                            <label class="form-check-label inline-block text-gray-800 " for="{{ 'accueil'.$photo->id }}" aria-describedby="label">
+                              Accueil
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    @endforeach
                   </div>
-                  <table class="table-auto photo-index-table text-left mt-4">
-                    <thead>
-                      <tr>
-                        <th class='w-1/6'>nom</th>
-                        <th class='w-1/12'>album</th>
-                        <th class='w-1/6'>nom du fichier</th>
-                        <th class='w-1/6'>description</th>
-                        <th class='w-1/12'>ordre</th>
-                        <th class='w-1/12'>accueil</th>
-                        <th class='w-1/12'>couverture</th>
-                        <th class='w-1/6 text-center'>apercu</th>
-                        <th class='w-1/6 text-center'>modifier</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <form method="POST" action="{{ route('admin.photo.mass_edit') }}" id="photo_mass_edit_form">
-                        @csrf
-                        @foreach($photos as $photo)                      
-                          <tr>
-                            <td><a href="{{ route('admin.photo.edit', [ 'id' => $photo->id ] ) }}">{{ $photo->nom }}</a>
-                            </td>
-                            
-                            <td>{{ $photo->album->nom }}
-                            </td>
-                            
-                            <td>{{ $photo->nom_fichier }}
-                            </td>
-                            
-                            <td>{{ $photo->description }}
-                            </td>
-                            
-                            <td>
-                              <select class='appearance-none text-xs select-pierre' name="{{ 'ordrePhoto_'.$photo->id }}">
-                                  <option value="{{ $photo->nombre_photos }}">{{ $photo->nombre_photos }}</option>
-                                @for ($i = 1; $i <= $photo->nombre_photos; $i ++)
-                                  <option value="{{ $i }}" {{ $photo->ordre == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                @endfor
-                              </select>
-                            </td>
-
-                            <td>
-                              <select class='appearance-none text-xs select-pierre' name="{{ 'accueil_'.$photo->id }}">
-                                <option value='0' {{ $photo->accueil == 0 ? 'selected' : '' }}>non</option>
-                                <option value='1' {{ $photo->accueil == 1 ? 'selected' : '' }}>oui</option>
-                              </select>
-                            </td>
-
-                            <td>
-                              <select class='appearance-none text-xs select-pierre' name="{{ 'couverture_'.$photo->id }}">
-                                <option value='0' {{ $photo->couverture == 0 ? 'selected' : '' }}>non</option>
-                                <option value='1' {{ $photo->couverture == 1 ? 'selected' : '' }}>oui</option>
-                              </select>
-                            </td>
-                            
-                            <td class='text-center'><img class='apercu' style='display:inline' src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}">
-                            </td>
-
-                            <td><a href="{{ route('admin.photo.edit', ['id' => $photo->id, 'albumRedirection' => $albumId, 'page' => request()->input('page') ] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
-
-                          </tr>                    
-                        @endforeach
-                      </form>
-                    </tbody>
-                  </table>
-                  <div class='pt-4'>
-                    {{ $photos->links() }}                  
-                  </div>
-                    
+                  
                 </div>
             </div>
         </div>
     </div>
+  
+  @push('scripts')
+    <script>
+  
+      $(document).ready(function() {
+
+        let x = 0;
+        let y = 0;
+        var element = false;
+        var numeroSpan;
+        var blocPris;
+
+        $(".photo-thumb").on('mousedown', function(e) {
+          blocPris = $(this).closest('.bloc_photo_pour_ordre');
+        });
+        
+        $(".dropzone").on('drop', function(e) {
+          e.preventDefault();  
+          $('.span-photo-order').css('z-index', '2');
+          x = event.pageX;
+          y = event.pageY;
+          element = document.elementFromPoint(x, y);
+          if(element.dataset) {
+            numeroSpan = element.dataset.number;
+            blocWhereDrop = $('span[data-number="'+numeroSpan+'"]').closest('.bloc_photo_pour_ordre');
+  
+            if (numeroSpan % 2) {
+              blocPris.insertAfter(blocWhereDrop)
+            } else if (numeroSpan % 2 == 0) {
+              blocPris.insertBefore(blocWhereDrop)
+            }
+          }
+          
+                 
+
+          $('.span-photo-order').css('z-index', '-1');
+        });
+
+        $(".dropzone").on('dragover', function(e) {
+          e.preventDefault();  
+        });
+
+
+        
+        
+      });
+
+    </script>
+  @endpush
 </x-app-layout>
