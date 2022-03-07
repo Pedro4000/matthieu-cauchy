@@ -40,10 +40,10 @@ $(document).ready(function() {
          if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
              if ( xDiff > 0 ) {
               swipe = {which : 1};
-              $('#stage').click(prochaineImage.call(this, swipe)); 
+              $('.left-click, .right-click').click(prochaineImage.call(this, swipe)); 
             } else {
               swipe = {which : 37};
-              $('#stage').click(prochaineImage.call(this, swipe));
+              $('.left-click, .right-click').click(prochaineImage.call(this, swipe));
              }                       
          } else {
              if ( yDiff > 0 ) {
