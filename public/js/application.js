@@ -40,10 +40,10 @@ $(document).ready(function() {
          if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
              if ( xDiff > 0 ) {
               swipe = {which : 1};
-              $('#stage').click(prochaineImage.call(this, swipe)); 
+              $(document).click(prochaineImage.call($('.left-click').first(), swipe)); 
             } else {
               swipe = {which : 37};
-              $('#stage').click(prochaineImage.call(this, swipe));
+              $(document).click(prochaineImage.call($('.left-click').first(), swipe));
              }                       
          } else {
              if ( yDiff > 0 ) {
@@ -56,6 +56,8 @@ $(document).ready(function() {
          xDown = null;
          yDown = null;                                             
      };
+
+     console.log($('.left-click').first());
 
     /********************************************
     *   Pour la diapo des images
