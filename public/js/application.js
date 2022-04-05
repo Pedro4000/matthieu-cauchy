@@ -40,7 +40,7 @@ $(document).ready(function() {
          if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
              if ( xDiff > 0 ) {
               swipe = {which : 1};
-              $(document).click(prochaineImage.call($('.left-click').first(), swipe)); 
+              $(document).click(prochaineImage.call($('.right-click').first(), swipe)); 
             } else {
               swipe = {which : 37};
               $(document).click(prochaineImage.call($('.left-click').first(), swipe));
@@ -57,7 +57,7 @@ $(document).ready(function() {
          yDown = null;                                             
      };
 
-     console.log($('.left-click').first());
+    //console.log($('.left-click').first());
 
     /********************************************
     *   Pour la diapo des images
@@ -80,7 +80,8 @@ $(document).ready(function() {
 
     function prochaineImage (event) {
 
-      if (event.which == 37  || event.target.classList.contains('left-click')) {
+      console.log(typeof event.target);
+      if (event.which == 37  || (typeof event.target !== 'undefined' && event.target.classList.contains('left-click'))) {
             sens_carrousel = 'precedent'
       } else if (event.which  == 1 || event.which == 39 || event.target.classList.contains('right-click')){
           sens_carrousel = 'suivant';
