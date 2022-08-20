@@ -17,7 +17,6 @@ class PhotoController extends Controller
      */
     public function index(Request $request, int $album_id = null)
     {
-        
         $albums = Album::all();
         foreach ($albums as &$album) {
             if (!isset($album->nombre_photos)) {
@@ -198,16 +197,29 @@ class PhotoController extends Controller
 
     public function massEdit(Request $request) {
 
-
         $masseEditArray = [];
+        $albumId = null;
+        
+        foreach ($request->post() as $input => $value) {
+            if (!$albumId) {
+                //dd($photo->album());
+            }
+            if (str_contains($input, 'ordre')) {
+                
+                $id = explode('ordre', $input)[1];
+            }
+        }
 
         foreach ($request->all() as $inputName => $inputValue) {
 
-            if(in_array(explode('_', $inputName)[0] ,['accueil', 'couverture', 'ordrePhoto'])) {                
+            dd($request->all());
+            if(in_array(explode('_', $inputName)[0] ,['accueil', 'couverture', 'ordre'])) {    
+                            
                 $photoId = explode('_', $inputName)[1];
                 $masseEditArray[$photoId][explode('_', $inputName)[0]] = $inputValue;
             }
         }
+
 
         foreach ($masseEditArray as $photoId => $photoInputs) {
 

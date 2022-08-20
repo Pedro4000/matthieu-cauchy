@@ -19,37 +19,47 @@
                     </div>
                     
                   </div>
-                  <div class='grid grid-cols-2 lg:grid-cols-6 mt-2 dropzone'>
-                    @php $i = 0 @endphp
-                    @foreach ($photos as $photo) 
-                      <div class="flex flex-col items-center bloc_photo_pour_ordre relative">
-                        <div class="absolute w-full h-full flex">
-                          <span class='w-1/2 h-full drag-left span-photo-order' data-number="{{ $i }}">
-                          </span>
-                          @php $i++ @endphp
-                          <span class='w-1/2 h-full drag-right span-photo-order' data-number="{{ $i }}">
-                          </span>     
-                          @php $i++ @endphp                 
-                        </div>
-                        <a draggable="true" href="{{ route('admin.photo.edit', ['id' => $photo->id]) }}" class='photo-link-box'>
-                          <i class="fa-solid fa-xmark absolute"></i>
-                          <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" class="bg-center h-100 photo-thumb">
-                        </a>
-                        <div class="flex justify-around my-2">
-                          <div class="flex flex-col">
-                            <input type="checkbox" name="{{ 'couverture_'.$photo->id }}" id="{{ 'couverture_'.$photo->id }}" class="">
-                            <label class="form-check-label inline-block text-gray-800" for="{{ 'couverture_'.$photo->id }}" aria-describedby="label">
-                              Couverture
-                            </label>
-                            <input type="checkbox" name="{{ 'accueil'.$photo->id }}" id="{{ 'accueil'.$photo->id }}" class="">
-                            <label class="form-check-label inline-block text-gray-800 " for="{{ 'accueil'.$photo->id }}" aria-describedby="label">
-                              Accueil
-                            </label>
+                  <form method="POST" action="{{ route('admin.photo.mass_edit') }}" id="photo_mass_edit_form">
+                    @csrf
+                    <div class='grid grid-cols-2 lg:grid-cols-6 mt-2 dropzone'>
+                      @php 
+                        $i = 0;
+                        $ordre = 1;
+                      @endphp
+                      @foreach ($photos as $photo) 
+                        <div class="flex flex-col items-center bloc_photo_pour_ordre relative">
+                          <div class="absolute w-full h-full flex">
+                            <span class='w-1/2 h-full drag-left span-photo-order' data-number="{{ $i }}">
+                            </span>
+                            @php $i++ @endphp
+                            <span class='w-1/2 h-full drag-right span-photo-order' data-number="{{ $i }}">
+                            </span>     
+                            @php $i++ @endphp                 
+                          </div>
+                          <a draggable="true" href="{{ route('admin.photo.edit', ['id' => $photo->id]) }}" class='photo-link-box'>
+                            <i class="fa-solid fa-xmark absolute"></i>
+                            <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" class="bg-center h-100 photo-thumb">
+                          </a>
+                          <div class="flex justify-around my-2">
+                            <div class="flex flex-col">
+                              <input type="checkbox" name="{{ 'couverture_'.$photo->id }}" id="{{ 'couverture_'.$photo->id }}" class="">
+                              <label class="form-check-label inline-block text-gray-800" for="{{ 'couverture_'.$photo->id }}" aria-describedby="label">
+                                Couverture
+                              </label>
+                              <input type="checkbox" name="{{ 'accueil'.$photo->id }}" id="{{ 'accueil'.$photo->id }}" class="">
+                              <label class="form-check-label inline-block text-gray-800 " for="{{ 'accueil'.$photo->id }}" aria-describedby="label">
+                                Accueil
+                              </label>
+                              <input class="ordrePhotoInput" name="{{ 'ordre_'.$photo->id }}" id="{{ 'ordre_'.$photo->id }}" value="{{ $ordre }}" class="">
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    @endforeach
-                  </div>
+                        @php 
+                          $ordre++;
+                        @endphp
+                      @endforeach
+                    </div>
+                  </form>
                   
                 </div>
             </div>
@@ -87,18 +97,19 @@
               blocPris.insertBefore(blocWhereDrop)
             }
           }
-          
-                 
-
           $('.span-photo-order').css('z-index', '-1');
+          $('.ordrePhotoInput').each(function(){
+            var ordre = 1;
+            $(this).val(ordre);
+            ordre++;
+            console.log($(this).val());
+          });
+          // il faut actualiser l ordre des photos
         });
 
         $(".dropzone").on('dragover', function(e) {
           e.preventDefault();  
-        });
-
-
-        
+        });      
         
       });
 
