@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 container">
-                  <div class="flex justify-between">
+                  <div class="flex justify-between mb-2">
                     <div class="inline-block">
                       <a href="{{ route('admin.photo.create')}}" class="text-danger">
                         <button class="bg-transparent hover:bg-gray-200 text-gray-400 font-semibold hover:text-white py-2 px-4 border border-gray-200 hover:border-transparent rounded">
@@ -19,9 +19,10 @@
                     </div>
                     
                   </div>
+                  <hr>
                   <form method="POST" action="{{ route('admin.photo.mass_edit') }}" id="photo_mass_edit_form">
                     @csrf
-                    <div class='grid grid-cols-2 lg:grid-cols-6 mt-2 dropzone'>
+                    <div class='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-2 dropzone'>
                       @php 
                         $i = 0;
                         $ordre = 1;
@@ -42,21 +43,21 @@
                           </a>
                           <div class="flex justify-around my-2">
                             <div class="flex flex-col">
-                              <input type="checkbox" name="{{ 'couverture_'.$photo->id }}" id="{{ 'couverture_'.$photo->id }}" class="">
-                              <label class="form-check-label inline-block text-gray-800" for="{{ 'couverture_'.$photo->id }}" aria-describedby="label">
-                                Couverture
+                              <input type="checkbox" name="{{ 'couverture_'.$photo->id }}" id="{{ 'couverture_'.$photo->id }}" {{ $photo->couverture ? 'checked' : '' }}>
+                              <label class="form-check-label inline-block text-gray-800 text-xs" for="{{ 'couverture_'.$photo->id }}" aria-describedby="label">
+                                Couverture de l'album
                               </label>
-                              <input type="checkbox" name="{{ 'accueil'.$photo->id }}" id="{{ 'accueil'.$photo->id }}" class="">
-                              <label class="form-check-label inline-block text-gray-800 " for="{{ 'accueil'.$photo->id }}" aria-describedby="label">
-                                Accueil
+                              <input type="checkbox" name="{{ 'accueil_'.$photo->id }}" id="{{ 'accueil_'.$photo->id }}"  {{ $photo->accueil ? 'checked' : '' }}>
+                              <label class="form-check-label inline-block text-gray-800 text-xs" for="{{ 'accueil_'.$photo->id }}" aria-describedby="label">
+                                Photo d'accueil du site
                               </label>
-                              <input class="ordrePhotoInput" name="{{ 'ordre_'.$photo->id }}" id="{{ 'ordre_'.$photo->id }}" value="{{ $ordre }}" class="">
+                              <input class="ordrePhotoInput w-1/2 hidden" name="{{ 'ordre_'.$photo->id }}" id="{{ 'ordre_'.$photo->id }}" value="{{ $ordre }}">
+                              @php 
+                                $ordre++;
+                              @endphp
                             </div>
                           </div>
                         </div>
-                        @php 
-                          $ordre++;
-                        @endphp
                       @endforeach
                     </div>
                   </form>
@@ -80,13 +81,15 @@
         $(".photo-thumb").on('mousedown', function(e) {
           blocPris = $(this).closest('.bloc_photo_pour_ordre');
         });
-        
+
         $(".dropzone").on('drop', function(e) {
           e.preventDefault();  
           $('.span-photo-order').css('z-index', '2');
           x = event.pageX;
           y = event.pageY;
-          element = document.elementFromPoint(x, y);
+
+          element = document.elementFromPoint(x, y - window.pageYOffset);
+          //console.log(x,y);
           if(element.dataset) {
             numeroSpan = element.dataset.number;
             blocWhereDrop = $('span[data-number="'+numeroSpan+'"]').closest('.bloc_photo_pour_ordre');
@@ -98,11 +101,10 @@
             }
           }
           $('.span-photo-order').css('z-index', '-1');
+          var ordre = 1;
           $('.ordrePhotoInput').each(function(){
-            var ordre = 1;
             $(this).val(ordre);
             ordre++;
-            console.log($(this).val());
           });
           // il faut actualiser l ordre des photos
         });

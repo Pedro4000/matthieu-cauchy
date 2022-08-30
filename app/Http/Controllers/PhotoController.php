@@ -28,7 +28,9 @@ class PhotoController extends Controller
         });
 
         if($album_id){
-            $photos = Photo::where('album_id', $album_id)->get();
+            $photos = Photo::where('album_id', $album_id)
+            ->orderBy('ordre')
+            ->get();
         } else {
             $photos = Photo::get();
         }
@@ -37,7 +39,6 @@ class PhotoController extends Controller
         foreach($photos as &$photo) {
             $photo->nombre_photos = $albums[$photo->album_id]->nombre_photos;
         }
-
         return view('admin.photo.photo_index',[
             'photos' => $photos,
             'albumId' => $album_id ?? null,
@@ -138,27 +139,25 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($request->get('id'));
 
-        $albumRedirection = $request->get('albumRedirection');
-        $numeroPage = $request->get('page') ?? 1;
-
-        if ($photo->nom != $request->get('nom') || $photo->description != $request->get('description') || $photo->album_id != $request->album) {
+        if ($photo->nom != $request->get('nom') || $photo->album_id != $request->album) {
 
             $nouvelAlbum = Album::find($request->get('album'));
             Storage::move(
                 'public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier, 
-                'public/images/'.$nouvelAlbum->type->nom.'/'.$nouvelAlbum->nom_route.'/'.$photo->nom_fichier
+                'public/images/'.$nouvelAlbum->type->nom.'/'.$nouvelAlbum->nom_route.'/'.$request->get('nom')
             );
         }
 
         $photo->nom = $request->get('nom');
+        $photo->nom_fichier = $request->get('nom');
         $photo->description = $request->get('description');
         $photo->album_id = $request->album;        
 
         if ($photo->save()) {
             if (isset($albumRedirection)) {
-                return redirect()->route('admin.photo.index', [ 'album_id' => $albumRedirection, 'page' => $numeroPage ])->with('success', 'la photo a bien été modifiée');
+                return redirect()->route('admin.photo.index', [ 'album_id' => $photo->album_id ])->with('success', 'la photo a bien été modifiée');
             } else {
-                return redirect()->route('admin.photo.index', [ 'page' => $numeroPage ])->with('success', 'la photo a bien été modifiée');
+                return redirect()->route('admin.photo.index', [ 'album_id' => $photo->album_id ])->with('success', 'la photo a bien été modifiée');
             }
         } else {
             return redirect(url()->previous())->with('error', 'poti problème lors de la modification');
@@ -199,7 +198,7 @@ class PhotoController extends Controller
 
         $masseEditArray = [];
         $albumId = null;
-        
+
         foreach ($request->post() as $input => $value) {
             if (!$albumId) {
                 //dd($photo->album());
@@ -212,7 +211,6 @@ class PhotoController extends Controller
 
         foreach ($request->all() as $inputName => $inputValue) {
 
-            dd($request->all());
             if(in_array(explode('_', $inputName)[0] ,['accueil', 'couverture', 'ordre'])) {    
                             
                 $photoId = explode('_', $inputName)[1];
@@ -220,14 +218,14 @@ class PhotoController extends Controller
             }
         }
 
-
         foreach ($masseEditArray as $photoId => $photoInputs) {
 
             $photo = Photo::find($photoId);
 
             // si on a un input avec 1 pour la photo d'accueil, on enleve tous les autres, pour eviter les doublons, attention cependant cest le 
             // dernier id qui prend, donc si on est sur la même page avec deux oui, cest juste la derniere photo qui prendra
-            if ($photoInputs['accueil']) {
+            if (isset($photoInputs['accueil'])) {
+                $photoInputs['accueil'] = 1;
                 $anciennesPhotoAccueil = Photo::where('accueil', '=', 1)->get();
                 foreach ($anciennesPhotoAccueil as $anciennePhotoAccueil) {
                     if ($anciennePhotoAccueil->id != $photo->id) {
@@ -235,8 +233,11 @@ class PhotoController extends Controller
                         $anciennePhotoAccueil->save();       
                     }
                 }
+            } else {
+                $photoInputs['accueil'] = 0;
             }
-            if ($photoInputs['couverture']) {
+            if (isset($photoInputs['couverture'])) {
+                $photoInputs['couverture'] = 1;
                 $anciennesPhotoCouvertures = Photo::where('couverture', '=', 1)->where('album_id', $photo->album->id)->get();
                 foreach ($anciennesPhotoCouvertures as $anciennePhotoCouvertures) {
                     if ($anciennePhotoCouvertures->id != $photo->id) {
@@ -244,11 +245,13 @@ class PhotoController extends Controller
                         $anciennePhotoCouvertures->save();       
                     }
                 }
+            } else {
+                $photoInputs['couverture'] = 0;
             }
 
             $photo->accueil = $photoInputs['accueil'];
             $photo->couverture = $photoInputs['couverture'];
-            $photo->ordre = $photoInputs['ordrePhoto'];
+            $photo->ordre = $photoInputs['ordre'];
             $photo->save();
         }
 

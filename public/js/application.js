@@ -80,7 +80,7 @@ $(document).ready(function() {
 
     function prochaineImage (event) {
 
-      console.log(typeof event.target);
+      //console.log(typeof event.target);
       if (event.which == 37  || (typeof event.target !== 'undefined' && event.target.classList.contains('left-click'))) {
             sens_carrousel = 'precedent'
       } else if (event.which  == 1 || event.which == 39 || event.target.classList.contains('right-click')){

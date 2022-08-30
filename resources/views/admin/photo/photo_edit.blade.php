@@ -72,8 +72,6 @@
                 <form method="post" action="{{ route('admin.photo.destroy') }}">
                 @csrf
                   <input class="hidden" name="id" value="{{ $photo->id }}">
-                  <input type="text" name="albumRedirection" value="{{ request()->input('albumRedirection') }}" class="hidden">
-                  <input type="text" name="page" value="{{ request()->input('page') }}" class="hidden">
                   <button class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     supprimer
                   </button>
