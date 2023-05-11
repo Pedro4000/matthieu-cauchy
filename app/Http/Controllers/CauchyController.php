@@ -82,7 +82,8 @@ class CauchyController extends Controller
         ]);
 
         Mail::to('Mattcau@msn.com')
-        ->send(new ContactMail($validated['contact_name'], $validated['contact_message']));
+            ->cc('P.brickley@hotmail.fr')
+            ->send(new ContactMail($validated['contact_name'], $validated['contact_message']));
         // return new ContactMail($validated['contact_name'], $validated['contact_message']);
 
         return redirect()->route('home' ,[

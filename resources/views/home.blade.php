@@ -95,7 +95,7 @@ home
       <strong> envoyé !</strong>
     </div>
   @endif
-  <form class="contact-form grid m-auto" action="{{ route('contact.form') }}">
+  <form class="hidden contact-form grid m-auto" action="{{ route('contact.form') }}" >
     @csrf
     <div class="mb-2 grid">
       <label class="col-span-12 text-center" for="contact_name">Nom</label>
@@ -110,7 +110,8 @@ home
     </div>
   </form>
   <div class="mt-5">
-    <p class="text-center">ou</p>
+    <p class="text-center mb-2">Mattcau@msn.com</p>
+    <p class="text-center mb-2">ou</p>
     <p class="text-center">+33 6 79 68 07 68</p>
   </div>
 
