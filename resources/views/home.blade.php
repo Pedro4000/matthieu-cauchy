@@ -43,7 +43,7 @@ home
     @endforeach
   @endisset
 
-  <a href='https://coucoumagazine.fr/' target="_blank" class="w-full lg:w-1/2 mb-7 lg:mb-0 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element lg:p-6">
+  <a href='https://www.obscuramachine.com/' target="_blank" class="w-full lg:w-1/2 mb-7 lg:mb-0 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element lg:p-6">
     <div id="" class="premiere-galerie-lien inline-block flex items-center w-full">
         <div class="w-full premiere_galerie oscura-machine">
         </div>
