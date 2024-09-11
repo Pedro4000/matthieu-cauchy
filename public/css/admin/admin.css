@@ -9,3 +9,24 @@ select-pierre {
   border-radius: 3px;
 }
 
+.main-container{
+  display:flex;
+}
+
+.padding-row td {
+  padding: 10px;
+}
+
+.list-table{
+  font-size:17px;
+}
+
+.list-table tbody tr td{
+  font-size:17px;
+}
+
+.list-table tbody tr{
+}
+
+.list-table tbody tr:hover{
+}

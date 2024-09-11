@@ -119,9 +119,25 @@ img {
 }
 #stageAccueil {
   margin: 0vh auto 0vh;
-  height: 60vh;
+  height: 80vh;
   width: auto;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#stageAccueil img{
+  box-shadow: 3px 3px 4px black;
+}
+
+.premiere_galerie{
+  box-shadow: 3px 3px 4px black;
+}
+
+.contact-container{
+  padding: 20px;
+  overflow: auto;
+  height: 54vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -777,16 +793,6 @@ table {
   border-collapse: collapse;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
 /**
  * Reset links to optimize for opt-in styling instead of
  * opt-out.
@@ -927,6 +933,14 @@ video {
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
   border-color: #2563eb;
+}
+
+.sidebar a{
+  color:black;
+}
+
+td a{
+  color: black;
 }
 
 input::-moz-placeholder, textarea::-moz-placeholder {

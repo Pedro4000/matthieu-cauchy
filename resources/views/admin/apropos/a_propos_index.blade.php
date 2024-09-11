@@ -9,7 +9,7 @@
                     </button>
                     <hr>
                     </a>
-                    <table class="table-auto photo-index-table text-left mt-2 border border-gray-200">
+                    <table class="list-table table-auto photo-index-table text-left mt-2 border border-gray-200">
                     <thead>
                         <tr>
                         <th class='w-1/12 p-2'>langue</th>

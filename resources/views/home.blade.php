@@ -9,7 +9,7 @@ home
 @endsection
 
 @section('sidebar')
-@include('include.sidebar')
+  @include('include.sidebar')
 @endsection
 
 @section('headcontent')
@@ -18,11 +18,12 @@ home
 <div class="flex mb-1 flex-column">
   <h1 class="h2"></h1>
 </div>
+<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 @endsection
-
 
 @section('content')
 
+<img src="chambre3.jpeg" alt="Italian Trulli" class='hidden'>
 @if(isset($photoAccueil))
   <div id="stageAccueil" class="{{  app('request')->input('section_display') ? 'hidden-away opaque' : '' }}" style="{{ app('request')->input('section_display') ? 'position:absolute' : '' }}" >
     <img src="{{ asset('storage/images/'.$photoAccueil->album->type->nom.'/'.$photoAccueil->album->nom_route.'/'.$photoAccueil->nom_fichier) }}">
@@ -30,25 +31,23 @@ home
 @endif
 
 <div id="album-div" class="m-auto flex flex-wrap flex-col lg:flex-row projects_div {{ app('request')->input('section_display') == 'projects' ? '' : 'hidden-away opaque' }}">
- @foreach($albums['works'] as $work)
-  <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
-    <a href="{{ route('album', ['album_nom' => $work->nom ]) }}" class="premiere-galerie-lien">
-      <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ isset($work->couv) ? "'".asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier)."'" : ''  }})">
+  @isset($albums['works'])
+    @foreach($albums['works'] as $work)
+      <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
+        <a href="{{ route('album', ['album_nom' => $work->nom ]) }}" class="premiere-galerie-lien">
+          <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ isset($work->couv) ? "'".asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier)."'" : ''  }})">
+          </div>
+          <div class="centered-title">{{ Str::of($work->nom)->upper() }}</div>
+        </a>
       </div>
-      <div class="centered-title">{{ Str::of($work->nom)->upper() }}</div>
-    </a>
-  </div>
-      
-@endforeach
-
+    @endforeach
+  @endisset
 
   <a href='https://coucoumagazine.fr/' target="_blank" class="w-full lg:w-1/2 mb-7 lg:mb-0 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element lg:p-6">
     <div id="" class="premiere-galerie-lien inline-block flex items-center w-full">
-      @if (isset($photoCouvCoucou))
-        <div class="w-full premiere_galerie" style="background-image: url({{ isset($photoCouvCoucou) ? "'".asset('storage/images/'.$photoCouvCoucou->album->type->nom.'/'.$photoCouvCoucou->album->nom_route.'/'.$photoCouvCoucou->nom_fichier)."'" : ''  }})">
+        <div class="w-full premiere_galerie oscura-machine">
         </div>
-        <div class="centered-title">COUCOU-MAGAZINE</div>        
-      @endif    
+        <div class="centered-title">OSCURA MACHINE</div>
     </div>
   </a>
 
@@ -83,7 +82,7 @@ home
   </div>
   @foreach ($AllAPropos as $aPropos)
     <span class="a-propos-texte {{ $loop->first ? '' : 'hidden' }}" data-langue={{ $aPropos->langue }}>
-      {!! $aPropos->contenu !!} 
+      {!! $aPropos->contenu !!}
     </span>
   @endforeach
 </div>
@@ -109,10 +108,12 @@ home
       <button type="submit">Envoyer </button>
     </div>
   </form>
-  <div class="mt-5">
-    <p class="text-center mb-2">Mattcau@msn.com</p>
-    <p class="text-center mb-2">ou</p>
-    <p class="text-center">+33 6 79 68 07 68</p>
+  <div class='contact-container'>
+    <div class="mt-5">
+      <p class="text-center mb-2">Mattcau@msn.com</p>
+      <p class="text-center mb-2">ou</p>
+      <p class="text-center">+33 6 79 68 07 68</p>
+    </div>
   </div>
 
 </div>
@@ -130,7 +131,7 @@ home
         $('#album-div').addClass('lg:justify-start');
         $('coucou_liens').addClass('lg:justify-center');
       };
-      
+
       $(document).ready(function() {
 
         function affichageHamburger() {
@@ -140,7 +141,7 @@ home
             $('.desktop-nav').removeClass('hidden');
           } else {
             $('.hamburger-nav').removeClass('hidden');
-            $('.desktop-nav').addClass('hidden');            
+            $('.desktop-nav').addClass('hidden');
           }
         };
 
@@ -156,8 +157,7 @@ home
           $('.premiere-galerie-lien').height($('.premiere-galerie-lien').width())
           $('.premiere_galerie').height($('.premiere_galerie').width())
         })
-        
 
-      });      
+      });
     </script>
 @endpush

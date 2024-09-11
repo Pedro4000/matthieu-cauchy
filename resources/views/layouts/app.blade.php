@@ -10,14 +10,12 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">        
-        <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">        
-        <link href="{{ asset('css/modal-back.css') }}" rel="stylesheet">    
-        <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">    
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
+        <link href="{{ asset('css/modal-back.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
-
-
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <!-- Scripts -->
 
         <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>
@@ -37,11 +35,11 @@
                 </div>
             </header>
             <!-- Page Content -->
-            <main>
+            <main class='main-container'>
                 @include('admin.sidebar')
                 <div class='content w-3/4'>
                     @include('include.errors')
-                    {{ $slot }}                        
+                    {{ $slot }}
                 </div>
             </main>
             @include('include.foot')

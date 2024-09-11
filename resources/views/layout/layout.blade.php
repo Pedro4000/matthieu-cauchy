@@ -5,6 +5,7 @@
 </title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>    
+    <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>    
     {{--<link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
@@ -41,5 +42,6 @@
       </p>
     </div>
 @include('include.foot')
+<script src="{{ asset('js/fun.js') }}"></script>
   </body>
 </html>

@@ -18,7 +18,7 @@ class CauchyController extends Controller
     public function home(Request $request){
 
         $types= Type::all();
-        
+
         $session = $request->session()->has('users');
         $albums = Album::all();
         $photoAccueil = Photo::where('accueil', 1)->get()->first();
@@ -28,14 +28,10 @@ class CauchyController extends Controller
             return [$item->album_id => $item];
         });
 
-        $idsBooks = Album::select('id')->where('type_id', Type::where('nom', 'books')->first()->id)->get()->toArray();
-        foreach ($idsBooks as $id) {
-            if (isset($photosCouv[$id['id']])) {
-                $photoCouvCoucou = $photosCouv[$id['id']];
-                break;
-            }
-        }
 
+        $idsBooks = Album::select('id')->where('type_id', Type::where('nom', 'books')->first()->id ?? '')->get()->toArray();
+
+        $albumTries = [];
         foreach ($albums as &$album) {
             if(isset($photosCouv[$album->id])){
                 $album->couv = $photosCouv[$album->id];
@@ -46,7 +42,7 @@ class CauchyController extends Controller
         }
         $albums = $albumTries;
         $AllAPropos = APropos::all();
-        
+
         $planets = Storage::files('public/favicon/planets');
 
         foreach ($planets as &$planet) {
@@ -59,7 +55,6 @@ class CauchyController extends Controller
             'AllAPropos' => $AllAPropos,
             'planets' => $planets,
             'photoAccueil' => $photoAccueil,
-            'photoCouvCoucou' => $photoCouvCoucou ?? null,
         ]);
     }
 

@@ -18,6 +18,25 @@ section
 <div class="flex mb-1 flex-column">
   <h1 class="h2"></h1>
 </div>
+<style>
+.slider_component {
+  position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust as needed */
+    overflow: hidden;
+}
+
+.slider_component img {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+  </style>
 @endsection
 
 @section('content')
