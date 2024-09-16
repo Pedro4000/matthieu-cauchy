@@ -126,9 +126,6 @@ img {
   justify-content: center;
   align-items: center;
 }
-#stageAccueil img{
-  box-shadow: 3px 3px 4px black;
-}
 
 .premiere_galerie{
   box-shadow: 3px 3px 4px black;
