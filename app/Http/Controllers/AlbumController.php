@@ -17,7 +17,7 @@ class AlbumController extends Controller
     {
         $albums = Album::all();
 
-        return view('admin.album.album_index',[
+        return view('admin.album.index',[
             'albums' => $albums,
         ]);
     }
@@ -30,7 +30,7 @@ class AlbumController extends Controller
     {
         $types = Type::all();
 
-        return view('admin.album.album_create',[
+        return view('admin.album.create',[
             'types' => $types,
         ]);
     }
@@ -42,7 +42,6 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         $album = new Album();
-        $album->type_id = $request->get('type');
         $album->nom = $request->get('nom');
         $album->nom_route = $request->get('nom_route');
 
@@ -61,11 +60,9 @@ class AlbumController extends Controller
     public function edit($id)
     {
         $album = Album::find($id);
-        $types = Type::all();
 
-        return view('admin.album.album_edit',[
+        return view('admin.album.edit',[
             'album' => $album,
-            'types' => $types
         ]);
     }
 

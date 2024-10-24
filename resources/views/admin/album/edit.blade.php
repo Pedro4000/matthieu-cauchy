@@ -15,14 +15,6 @@
                           </div>
 
                           <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="album_route">
-                              nom de la route (ne pas toucher)
-                            </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="album_route" type="text" value="{{ $album->nom_route }}" name="nom_route" readonly>
-                          </div>
-
-
-                          <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                               type
                             </label>
@@ -33,16 +25,12 @@
                             </select>
                             <p class="text-red-500 text-xs italic">.</p>
                           </div>
-
-
                           <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
                               description
                             </label>
                             <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" name="description" >{!! $album->description !!}</textarea>
                           </div>
-
-
                           <div class="flex items-center justify-between pb-4">
                             <div class="flex">
                               <a class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" href="{{ url()->previous() }}">annuler</a>          
@@ -61,7 +49,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal suppression -->
     <div id="myModal" class="modal">
       <div class="modal-content">
@@ -90,14 +77,11 @@
 
 </x-app-layout>
 <script>
-
   $(document).ready(function() {
-
     ClassicEditor
         .create( document.querySelector( '#description' ) )
         .catch( error => {
             console.error( error );
         } );
   });
-
 </script>

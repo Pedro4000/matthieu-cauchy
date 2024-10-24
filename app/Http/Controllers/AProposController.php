@@ -17,7 +17,7 @@ class AProposController extends Controller
     {
         $aproposTous = APropos::get();
 
-        return view('admin.apropos.a_propos_index',[
+        return view('admin.apropos.index',[
             'aproposTous' => $aproposTous,
         ]);
     }
@@ -29,7 +29,7 @@ class AProposController extends Controller
     {
         $apropos = APropos::find($id);
 
-        return view('admin.apropos.a_propos_edit',[
+        return view('admin.apropos.edit',[
             'apropos' => $apropos,
         ]);
     }
@@ -58,7 +58,7 @@ class AProposController extends Controller
      */
     public function create()
     {
-        return view('admin.apropos.a_propos_create',[
+        return view('admin.apropos.create',[
         ]);
     }
 

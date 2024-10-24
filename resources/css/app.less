@@ -1,3 +1,5 @@
+@import 'dropzone/dist/dropzone.css';
+
 body {
   font-family: 'DIN', Fallback, sans-serif !important;  
   margin: 0;
@@ -233,6 +235,7 @@ img{
     opacity: 1;
   }
 }
+
 .premiere-galerie-lien, .premiere_galerie{
   width: 100%;
   background-position: center;
@@ -355,6 +358,13 @@ img{
 
 .bloc_photo_pour_ordre{
   position: relative;
+}
+.dropzone{
+  min-height: 70px;
+}
+
+.main-container .dropzone .dz-message{
+  margin:0;
 }
 
 @media screen and (max-width: 980px) {

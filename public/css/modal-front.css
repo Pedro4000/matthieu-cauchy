@@ -34,17 +34,13 @@
 }
 @media only screen and (min-width: 980px) {
   .modal-content {
-    -webkit-animation-name: animatetop;
     animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
     animation-duration: 0.4s;
   }
 }
 @media only screen and (max-width: 980px) {
   .modal-content {
-    -webkit-animation-name: animatetopmobile;
     animation-name: animatetopmobile;
-    -webkit-animation-duration: 0.4s;
     animation-duration: 0.4s;
     min-height: 100vh;
   }
@@ -81,16 +77,6 @@
   align-items: center;
 }
 /* Add Animation */
-@-webkit-keyframes animatetop {
-  from {
-    opacity: 0;
-    width: 0%;
-  }
-  to {
-    opacity: 1;
-    width: 20%;
-  }
-}
 @keyframes animatetop {
   from {
     opacity: 0;
@@ -99,20 +85,6 @@
   to {
     opacity: 1;
     width: 20%;
-  }
-}
-@-webkit-keyframes animatetopmobile {
-  from {
-    opacity: 0;
-    height: 0%;
-    margin-top: 0rem;
-    top: 100%;
-  }
-  to {
-    opacity: 1;
-    height: 100%;
-    margin-top: 5em;
-    top: 0%;
   }
 }
 @keyframes animatetopmobile {

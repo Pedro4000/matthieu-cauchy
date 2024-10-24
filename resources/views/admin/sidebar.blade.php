@@ -8,18 +8,18 @@
       </a>
     </li> 
     <li class="nav-item my-1">
-      <a class="nav-link px-4 py-2 inline-block w-full {{ (Route::current()->getName() == 'admin.type.index') ? 'sidebar-active' : '' }}" href="{{ route('admin.type.index') }}" title="gerer les types">
-        <i class="fas fa-venus-double"></i><span class="hidden lg:inline"> Type</span>
-      </a>
-    </li>  
-    <li class="nav-item my-1">
       <a class="nav-link px-4 py-2 inline-block w-full {{ (Route::current()->getName() == 'admin.a_propos.index') ? 'sidebar-active' : '' }}" href="{{ route('admin.a_propos.index') }}" title="gerer les types">
         <i class="fab fa-accessible-icon"></i><span class="hidden lg:inline"> About</span>
       </a>
     </li> 
     <li class="nav-item my-1">
       <a class="nav-link px-4 py-2 inline-block w-full {{ (Route::current()->getName() == 'admin.users.index') ? 'sidebar-active' : '' }}" href="{{ route('admin.users.index') }}" title="gerer les types">
-        <i class="fas fa-users"></i><i class="fa-solid fa-person"></i><span class="hidden lg:inline"> Users</span>
+        <i class="fas fa-users"></i><span class="hidden lg:inline"> Users</span>
+      </a>
+    </li> 
+    <li class="nav-item my-1">
+      <a class="nav-link px-4 py-2 inline-block w-full {{ (Route::current()->getName() == 'admin.business.index') ? 'sidebar-active' : '' }}" href="{{ route('admin.business.index') }}" title="gerer les types">
+        <i class="fa fa-money-bill"></i><span class="hidden lg:inline"> Business</span>
       </a>
     </li> 
   </ul>

@@ -12,9 +12,9 @@ use function PHPUnit\Framework\stringContains;
 
 class CauchyController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {}
 
-    }
     public function home(Request $request){
 
         $types= Type::all();
@@ -27,7 +27,6 @@ class CauchyController extends Controller
         $photosCouv = $photosCouv->mapWithKeys(function ($item, $key) {
             return [$item->album_id => $item];
         });
-
 
         $idsBooks = Album::select('id')->where('type_id', Type::where('nom', 'books')->first()->id ?? '')->get()->toArray();
 
@@ -133,9 +132,10 @@ class CauchyController extends Controller
         ]);
     }
 
-    public function ajax(){
-        $i=0;
-        $allFiles=Storage::allFiles('public/images/');
+    public function ajax()
+    {
+        $i = 0;
+        $allFiles = Storage::allFiles('public/images/');
         foreach ($allFiles as $allFile) {
             if (!str_contains($allFile,'540') || str_contains($allFile,'txt')){
                 unset($allFiles[$i]);

@@ -16,10 +16,8 @@ class Photo extends Model
      * @var array
      */
     protected $fillable = [
-        'contenu',
         'couverture',
         'ordre',
-        'afficher',
     ];
 
     /**

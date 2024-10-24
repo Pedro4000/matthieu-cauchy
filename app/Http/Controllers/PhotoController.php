@@ -15,33 +15,19 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, int $album_id = null)
+    public function index(Request $request, int $albumId = null)
     {
-        $albums = Album::all();
-        foreach ($albums as &$album) {
-            if (!isset($album->nombre_photos)) {
-                $album->nombre_photos = count($album->photos);
-            };
-        }
-        $albums = $albums->mapWithKeys(function ($item, $key) {
-            return [$item->id => $item];
-        });
-
-        if($album_id){
-            $photos = Photo::where('album_id', $album_id)
-            ->orderBy('ordre')
-            ->get();
+        if ($albumId) {
+            $photos = Photo::where('album_id', $albumId)
+                ->orderBy('ordre')
+                ->get();
         } else {
             $photos = Photo::get();
         }
 
-
-        foreach($photos as &$photo) {
-            $photo->nombre_photos = $albums[$photo->album_id]->nombre_photos;
-        }
-        return view('admin.photo.photo_index',[
+        return view('admin.photo.index',[
             'photos' => $photos,
-            'albumId' => $album_id ?? null,
+            'albumId' => $albumId ?? null,
         ]);
     }
 
@@ -54,113 +40,53 @@ class PhotoController extends Controller
     {
         $albums = Album::all();
         
-        return view('admin.photo.photo_create',[
+        return view('admin.photo.create',[
             'albums' => $albums,
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function upload(Request $request)
     {
-        $album = Album::find($request->get('album'));
+        if($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $path = $file->storeAs('photos', $filename, 'public');
 
-        $file = $request->file('file');
-                $albumRedirection = $request->get('albumRedirection');
+            $photo = new Photo();
+            $photo->filename = $filename;
+            $photo->album_id = $request->album_id;
+            $photo->save();
 
-        $validated = $request->validate([
-            'nom' => 'required|unique:photos',
-        ]);
-
-        // todo faire un slug pour verifier que le nom nexiste pas deja de la photo 
-        // sans quoi ca ecrase lancienne photo
-        $photo = new Photo();
-        $photo->nom = $request->get('nom');
-        $photo->album_id = $request->get('album');
-        $photo->description = $request->get('description');
-        $photo->nom_fichier = $file->getClientOriginalName();
-
-        if (!$album->type) {
-            return redirect(url()->previous())->with('error', 'il faut que cet album appartienne à un type de contenu');
-        }
-        if (Storage::exists('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier)) {
-            return redirect(url()->previous())->with('error', 'il existe déjà une photo avec ce nom dans cet album');
-        };
-
-        if ($photo->save()) {
-            $file->storeAs('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route, $photo->nom_fichier);
-            return redirect()->route('admin.photo.create')->with('success', 'photo enregistrée');
+            return response()->json([
+                'success' => true,
+                'filename' => $filename,
+                'id' => $photo->id,
+            ]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(int $id)
+    public function delete(Request $request)
     {
-        $photo = Photo::find($id);
-
-        return view('admin.photo.photo_show',[
-            'photo' => $photo,
-        ]);        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $id)
-    {
-        $photo = Photo::find($id);
-        $albums = Album::all();
-
-        return view('admin.photo.photo_edit',[
-            'photo' => $photo,
-            'albums' => $albums,
-        ]);      
-    }
-
-    /**
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $photo = Photo::find($request->get('id'));
-
-        if ($photo->nom != $request->get('nom') || $photo->album_id != $request->album) {
-
-            $nouvelAlbum = Album::find($request->get('album'));
-            Storage::move(
-                'public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier, 
-                'public/images/'.$nouvelAlbum->type->nom.'/'.$nouvelAlbum->nom_route.'/'.$request->get('nom')
-            );
-        }
-
-        $photo->nom = $request->get('nom');
-        $photo->nom_fichier = $request->get('nom');
-        $photo->description = $request->get('description');
-        $photo->album_id = $request->album;        
-
-        if ($photo->save()) {
-            if (isset($albumRedirection)) {
-                return redirect()->route('admin.photo.index', [ 'album_id' => $photo->album_id ])->with('success', 'la photo a bien été modifiée');
-            } else {
-                return redirect()->route('admin.photo.index', [ 'album_id' => $photo->album_id ])->with('success', 'la photo a bien été modifiée');
-            }
+        $filename = $request->input('filename');
+        $photo = Photo::where('filename', $filename)->first();
+        
+        // Path to the picture
+        $filePath = 'public/photos/' . $photo->filename;
+        
+        // Check if the file exists
+        if (Storage::exists($filePath)) {
+            // Delete the file
+            Storage::delete($filePath);
+            $photo->delete();
+            return response()->json([
+                'message' => 'Picture deleted successfully',
+                'filename' => $filename,
+            ], 
+                200);
         } else {
-            return redirect(url()->previous())->with('error', 'poti problème lors de la modification');
+            // Return an error if the file does not exist
+            return response()->json(['error' => 'Picture not found'], 404);
         }
     }
 
@@ -302,6 +228,19 @@ class PhotoController extends Controller
             }         
         }
         die('fini');
+    }
+
+    public function saveOrder(Request $request)
+    {
+        $photoIds = $request->input('photoOrder');
+
+        foreach ($photoIds as $order => $photoId) {
+            $photo = Photo::find($photoId);
+            $photo->ordre = $order + 1;
+            $photo->save();
+        }
+
+        return response()->json(['success' => 'Order saved']);
     }
 
 }

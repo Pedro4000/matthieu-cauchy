@@ -2,7 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <title>{{ Str::replace('_',' ',config('app.name', '')) }}</title>
-</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>    
     <script src="https://kit.fontawesome.com/23527384bb.js" crossorigin="anonymous"></script>    
