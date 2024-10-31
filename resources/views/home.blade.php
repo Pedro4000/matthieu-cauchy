@@ -38,7 +38,7 @@ home
         <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
           <a href="{{ route('album', ['albumName' => $album->name ]) }}" class="premiere-galerie-lien">
             @if(strtolower($album->name) == 'martha')
-              <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ asset('storage/marthamain.jpeg') }})">
+              <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ asset('marthamain.jpeg') }})">
             @else
               <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ isset($photo->cover) ? asset('storage/photos/' . $photo->filename) : ''  }})">
             @endif
