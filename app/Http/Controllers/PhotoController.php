@@ -18,13 +18,16 @@ class PhotoController extends Controller
     public function index(Request $request, int $albumId = null)
     {
         if ($albumId) {
+            $album = Album::find($albumId);
+            if (!$album) {
+                return redirect()->route('admin.album.index');
+            }
             $photos = Photo::where('album_id', $albumId)
                 ->orderBy('ordre')
                 ->get();
         } else {
             $photos = Photo::get();
         }
-
         return view('admin.photo.index',[
             'photos' => $photos,
             'albumId' => $albumId ?? null,
@@ -90,145 +93,46 @@ class PhotoController extends Controller
         }
     }
 
-    /**
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
+    public function coverAlbum(Request $request)
     {
-        $photo = Photo::find($request->get('id'));
-        $album = Album::find($photo->album->id);
-        $albumRedirection = $request->get('albumRedirection');
-        $numeroPage = $request->get('page') ?? 1;        
+        $photoId = $request->photoId;
+        $albumId = $request->albumId;
+        $photo = Photo::find($photoId);
+        
+        $previousCovers = Photo::where('cover', 1)
+            ->where('album_id', $albumId)
+            ->get();
+        
+        foreach($previousCovers as $cover) {
+            $cover->cover = false;
+            $cover->save();
+        }
 
-        $files = Storage::get('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
+        $photo->cover = true;
+        $photo->save();
 
-        if (Storage::exists('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier)) {
-
-            Storage::delete('public/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier);
-            $photo->delete();
-            if (isset($albumRedirection)) {
-                return redirect()->route('admin.photo.index', [ 'album_id' => $albumRedirection, 'page' => $numeroPage ])->with('success', 'la photo est bien supprimée fraté');
-            } else {
-                return redirect()->route('admin.photo.index', [ 'page' => $numeroPage ])->with('success', 'la photo a bien été modifiée');
-            }
-        } else {
-            return redirect()->route('admin.photo.index')->with('error', 'oopsie ca a buggé');        
-        } 
-
-
+        return response()->json(['success' => 'Cover saved'], 200);
     }
 
-    public function massEdit(Request $request) {
-
-        $masseEditArray = [];
-        $albumId = null;
-
-        foreach ($request->post() as $input => $value) {
-            if (!$albumId) {
-                //dd($photo->album());
-            }
-            if (str_contains($input, 'ordre')) {
-                
-                $id = explode('ordre', $input)[1];
-            }
+    public function coverSite(Request $request)
+    {
+        $photoId = $request->photoId;
+        $photo = Photo::find($photoId);
+        
+        $previousLandingImages = Photo::where('landing', 1)
+            ->get();
+        
+        foreach($previousLandingImages as $landing) {
+            $landing->landing = false;
+            $landing->save();
         }
 
-        foreach ($request->all() as $inputName => $inputValue) {
+        $photo->landing = true;
+        $photo->save();
 
-            if(in_array(explode('_', $inputName)[0] ,['accueil', 'couverture', 'ordre'])) {    
-                            
-                $photoId = explode('_', $inputName)[1];
-                $masseEditArray[$photoId][explode('_', $inputName)[0]] = $inputValue;
-            }
-        }
-
-        foreach ($masseEditArray as $photoId => $photoInputs) {
-
-            $photo = Photo::find($photoId);
-
-            // si on a un input avec 1 pour la photo d'accueil, on enleve tous les autres, pour eviter les doublons, attention cependant cest le 
-            // dernier id qui prend, donc si on est sur la même page avec deux oui, cest juste la derniere photo qui prendra
-            if (isset($photoInputs['accueil'])) {
-                $photoInputs['accueil'] = 1;
-                $anciennesPhotoAccueil = Photo::where('accueil', '=', 1)->get();
-                foreach ($anciennesPhotoAccueil as $anciennePhotoAccueil) {
-                    if ($anciennePhotoAccueil->id != $photo->id) {
-                        $anciennePhotoAccueil->accueil = 0;
-                        $anciennePhotoAccueil->save();       
-                    }
-                }
-            } else {
-                $photoInputs['accueil'] = 0;
-            }
-            if (isset($photoInputs['couverture'])) {
-                $photoInputs['couverture'] = 1;
-                $anciennesPhotoCouvertures = Photo::where('couverture', '=', 1)->where('album_id', $photo->album->id)->get();
-                foreach ($anciennesPhotoCouvertures as $anciennePhotoCouvertures) {
-                    if ($anciennePhotoCouvertures->id != $photo->id) {
-                        $anciennePhotoCouvertures->couverture = 0;
-                        $anciennePhotoCouvertures->save();       
-                    }
-                }
-            } else {
-                $photoInputs['couverture'] = 0;
-            }
-
-            $photo->accueil = $photoInputs['accueil'];
-            $photo->couverture = $photoInputs['couverture'];
-            $photo->ordre = $photoInputs['ordre'];
-            $photo->save();
-        }
-
-        return redirect()->back();
+        return response()->json(['success' => 'Landing saved'], 200);
     }
-
-
-    public function createFromStorage(Request $request) {
-        
-        $directories =  Storage::directories('public/images');
-        $types = Type::all();
-        $books = $types[0];
-        $works = $types[1];
-       
-        foreach($directories as $directory){
-
-            $subdirectories =  Storage::directories($directory);
-            foreach ($subdirectories as $subdirectory) {
-
-                $nom_album = explode('/',$subdirectory)[3];
-                $album = new Album();
-                $album->nom = $nom_album;
-                $album->nom_route = $nom_album;
-
-                if(preg_match('/books/', $subdirectory)){
-                    $album->type_id = $books->id; 
-                } else {
-                    $album->type_id = $works->id;                
-                };
-                $album->save();
-            }
-        };
-        
-
-        // on vient d'enregistrer les albums donc ne pas bouger de place
-        $albums = Album::all();
-        
-        foreach ($albums as $album){
-
-            $files = Storage::files('public/images/'.$album->type->nom.'/'.$album->nom);
-            foreach($files as $file) {
-                $nomPhoto = explode('/', $file)[4];
-                $photo = new Photo();
-                $photo->album_id = $album->id;
-                $photo->nom = $nomPhoto;
-                $photo->nom_fichier = $nomPhoto;
-                $photo->save();
-            }         
-        }
-        die('fini');
-    }
+    
 
     public function saveOrder(Request $request)
     {

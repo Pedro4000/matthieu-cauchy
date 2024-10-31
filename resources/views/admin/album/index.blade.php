@@ -18,13 +18,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($albums as $album)                      
+                      @foreach($albums as $album)
                           <tr>
-                            <td class="p-2">{{ $album->nom }}</td>
+                            <td class="p-2">{{ $album->name }}</td>
                             <td class="p-2"><a href="{{ route('admin.photo.index', ['album_id' => $album->id] ) }}">
-                              <img class='apercu' src="" style="min-height:30px" alt='empty'></a></td>
+                              <img class='apercu' src="{{ asset('storage/photos/' . ($albumCoversIndexedByAlbumId[$album->id]->filename ?? '')) }}" style="min-height:30px" alt='empty'></a></td>
                             <td class="p-2"><a href="{{ route('admin.album.edit', ['id' => $album->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
-                          </tr>                    
+                          </tr>
                       @endforeach
                     </tbody>
                   </table>

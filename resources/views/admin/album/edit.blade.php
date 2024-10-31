@@ -4,32 +4,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="w-full ">
-                        <form method="post" action="{{ route('admin.album.update') }}">
+                        <form method="post" action="{{ route('admin.album.update', ['id' => $album->id]) }}">
                           @csrf
                           <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="album_nom">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="album_name">
                               nom de l'album
                             </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="album_nom" type="text" value="{{ $album->nom }}" name="nom">
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="album_name" type="text" value="{{ $album->name }}" name="name">
                             <input type="number" value="{{ $album->id }}" name="id" class="hidden"> 
-                          </div>
-
-                          <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                              type
-                            </label>
-                            <select name='type'>
-                              @foreach($types as $type)
-                                <option value='{{ $type->id }}' {{ !$album->type ? '' : ( $album->type->id == $type->id ? 'selected' :'') }}>{{ $type->nom }}</option>
-                              @endforeach
-                            </select>
-                            <p class="text-red-500 text-xs italic">.</p>
                           </div>
                           <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
                               description
                             </label>
                             <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" name="description" >{!! $album->description !!}</textarea>
+                          </div>
+                          <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                              Display ?
+                            </label>
+                            <label class="switch">
+                              <input type="checkbox" name="display" {{ $album->display ? 'checked' : '' }}>
+                              <span class="slider round"></span>
+                            </label>
+                            <p class="text-red-500 text-xs italic">.</p>
                           </div>
                           <div class="flex items-center justify-between pb-4">
                             <div class="flex">

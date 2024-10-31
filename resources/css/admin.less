@@ -76,23 +76,31 @@ select-pierre{
 }
 .cover-album{
   position: absolute;
-  top: 23%;
-  left: 83%;
-  transform: translate(-50%, -50%);
-  font-size: 30px;
-  color: orange;
-  cursor: pointer;
-  display: none;
-}
-.cover-site{
-  position: absolute;
   top: 50%;
   left: 83%;
   transform: translate(-50%, -50%);
   font-size: 30px;
+  color: white;
   cursor: pointer;
-  color:blanchedalmond;
   display: none;
+}
+
+.cover-album.selected{
+  color: orange;
+}
+.cover-site{
+  position: absolute;
+  top: 23%;
+  left: 83%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  cursor: pointer;
+  color:white;
+  display: none;
+}
+
+.cover-site.selected{
+  color: forestgreen;
 }
 .delete-photo{
   position: absolute;

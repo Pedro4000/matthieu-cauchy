@@ -25,8 +25,8 @@
                             <div class="photo-slot" data-filename={{ $photo->filename }}>
                                 <img src="{{ asset('storage/photos/' . $photo->filename) }}" class="list-photo" alt="Saved Photo" data-order="{{ $photo->order }}" data-id="{{ $photo->id }}">
                                 <div class="delete-photo" data-filename="{{ $photo->filename }}" data-action='admin/photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
-                                <div class="cover-album" data-filename="{{ $photo->filename }}" data-action='admin/photo/cover-album'><i class="far fa-star" aria-hidden="true" ></i></div>
-                                <div class="cover-site" data-filename="{{ $photo->filename }}" data-action='admin/photo/cover-site'><i class="fa fa-images" aria-hidden="true" ></i></div>
+                                <div class="cover-album {{ $photo->cover ? 'selected' : '' }}" data-album-id="{{ $albumId }}" data-photo-id="{{ $photo->id }}" data-action='admin/photo/cover-album'><i class="fa fa-images" aria-hidden="true" ></i></div>
+                                <div class="cover-site {{ $photo->landing ? 'selected' : '' }}" data-photo-id="{{ $photo->id }}" data-action='admin/photo/cover-site'><i class="far fa-star" aria-hidden="true"></i></div>
                             </div>
                             @endforeach
                         </div>

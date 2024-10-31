@@ -16,9 +16,16 @@ class AlbumController extends Controller
     public function index()
     {
         $albums = Album::all();
+        $covers = Photo::where('cover', 1)->get();
+
+        $albumCoversIndexedByAlbumId = [];
+        foreach ($covers as $cover) {
+            $albumCoversIndexedByAlbumId[$cover->album_id] = $cover;
+        }
 
         return view('admin.album.index',[
             'albums' => $albums,
+            'albumCoversIndexedByAlbumId' => $albumCoversIndexedByAlbumId,
         ]);
     }
 
@@ -28,10 +35,7 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
-
         return view('admin.album.create',[
-            'types' => $types,
         ]);
     }
 
@@ -42,25 +46,27 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         $album = new Album();
-        $album->nom = $request->get('nom');
-        $album->nom_route = $request->get('nom_route');
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+        $album->name = $request->get('name');
+        $album->description = $request->get('description');
+        $album->display = isset($request->display) ?? false;
 
         if($album->save()) {
             return redirect()->route('admin.album.index')->with('success', 'ok album créé');
         } else {
             return redirect(url()->previous())->with('error', 'problème lors de la création');
         }
-
     }
 
- 
+
      /**
       * 
      */
     public function edit($id)
     {
         $album = Album::find($id);
-
         return view('admin.album.edit',[
             'album' => $album,
         ]);
@@ -73,20 +79,20 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, int $id)
     {
-        $album = Album::find($request->get('id'));
-        if($album->type_id != $request->get('type')) {
-            $oldType = Type::find($album->type_id);
-            $newType = Type::find($request->get('type'));
-            Storage::move('public/images/'.$album->type->nom.'/'.$album->nom_route, 'public/images/'.$newType->nom.'/'.$album->nom_route);
-        }       
-        $album->type_id = $request->get('type') ;
-        $album->nom = $request->get('nom');
+        $album = Album::find($id);
+        $validated = $request->validate([
+            'name' => 'required',
+        ]);
+        $album->name = $request->get('name');
         $album->description = $request->get('description');
+        $album->display = isset($request->display) ?? false;
+
+        $album->save();
 
         if($album->save()) {
-            return redirect()->route('admin.album.index')->with('success', 'album modifié');
+            return redirect()->route('admin.album.index')->with('success', 'album modified');
         } else {
             return redirect()->route('admin.album.index')->with('success', 'problème lors de la modif');
         }    
@@ -102,7 +108,7 @@ class AlbumController extends Controller
     {
         $albumId = $request->get('id');
         $album = Album::find($albumId);
-        $directory = Storage::deleteDirectory('public/images/'.$album->type->nom.'/'.$album->nom_route);
+        dd($album->photos);
         
         foreach($album->photos as $photo) {
             $photo->delete();

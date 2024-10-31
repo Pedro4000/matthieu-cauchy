@@ -13,7 +13,6 @@
                         <div class="photo-slot" data-filename={{ $photo->filename }}>
                             <img src="{{ asset('storage/business-photos/' . $photo->filename) }}" class="list-photo" alt="Saved Photo" data-order="{{ $photo->order }}" data-id="{{ $photo->id }}">
                             <div class="delete-photo" data-filename="{{ $photo->filename }}" data-action='admin/business/delete'><i class="fa fa-trash" aria-hidden="true" ></i></div>
-                            <div class="cover-album" data-filename="{{ $photo->filename }}" data-action='admin/business/welcome'><i class="far fa-star" aria-hidden="true" ></i></div>
                             <div class="cover-site" data-filename="{{ $photo->filename }}" data-action='admin/business/cover'><i class="fa fa-images" aria-hidden="true" ></i></div>
                         </div>
                         @endforeach

@@ -19,8 +19,8 @@ class CreatePhotosTable extends Migration
             $table->foreignId('album_id')->nullable();
             $table->string('filename')->nullable();
             $table->integer('ordre')->nullable();
-            $table->boolean('accueil')->nullable();
-            $table->boolean('couverture')->nullable();
+            $table->boolean('landing')->nullable();
+            $table->boolean('cover')->nullable();
         });
     }
 

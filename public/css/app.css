@@ -385,6 +385,7 @@ img {
   position: relative;
   text-align: center;
   color: white;
+  box-shadow: 1px 1px 2px black;
 }
 .premiere-galerie-lien:hover .premiere_galerie {
   opacity: 0.3;
@@ -515,6 +516,9 @@ img {
 }
 .main-container .dropzone .dz-message {
   margin: 0;
+}
+#album-div {
+  justify-content: flex-start;
 }
 @media screen and (max-width: 980px) {
   .sidebar {

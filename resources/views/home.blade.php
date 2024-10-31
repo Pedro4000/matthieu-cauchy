@@ -26,20 +26,24 @@ home
 <img src="chambre3.jpeg" alt="Italian Trulli" class='hidden'>
 @if(isset($photoAccueil))
   <div id="stageAccueil" class="{{  app('request')->input('section_display') ? 'hidden-away opaque' : '' }}" style="{{ app('request')->input('section_display') ? 'position:absolute' : '' }}" >
-    <img src="{{ asset('storage/images/'.$photoAccueil->album->type->nom.'/'.$photoAccueil->album->nom_route.'/'.$photoAccueil->nom_fichier) }}">
+    <img src="{{ asset('storage/photos/'.$photoAccueil->filename) }}">
   </div>
 @endif
 
 <div id="album-div" class="m-auto flex flex-wrap flex-col lg:flex-row projects_div {{ app('request')->input('section_display') == 'projects' ? '' : 'hidden-away opaque' }}">
-  @isset($albums['works'])
-    @foreach($albums['works'] as $work)
-      <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
-        <a href="{{ route('album', ['album_nom' => $work->nom ]) }}" class="premiere-galerie-lien">
-          <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ isset($work->couv) ? "'".asset('storage/images/works/'.$work->nom_route.'/'.$work->couv->nom_fichier)."'" : ''  }})">
-          </div>
-          <div class="centered-title">{{ Str::of($work->nom)->upper() }}</div>
-        </a>
-      </div>
+  @isset($albums)
+    @foreach($albums as $album)
+      @foreach($album->photos as $photo) 
+        @if($photo->cover)
+        <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
+          <a href="{{ route('album', ['albumName' => $album->name ]) }}" class="premiere-galerie-lien">
+            <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ isset($photo->cover) ? asset('storage/photos/' . $photo->filename) : ''  }})">
+            </div>
+            <div class="centered-title">{{ Str::of($album->name)->upper() }}</div>
+          </a>
+        </div>
+        @endif
+      @endforeach
     @endforeach
   @endisset
 
@@ -50,26 +54,6 @@ home
         <div class="centered-title">OSCURA MACHINE</div>
     </div>
   </a>
-
-  {{--
-  <div class="w-full lg:w-1/3 mb-7 lg:mb-0 px-3 text-center flex lg:justify-end lg:items-start pointer home-main-element">
-    <div id="coucou_image" class="premiere-galerie-lien inline-block flex items-center w-full">
-      @if (isset($photoCouvCoucou))
-        <div class="w-full premiere_galerie" style="background-image: url({{ isset($photoCouvCoucou) ? "'".asset('storage/images/'.$photoCouvCoucou->album->type->nom.'/'.$photoCouvCoucou->album->nom_route.'/'.$photoCouvCoucou->nom_fichier)."'" : ''  }})">
-        </div>
-        <div class="centered-title">COUCOU-MAGAZINE</div>        
-      @endif    
-    </div>
-  </div>
-
-  <div class="w-full lg:w-1/3 mb-7 lg:mb-0 px-3 text-center flex flex-col coucou_liens hidden-away home-main-element justify-center items-center">
-      @foreach($albums['books'] as $book)
-        <a href="{{ route('album', ['album_nom' => $book->nom ]) }}" class="text-left opaque">
-          <p class="flex items-center w-100 my-3"><img class="mx-2" style="width:30px; border-radius: 50%; padding: 2px" src="{{ asset($planets[rand(0, count($planets)-1) ]) }}">{{ $book->nom }}</p>
-        </a>  
-      @endforeach
-  </div>
---}}
 </div>
 
 <div class="row mx-8 m-auto mb-5 a_propos_div a-propos hidden-away opaque">

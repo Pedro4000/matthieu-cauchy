@@ -21,7 +21,7 @@ Route::get('/index', [CauchyController::class , 'index'])
     ->name('index');
 Route::get('/ajax-all', [CauchyController::class , 'ajax'])
     ->name('ajax-gngn');
-Route::get('/ccs/{album_nom}', [CauchyController::class , 'album'])
+Route::get('/ccs/{albumName}', [CauchyController::class , 'album'])
     ->name('album');
 Route::get('/contact-store', [CauchyController::class , 'contact'])
     ->name('contact.form');
@@ -39,17 +39,17 @@ Route::middleware(['auth'])
         Route::get('/', [DashboardController::class , 'dashboard'])
             ->name('dashboard');
 
-        Route::get('photo-index/{album_id?}', [PhotoController::class , 'index'])
+        Route::get('photo-index/{album_id}', [PhotoController::class , 'index'])
             ->name('photo.index');
         Route::post('photo/upload', [PhotoController::class , 'upload'])
             ->name('photo.upload');
         Route::post('photo/delete', [PhotoController::class , 'delete'])
             ->name('photo.delete');
-        Route::post('photo/cover-album', [PhotoController::class , 'cover-album'])
-            ->name('photo.cover-album');
-        Route::post('photo/cover-site', [PhotoController::class , 'cover-site'])
-            ->name('photo.cover-site');
-        Route::post('photo/save-order', [PhotoController::class , 'save-order'])
+        Route::post('photo/cover-album', [PhotoController::class , 'coverAlbum'])
+            ->name('photo.coverAlbum');
+        Route::post('photo/cover-site', [PhotoController::class , 'coverSite'])
+            ->name('photo.coverSite');
+        Route::post('photo/save-order', [PhotoController::class , 'saveOrder'])
             ->name('photo.saveOrder');
 
         Route::get('/createfromstorage', [PhotoController::class , 'createFromStorage'])
@@ -63,7 +63,7 @@ Route::middleware(['auth'])
             ->name('album.store');
         Route::get('album-edit/{id}', [AlbumController::class , 'edit'])
             ->name('album.edit');
-        Route::post('album-update', [AlbumController::class , 'update'])
+        Route::post('album-update/{id}', [AlbumController::class , 'update'])
             ->name('album.update');
         Route::post('album-destroy', [AlbumController::class , 'destroy'])
             ->name('album.destroy');

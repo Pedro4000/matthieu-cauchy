@@ -66,21 +66,27 @@ $(document).ready(function() {
         coverAlbumButtons.forEach(button => {
             button.addEventListener('click', async function() {
             // Get the filename from data-filename attribute
-                const filename = this.getAttribute('data-filename');
-                const action = this.getAttribute('data-action');
-                c
+                const photoId = this.getAttribute('data-photo-id');
+                const albumId = this.getAttribute('data-album-id');
                 if (confirm('make it the cover of the album ?')) {
                     try {
-                        const response = await fetch('../../' + action, {
+                        const response = await fetch('../../admin/photo/cover-album', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                             },
-                            body: JSON.stringify({ filename: filename })
+                            body: JSON.stringify({ 
+                                photoId: photoId,
+                                albumId: albumId,
+                            })
                         });
                         if (response.ok) {
                             const result = await response.json();
+                            document.querySelectorAll('.cover-album.selected').forEach(e=>{
+                                e.classList.remove('selected');
+                            })
+                            button.classList.add('selected');
                         } else {
                             alert('Error: ' + response.statusText);
                         }
@@ -97,21 +103,24 @@ $(document).ready(function() {
         coverAlbumButtons.forEach(button => {
             button.addEventListener('click', async function() {
             // Get the filename from data-filename attribute
-                const filename = this.getAttribute('data-filename');
+                const photoId = this.getAttribute('data-photo-id');
                 const action = this.getAttribute('data-action');
-                c
-                if (confirm('make it the welcome image of the site ?')) {
+                if (confirm('make it the welcome image ?')) {
                     try {
-                        const response = await fetch('../../' + action, {
+                        const response = await fetch('../../admin/photo/cover-site', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                             },
-                            body: JSON.stringify({ filename: filename })
+                            body: JSON.stringify({ photoId: photoId, })
                         });
                         if (response.ok) {
                             const result = await response.json();
+                            document.querySelectorAll('.cover-site.selected').forEach(e=>{
+                                e.classList.remove('selected');
+                            })
+                            button.classList.add('selected');
                         } else {
                             alert('Error: ' + response.statusText);
                         }
@@ -187,7 +196,7 @@ $(document).ready(function() {
                         <div class="photo-slot" data-filename="${response.filename}" data-id="${response.id}">
                             <img src="/storage/photos/${response.filename}" class="list-photo" alt="Saved Photo" data-order=null >
                             <div class="delete-photo" data-filename="${response.filename}" style="display: none;" data-action='admin/photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
-                            <div class="couv-album" data-filename="${response.filename}" style="display: none;" data-action='admin/photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
+                            <div class="couv-album"  data-album-id="${response.album_id}" data-photo-id="${response.id}" style="display: none;" data-action='admin/photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
                             <div class="couv-site" data-filename="${response.filename}" style="display: none;" data-action='admin/photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
                         </div>
                     `;

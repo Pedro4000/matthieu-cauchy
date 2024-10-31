@@ -4152,68 +4152,72 @@ $(document).ready(function () {
     var coverAlbumButtons = document.querySelectorAll('.cover-album');
     coverAlbumButtons.forEach(function (button) {
       button.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var filename, action, response, result;
+        var photoId, albumId, response, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 // Get the filename from data-filename attribute
-                filename = this.getAttribute('data-filename');
-                action = this.getAttribute('data-action');
-                c;
+                photoId = this.getAttribute('data-photo-id');
+                albumId = this.getAttribute('data-album-id');
 
                 if (!confirm('make it the cover of the album ?')) {
-                  _context2.next = 20;
+                  _context2.next = 21;
                   break;
                 }
 
-                _context2.prev = 4;
-                _context2.next = 7;
-                return fetch('../../' + action, {
+                _context2.prev = 3;
+                _context2.next = 6;
+                return fetch('../../admin/photo/cover-album', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                   },
                   body: JSON.stringify({
-                    filename: filename
+                    photoId: photoId,
+                    albumId: albumId
                   })
                 });
 
-              case 7:
+              case 6:
                 response = _context2.sent;
 
                 if (!response.ok) {
-                  _context2.next = 14;
+                  _context2.next = 15;
                   break;
                 }
 
-                _context2.next = 11;
+                _context2.next = 10;
                 return response.json();
 
-              case 11:
+              case 10:
                 result = _context2.sent;
-                _context2.next = 15;
+                document.querySelectorAll('.cover-album.selected').forEach(function (e) {
+                  e.classList.remove('selected');
+                });
+                button.classList.add('selected');
+                _context2.next = 16;
                 break;
-
-              case 14:
-                alert('Error: ' + response.statusText);
 
               case 15:
-                _context2.next = 20;
+                alert('Error: ' + response.statusText);
+
+              case 16:
+                _context2.next = 21;
                 break;
 
-              case 17:
-                _context2.prev = 17;
-                _context2.t0 = _context2["catch"](4);
+              case 18:
+                _context2.prev = 18;
+                _context2.t0 = _context2["catch"](3);
                 console.error('Error:', _context2.t0);
 
-              case 20:
+              case 21:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[4, 17]]);
+        }, _callee2, this, [[3, 18]]);
       })));
     });
   }
@@ -4222,68 +4226,71 @@ $(document).ready(function () {
     var coverAlbumButtons = document.querySelectorAll('.cover-site');
     coverAlbumButtons.forEach(function (button) {
       button.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var filename, action, response, result;
+        var photoId, action, response, result;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 // Get the filename from data-filename attribute
-                filename = this.getAttribute('data-filename');
+                photoId = this.getAttribute('data-photo-id');
                 action = this.getAttribute('data-action');
-                c;
 
-                if (!confirm('make it the welcome image of the site ?')) {
-                  _context3.next = 20;
+                if (!confirm('make it the welcome image ?')) {
+                  _context3.next = 21;
                   break;
                 }
 
-                _context3.prev = 4;
-                _context3.next = 7;
-                return fetch('../../' + action, {
+                _context3.prev = 3;
+                _context3.next = 6;
+                return fetch('../../admin/photo/cover-site', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                   },
                   body: JSON.stringify({
-                    filename: filename
+                    photoId: photoId
                   })
                 });
 
-              case 7:
+              case 6:
                 response = _context3.sent;
 
                 if (!response.ok) {
-                  _context3.next = 14;
+                  _context3.next = 15;
                   break;
                 }
 
-                _context3.next = 11;
+                _context3.next = 10;
                 return response.json();
 
-              case 11:
+              case 10:
                 result = _context3.sent;
-                _context3.next = 15;
+                document.querySelectorAll('.cover-site.selected').forEach(function (e) {
+                  e.classList.remove('selected');
+                });
+                button.classList.add('selected');
+                _context3.next = 16;
                 break;
-
-              case 14:
-                alert('Error: ' + response.statusText);
 
               case 15:
-                _context3.next = 20;
+                alert('Error: ' + response.statusText);
+
+              case 16:
+                _context3.next = 21;
                 break;
 
-              case 17:
-                _context3.prev = 17;
-                _context3.t0 = _context3["catch"](4);
+              case 18:
+                _context3.prev = 18;
+                _context3.t0 = _context3["catch"](3);
                 console.error('Error:', _context3.t0);
 
-              case 20:
+              case 21:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[4, 17]]);
+        }, _callee3, this, [[3, 18]]);
       })));
     });
   }
@@ -4347,7 +4354,7 @@ $(document).ready(function () {
         this.on("success", function (file, response) {
           console.log('response', response); // Save file ID from the server response (if available)
 
-          var imgElement = "\n                        <div class=\"photo-slot\" data-filename=\"".concat(response.filename, "\" data-id=\"").concat(response.id, "\">\n                            <img src=\"/storage/photos/").concat(response.filename, "\" class=\"list-photo\" alt=\"Saved Photo\" data-order=null >\n                            <div class=\"delete-photo\" data-filename=\"").concat(response.filename, "\" style=\"display: none;\" data-action='admin/photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                            <div class=\"couv-album\" data-filename=\"").concat(response.filename, "\" style=\"display: none;\" data-action='admin/photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                            <div class=\"couv-site\" data-filename=\"").concat(response.filename, "\" style=\"display: none;\" data-action='admin/photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                        </div>\n                    ");
+          var imgElement = "\n                        <div class=\"photo-slot\" data-filename=\"".concat(response.filename, "\" data-id=\"").concat(response.id, "\">\n                            <img src=\"/storage/photos/").concat(response.filename, "\" class=\"list-photo\" alt=\"Saved Photo\" data-order=null >\n                            <div class=\"delete-photo\" data-filename=\"").concat(response.filename, "\" style=\"display: none;\" data-action='admin/photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                            <div class=\"couv-album\"  data-album-id=\"").concat(response.album_id, "\" data-photo-id=\"").concat(response.id, "\" style=\"display: none;\" data-action='admin/photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                            <div class=\"couv-site\" data-filename=\"").concat(response.filename, "\" style=\"display: none;\" data-action='admin/photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                        </div>\n                    ");
           document.getElementById('album-photo-container').insertAdjacentHTML('beforeend', imgElement);
           setEventListenersOnCTAs();
           file.serverId = response.fileId; // Assuming the server responds with fileId

@@ -17,54 +17,29 @@ class CauchyController extends Controller
 
     public function home(Request $request){
 
-        $types= Type::all();
-
-        $session = $request->session()->has('users');
         $albums = Album::all();
-        $photoAccueil = Photo::where('accueil', 1)->get()->first();
+        $photoAccueil = Photo::where('landing', 1)->get()->first();
 
-        $photosCouv = Photo::where('couverture', 1)->get();
+        $photosCouv = Photo::where('cover', 1)->get();
         $photosCouv = $photosCouv->mapWithKeys(function ($item, $key) {
             return [$item->album_id => $item];
         });
 
-        $idsBooks = Album::select('id')->where('type_id', Type::where('nom', 'books')->first()->id ?? '')->get()->toArray();
-
-        $albumTries = [];
-        foreach ($albums as &$album) {
-            if(isset($photosCouv[$album->id])){
-                $album->couv = $photosCouv[$album->id];
-            }
-            if ($album->type){
-                $albumTries[$album->type->nom][$album->nom] = $album;
-            }
-        }
-        $albums = $albumTries;
         $AllAPropos = APropos::all();
 
-        $planets = Storage::files('public/favicon/planets');
-
-        foreach ($planets as &$planet) {
-            $planet = str_replace('public', 'storage', $planet);
-        }
-
         return view('home', [
-            'types' => $types,
             'albums' => $albums,
             'AllAPropos' => $AllAPropos,
-            'planets' => $planets,
             'photoAccueil' => $photoAccueil,
         ]);
     }
 
-    public function album(string $album_nom) {
+    public function album(string $albumName) {
 
-        $types= Type::all();
-        $album = Album::where('nom', $album_nom)->get()->first();
+        $album = Album::where('name', $albumName)->get()->first();
 
         return view('album', [
             'album' => $album,
-            'types' => $types,
         ]);
     }
 

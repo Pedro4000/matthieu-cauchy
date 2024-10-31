@@ -52,7 +52,7 @@ section
       </span>
 
     </div>
-    <img src="{{ asset('storage/images/'.$photo->album->type->nom.'/'.$photo->album->nom_route.'/'.$photo->nom_fichier) }}" style="display:none" class="slider_component">
+    <img src="{{ asset('storage/photos/'. $photo->filename) }}" style="display:none" class="slider_component">
     @endforeach
   </div>
 
