@@ -147,4 +147,16 @@ class PhotoController extends Controller
         return response()->json(['success' => 'Order saved']);
     }
 
+
+    public function hidePhoto(Request $request)
+    {
+        $photoId = $request->photoId;
+        $photo = Photo::find($photoId);
+        
+        $photo->is_hidden = !($photo->is_hidden);
+        $photo->save();
+
+        return response()->json(['success' => 'Order saved']);
+    }
+
 }

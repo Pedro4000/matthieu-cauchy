@@ -35,7 +35,7 @@ home
     @foreach($albums as $album)
       @foreach($album->photos as $photo) 
         @if($photo->cover)
-        <div class="w-full lg:w-1/2 mb-7 lg:mb-0 px-3 text-center flex home-main-element lg:p-6">
+        <div class="w-full lg:w-1/2 mb-7 lg:mb-0 lg:px-3 text-center flex home-main-element lg:p-6">
           <a href="{{ route('album', ['albumName' => $album->name ]) }}" class="premiere-galerie-lien">
             @if(strtolower($album->name) == 'martha')
               <div class="inline-block premiere_galerie flex items-center w-full"  style="background-image: url({{ asset('marthamain.jpeg') }})">
@@ -97,10 +97,8 @@ home
     </div>
   </form>
   <div class='contact-container'>
-    <div class="mt-5">
-      <p class="text-center mb-2">Mattcau@msn.com</p>
-      <p class="text-center mb-2">ou</p>
-      <p class="text-center">+33 6 79 68 07 68</p>
+    <div class="mt-5" style='text-align:right'>
+      <p class="text-center mb-2">{!! $contactText->content !!}</p>
     </div>
   </div>
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
-use App\Models\{Serie, Album, Photo, Type, APropos};
+use App\Models\{Serie, Album, Photo, Type, APropos, Contact};
 use Illuminate\Http\{Request, Response};
 use Illuminate\Support\Facades\{Storage, File, DB, App, Mail};
 use Intervention\Image\ImageManagerStatic;
@@ -17,7 +17,8 @@ class CauchyController extends Controller
 
     public function home(Request $request){
 
-        $albums = Album::all();
+        $albums = Album::orderBy('order')->get();
+
         $photoAccueil = Photo::where('landing', 1)->get()->first();
 
         $photosCouv = Photo::where('cover', 1)->get();
@@ -25,12 +26,15 @@ class CauchyController extends Controller
             return [$item->album_id => $item];
         });
 
+        $contactText = Contact::get()->last();
+
         $AllAPropos = APropos::all();
 
         return view('home', [
             'albums' => $albums,
             'AllAPropos' => $AllAPropos,
             'photoAccueil' => $photoAccueil,
+            'contactText' => $contactText,
         ]);
     }
 

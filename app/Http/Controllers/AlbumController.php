@@ -15,7 +15,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
+        $albums = Album::orderBy('order')->get();
         $covers = Photo::where('cover', 1)->get();
 
         $albumCoversIndexedByAlbumId = [];
@@ -108,7 +108,6 @@ class AlbumController extends Controller
     {
         $albumId = $request->get('id');
         $album = Album::find($albumId);
-        dd($album->photos);
         
         foreach($album->photos as $photo) {
             $photo->delete();
@@ -116,5 +115,15 @@ class AlbumController extends Controller
         $album->delete();
 
         return redirect()->route('admin.album.index')->with('success', 'album supprimé');
+    }
+
+    public function reorder(Request $request)
+    {
+
+        foreach ($request->order as $item) {
+            Album::where('id', $item['id'])->update(['order' => $item['position']]);
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\{
     AProposController, 
     BusinessController, 
     CauchyController, 
+    ContactController, 
     DashboardController, 
     PhotoController, 
     TypeController, 
@@ -51,6 +52,8 @@ Route::middleware(['auth'])
             ->name('photo.coverSite');
         Route::post('photo/save-order', [PhotoController::class , 'saveOrder'])
             ->name('photo.saveOrder');
+        Route::post('photo/hide-photo', [PhotoController::class , 'hidePhoto'])
+            ->name('photo.hidePhoto');
 
         Route::get('/createfromstorage', [PhotoController::class , 'createFromStorage'])
             ->name('create_from_storage');
@@ -67,6 +70,9 @@ Route::middleware(['auth'])
             ->name('album.update');
         Route::post('album-destroy', [AlbumController::class , 'destroy'])
             ->name('album.destroy');
+        Route::post('/albums/reorder', [AlbumController::class, 'reorder'])
+            ->name('album.reorder');
+
 
         Route::get('type-index', [TypeController::class , 'index'])
             ->name('type.index');
@@ -103,6 +109,14 @@ Route::middleware(['auth'])
             ->name('business.saveOrder');
         Route::post('/business/delete', [BusinessController::class, 'delete'])
             ->name('business.delete');
+
+        Route::get('/contact/edit', [ContactController::class, 'edit'])
+            ->name('contact.edit');
+        Route::put('/contact/update', [ContactController::class, 'update'])
+            ->name('contact.update');
+        Route::post('/contact/upload-image', [ContactController::class, 'uploadImage'])
+            ->name('contact.upload-image');
+
 
         Route::resource('users', UserController::class);
 

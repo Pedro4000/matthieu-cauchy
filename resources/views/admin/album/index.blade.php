@@ -15,15 +15,17 @@
                         <th class='w-1/12 p-2'>nom</th>
                         <th class='w-1/12 p-2'>photos</th>
                         <th class='w-1/12 p-2'>modifier</th>
+                        <th class='w-1/12 p-2'>ordre</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="album-table-body">
                       @foreach($albums as $album)
-                          <tr>
+                          <tr data-id="{{ $album->id }}">
                             <td class="p-2">{{ $album->name }}</td>
                             <td class="p-2"><a href="{{ route('admin.photo.index', ['album_id' => $album->id] ) }}">
                               <img class='apercu' src="{{ asset('storage/photos/' . ($albumCoversIndexedByAlbumId[$album->id]->filename ?? '')) }}" style="min-height:30px" alt='empty'></a></td>
                             <td class="p-2"><a href="{{ route('admin.album.edit', ['id' => $album->id] ) }}"><i class="fas fa-edit text-lg" ></i></a></td>
+                            <td class="p-2 cursor-move text-center">☰</td> <!-- reorder handle -->
                           </tr>
                       @endforeach
                     </tbody>
@@ -33,3 +35,38 @@
         </div>
     </div>
 </x-app-layout>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+  const el = document.getElementById('album-table-body');
+
+  new Sortable(el, {
+    animation: 150,
+    handle: '.cursor-move',
+    onEnd: function (evt) {
+      const order = [];
+      el.querySelectorAll('tr').forEach((row, index) => {
+        order.push({ id: row.dataset.id, position: index + 1 });
+      });
+
+      fetch('{{ route('admin.album.reorder') }}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ order: order })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(data => {
+        console.log('Order updated', data);
+      })
+      .catch(error => {
+        console.error('Error updating order:', error);
+      });
+    }
+  });
+</script>

@@ -13,16 +13,19 @@ $(document).ready(function() {
                 e.target.querySelector('.delete-photo').style.display = "block";
                 e.target.querySelector('.cover-album').style.display = "block";
                 e.target.querySelector('.cover-site').style.display = "block";
+                e.target.querySelector('.hide-photo').style.display = "block";
             }));
         photosSlots.forEach(e => 
             e.addEventListener('mouseleave', function(e) {
                 e.target.querySelector('.delete-photo').style.display = "none";
                 e.target.querySelector('.cover-album').style.display = "none";
                 e.target.querySelector('.cover-site').style.display = "none";
+                e.target.querySelector('.hide-photo').style.display = "none";
         }));
         setTrashButtonsEventListeners();
         setAlbumCoverButtonEventListeners();
         setSiteCoverButtonEventListeners();
+        setHidePhotoButtonEventListeners();
     }
 
     setEventListenersOnCTAs();
@@ -130,6 +133,39 @@ $(document).ready(function() {
                 }
             })
         });    
+    }
+
+    function setHidePhotoButtonEventListeners () {
+        let coverAlbumButtons = document.querySelectorAll('.hide-photo');
+        coverAlbumButtons.forEach(button => {
+            button.addEventListener('click', async function() {
+
+                const photoId = this.getAttribute('data-photo-id');
+                if (confirm('hide this photo from the album?')) {
+                    try {
+                        const response = await fetch('../../admin/photo/hide-photo', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({ photoId: photoId })
+                        });
+                        if (response.ok) {
+                            const result = await response.json();
+                            document.querySelectorAll('.hide.selected').forEach(e=>{
+                                e.classList.remove('selected');
+                            })
+                            button.classList.add('selected');
+                        } else {
+                            alert('Error: ' + response.statusText);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                }
+            })
+        }); 
     }
 
 

@@ -27,6 +27,7 @@
                                 <div class="delete-photo" data-filename="{{ $photo->filename }}" data-action='admin/photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
                                 <div class="cover-album {{ $photo->cover ? 'selected' : '' }}" data-album-id="{{ $albumId }}" data-photo-id="{{ $photo->id }}" data-action='admin/photo/cover-album'><i class="fa fa-images" aria-hidden="true" ></i></div>
                                 <div class="cover-site {{ $photo->landing ? 'selected' : '' }}" data-photo-id="{{ $photo->id }}" data-action='admin/photo/cover-site'><i class="far fa-star" aria-hidden="true"></i></div>
+                                <div class="hide-photo {{ $photo->is_hidden ? 'selected' : '' }}" data-photo-id="{{ $photo->id }}"><i class="fa fa-glasses" aria-hidden="true"></i></div>
                             </div>
                             @endforeach
                         </div>
