@@ -38,6 +38,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
+  // @ts-nocheck
+  const reorderUrl = '{{ route('admin.album.reorder') }}';
+  const csrfToken = '{{ csrf_token() }}';
   const el = document.getElementById('album-table-body');
 
   new Sortable(el, {
@@ -49,11 +52,11 @@
         order.push({ id: row.dataset.id, position: index + 1 });
       });
 
-      fetch('{{ route('admin.album.reorder') }}', {
+      fetch(reorderUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          'X-CSRF-TOKEN': csrfToken
         },
         body: JSON.stringify({ order: order })
       })

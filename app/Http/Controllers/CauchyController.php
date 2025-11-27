@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
-use App\Models\{Serie, Album, Photo, Type, APropos, Contact};
+use App\Models\{Serie, Album, Photo, Type, APropos, Contact, CommissionedPhoto};
 use Illuminate\Http\{Request, Response};
 use Illuminate\Support\Facades\{Storage, File, DB, App, Mail};
 use Intervention\Image\ImageManagerStatic;
@@ -28,13 +28,21 @@ class CauchyController extends Controller
 
         $contactText = Contact::get()->last();
 
-        $AllAPropos = APropos::all();
+        $AllAPropos = APropos::orderByRaw("
+            CASE 
+                WHEN LOWER(langue) IN ('fr', 'francais', 'français', 'france') THEN 0
+                ELSE 1
+            END
+        ")->get();
+        
+        $hasCommissionedPhotos = CommissionedPhoto::count() > 0;
 
         return view('home', [
             'albums' => $albums,
             'AllAPropos' => $AllAPropos,
             'photoAccueil' => $photoAccueil,
             'contactText' => $contactText,
+            'hasCommissionedPhotos' => $hasCommissionedPhotos,
         ]);
     }
 

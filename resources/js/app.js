@@ -6,21 +6,66 @@ require('alpinejs');
 
 $(document).ready(function() {
 
+    // Create tooltip element
+    const tooltip = document.createElement('div');
+    tooltip.id = 'photo-action-tooltip';
+    tooltip.style.cssText = `
+        position: fixed;
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        pointer-events: none;
+        z-index: 10000;
+        display: none;
+        max-width: 200px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    `;
+    document.body.appendChild(tooltip);
+
+    let tooltipTimeout = null;
+
+    function showTooltip(text, x, y) {
+        clearTimeout(tooltipTimeout);
+        tooltipTimeout = setTimeout(() => {
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+            tooltip.style.left = (x + 15) + 'px';
+            tooltip.style.top = (y + 15) + 'px';
+        }, 1500); // Show after 1.5 seconds
+    }
+
+    function hideTooltip() {
+        clearTimeout(tooltipTimeout);
+        tooltip.style.display = 'none';
+    }
+
     function setEventListenersOnCTAs () {
         let photosSlots = document.querySelectorAll(".photo-slot");
         photosSlots.forEach(e => 
             e.addEventListener('mouseenter', function(e) {
-                e.target.querySelector('.delete-photo').style.display = "block";
-                e.target.querySelector('.cover-album').style.display = "block";
-                e.target.querySelector('.cover-site').style.display = "block";
-                e.target.querySelector('.hide-photo').style.display = "block";
+                const deleteBtn = e.target.querySelector('.delete-photo');
+                const coverAlbumBtn = e.target.querySelector('.cover-album');
+                const coverSiteBtn = e.target.querySelector('.cover-site');
+                const hidePhotoBtn = e.target.querySelector('.hide-photo');
+                
+                if (deleteBtn) deleteBtn.style.display = "block";
+                if (coverAlbumBtn) coverAlbumBtn.style.display = "block";
+                if (coverSiteBtn) coverSiteBtn.style.display = "block";
+                if (hidePhotoBtn) hidePhotoBtn.style.display = "block";
             }));
         photosSlots.forEach(e => 
             e.addEventListener('mouseleave', function(e) {
-                e.target.querySelector('.delete-photo').style.display = "none";
-                e.target.querySelector('.cover-album').style.display = "none";
-                e.target.querySelector('.cover-site').style.display = "none";
-                e.target.querySelector('.hide-photo').style.display = "none";
+                const deleteBtn = e.target.querySelector('.delete-photo');
+                const coverAlbumBtn = e.target.querySelector('.cover-album');
+                const coverSiteBtn = e.target.querySelector('.cover-site');
+                const hidePhotoBtn = e.target.querySelector('.hide-photo');
+                
+                if (deleteBtn) deleteBtn.style.display = "none";
+                if (coverAlbumBtn) coverAlbumBtn.style.display = "none";
+                if (coverSiteBtn) coverSiteBtn.style.display = "none";
+                if (hidePhotoBtn) hidePhotoBtn.style.display = "none";
         }));
         setTrashButtonsEventListeners();
         setAlbumCoverButtonEventListeners();
@@ -33,6 +78,16 @@ $(document).ready(function() {
     function setTrashButtonsEventListeners(){
         let trashButtons = document.querySelectorAll('.delete-photo');
         trashButtons.forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                showTooltip('Supprimer la photo', e.clientX, e.clientY);
+            });
+            button.addEventListener('mouseleave', hideTooltip);
+            button.addEventListener('mousemove', function(e) {
+                if (tooltip.style.display === 'block') {
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                }
+            });
             button.addEventListener('click', async function() {
             // Get the filename from data-filename attribute
                 const filename = this.getAttribute('data-filename');
@@ -67,6 +122,16 @@ $(document).ready(function() {
     function setAlbumCoverButtonEventListeners() {
         let coverAlbumButtons = document.querySelectorAll('.cover-album');
         coverAlbumButtons.forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                showTooltip('Définir comme couverture de l\'album', e.clientX, e.clientY);
+            });
+            button.addEventListener('mouseleave', hideTooltip);
+            button.addEventListener('mousemove', function(e) {
+                if (tooltip.style.display === 'block') {
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                }
+            });
             button.addEventListener('click', async function() {
             // Get the filename from data-filename attribute
                 const photoId = this.getAttribute('data-photo-id');
@@ -104,6 +169,16 @@ $(document).ready(function() {
     function setSiteCoverButtonEventListeners() {
         let coverAlbumButtons = document.querySelectorAll('.cover-site');
         coverAlbumButtons.forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                showTooltip('Définir comme image d\'accueil du site', e.clientX, e.clientY);
+            });
+            button.addEventListener('mouseleave', hideTooltip);
+            button.addEventListener('mousemove', function(e) {
+                if (tooltip.style.display === 'block') {
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                }
+            });
             button.addEventListener('click', async function() {
             // Get the filename from data-filename attribute
                 const photoId = this.getAttribute('data-photo-id');
@@ -138,6 +213,16 @@ $(document).ready(function() {
     function setHidePhotoButtonEventListeners () {
         let coverAlbumButtons = document.querySelectorAll('.hide-photo');
         coverAlbumButtons.forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                showTooltip('Cacher la photo de l\'album', e.clientX, e.clientY);
+            });
+            button.addEventListener('mouseleave', hideTooltip);
+            button.addEventListener('mousemove', function(e) {
+                if (tooltip.style.display === 'block') {
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                }
+            });
             button.addEventListener('click', async function() {
 
                 const photoId = this.getAttribute('data-photo-id');
@@ -168,52 +253,6 @@ $(document).ready(function() {
         }); 
     }
 
-
-    if (document.getElementById("business-photo-upload")) {
-        const businessDropzone = new Dropzone("#business-photo-upload", {
-            url: document.getElementById('business-photo-upload').action, // Your upload endpoint
-            addRemoveLinks: true,
-            init: function () {
-                this.on("success", function (file, response) {
-                    // Save file ID from the server response (if available)
-                    let imgElement = `
-                        <div class="photo-slot" data-filename="${response.success}">
-                            <img src="/storage/business-photos/${response.success}" class="list-photo" alt="Saved Photo" data-order=null >
-                            <div class="delete-photo" data-filename="${response.success}" style="display: none;" data-action='admin/business-photo/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
-                        </div>
-                    `;
-                    document.getElementById('business-photo-container').insertAdjacentHTML('beforeend', imgElement);
-                    setEventListenersOnCTAs();
-                    file.serverId = response.fileId; // Assuming the server responds with fileId
-                });
-            }
-        });
-    };
-
-    if (document.getElementById("business-photo-container")) {
-        var businessSortable = new Sortable(document.getElementById('business-photo-container'), {
-            animation: 150,
-            onEnd: function (evt) {
-                // Get order of photos
-                let order = [];
-                document.querySelectorAll('.list-photo').forEach(photo => {
-                    console.log(photo.getAttribute('data-id'));
-                    order.push(photo.getAttribute('data-id'));
-                });
-                console.log(order);
-                // Save order to server
-                document.getElementById('saveOrder').addEventListener('click', function () {
-                    axios.post('/admin/business/save-order', {
-                        photoOrder: order,
-                    }).then(function (response) {
-                        alert('Photos saved successfully!');
-                    }).catch(function (error) {
-                        console.error(error);
-                    });
-                });
-            }
-        });
-    };
 
     if (document.getElementById("album-photo-upload")) {
         let dropzoneForm = document.getElementById("album-photo-upload");
@@ -260,6 +299,55 @@ $(document).ready(function() {
                         photoOrder: order,
                     }).then(function (response) {
                         alert('Photos saved successfully!');
+                    }).catch(function (error) {
+                        console.error(error);
+                    });
+                });
+            }
+        });
+    }
+
+    // Commission Photo Upload
+    if (document.getElementById("commission-photo-upload")) {
+        let commissionDropzoneForm = document.getElementById("commission-photo-upload");
+        const commissionDropzone = new Dropzone("#commission-photo-upload", {
+            url: commissionDropzoneForm.action,
+            addRemoveLinks: true,
+            init: function () {
+                this.on("success", function (file, response) {
+                    console.log('response', response);
+
+                    let imgElement = `
+                        <div class="photo-slot" data-filename="${response.filename}" data-id="${response.id}">
+                            <img src="/storage/commissioned_photos/${response.filename}" class="list-photo" alt="Commissioned Photo" data-order=null data-id="${response.id}">
+                            <div class="delete-photo" data-filename="${response.filename}" style="display: none;" data-action='admin/commission/delete'><i class="fa fa-trash" aria-hidden="true"></i></div>
+                        </div>
+                    `;
+                    document.getElementById('commissioned-photo-container').insertAdjacentHTML('beforeend', imgElement);
+                    setEventListenersOnCTAs();
+                    file.serverId = response.id;
+                });
+            }
+        });
+    };
+
+    // Commission Photo Container Sortable
+    if (document.getElementById("commissioned-photo-container")) {
+        var commissionSortable = new Sortable(document.getElementById('commissioned-photo-container'), {
+            animation: 150,
+            onEnd: function (evt) {
+                // Get order of photos
+                let order = [];
+                document.querySelectorAll('#commissioned-photo-container .list-photo').forEach(photo => {
+                    order.push(photo.getAttribute('data-id'));
+                });
+                console.log(order);
+                // Save order to server
+                document.getElementById('saveCommissionOrder').addEventListener('click', function () {
+                    axios.post('/admin/commission/save-order', {
+                        photoOrder: order,
+                    }).then(function (response) {
+                        alert('Commission photos saved successfully!');
                     }).catch(function (error) {
                         console.error(error);
                     });

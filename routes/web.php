@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AlbumController, 
     AProposController, 
-    BusinessController, 
     CauchyController, 
+    CommissionController,
     ContactController, 
     DashboardController, 
     PhotoController, 
@@ -27,6 +27,8 @@ Route::get('/ccs/{albumName}', [CauchyController::class , 'album'])
 Route::get('/contact-store', [CauchyController::class , 'contact'])
     ->name('contact.form');
 Route::get('/getcauchyimages', [CauchyController::class , 'getImages']);
+Route::get('/commissions', [CommissionController::class , 'show'])
+    ->name('commissions');
 
 Route::view('/gallery', 'gallery');
 Route::view('/gallerybis', 'gallerybis');
@@ -100,15 +102,14 @@ Route::middleware(['auth'])
         Route::post('a-propos-store', [AProposController::class , 'store'])
             ->name('a_propos.store');
 
-
-        Route::get('/business/index', [BusinessController::class, 'index'])
-            ->name('business.index');
-        Route::post('/business/upload', [BusinessController::class, 'upload'])
-            ->name('business.upload');
-        Route::post('/business/save-order', [BusinessController::class, 'saveOrder'])
-            ->name('business.saveOrder');
-        Route::post('/business/delete', [BusinessController::class, 'delete'])
-            ->name('business.delete');
+        Route::get('/commission/index', [CommissionController::class, 'index'])
+            ->name('commission.index');
+        Route::post('/commission/upload', [CommissionController::class, 'upload'])
+            ->name('commission.upload');
+        Route::post('/commission/reorder', [CommissionController::class, 'reorder'])
+            ->name('commission.reorder');
+        Route::post('/commission/delete', [CommissionController::class, 'delete'])
+            ->name('commission.delete');
 
         Route::get('/contact/edit', [ContactController::class, 'edit'])
             ->name('contact.edit');

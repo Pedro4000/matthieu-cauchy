@@ -16,6 +16,7 @@ class APropos extends Model
      */
     protected $fillable = [
         'contenu',
+        'langue',
     ];
 
 

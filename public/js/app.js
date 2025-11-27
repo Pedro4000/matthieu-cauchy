@@ -35369,22 +35369,49 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 $(document).ready(function () {
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.id = 'photo-action-tooltip';
+  tooltip.style.cssText = "\n        position: fixed;\n        background: rgba(0, 0, 0, 0.85);\n        color: white;\n        padding: 8px 12px;\n        border-radius: 4px;\n        font-size: 12px;\n        pointer-events: none;\n        z-index: 10000;\n        display: none;\n        max-width: 200px;\n        box-shadow: 0 2px 8px rgba(0,0,0,0.3);\n    ";
+  document.body.appendChild(tooltip);
+  var tooltipTimeout = null;
+  function showTooltip(text, x, y) {
+    clearTimeout(tooltipTimeout);
+    tooltipTimeout = setTimeout(function () {
+      tooltip.textContent = text;
+      tooltip.style.display = 'block';
+      tooltip.style.left = x + 15 + 'px';
+      tooltip.style.top = y + 15 + 'px';
+    }, 1500); // Show after 1.5 seconds
+  }
+  function hideTooltip() {
+    clearTimeout(tooltipTimeout);
+    tooltip.style.display = 'none';
+  }
   function setEventListenersOnCTAs() {
     var photosSlots = document.querySelectorAll(".photo-slot");
     photosSlots.forEach(function (e) {
       return e.addEventListener('mouseenter', function (e) {
-        e.target.querySelector('.delete-photo').style.display = "block";
-        e.target.querySelector('.cover-album').style.display = "block";
-        e.target.querySelector('.cover-site').style.display = "block";
-        e.target.querySelector('.hide-photo').style.display = "block";
+        var deleteBtn = e.target.querySelector('.delete-photo');
+        var coverAlbumBtn = e.target.querySelector('.cover-album');
+        var coverSiteBtn = e.target.querySelector('.cover-site');
+        var hidePhotoBtn = e.target.querySelector('.hide-photo');
+        if (deleteBtn) deleteBtn.style.display = "block";
+        if (coverAlbumBtn) coverAlbumBtn.style.display = "block";
+        if (coverSiteBtn) coverSiteBtn.style.display = "block";
+        if (hidePhotoBtn) hidePhotoBtn.style.display = "block";
       });
     });
     photosSlots.forEach(function (e) {
       return e.addEventListener('mouseleave', function (e) {
-        e.target.querySelector('.delete-photo').style.display = "none";
-        e.target.querySelector('.cover-album').style.display = "none";
-        e.target.querySelector('.cover-site').style.display = "none";
-        e.target.querySelector('.hide-photo').style.display = "none";
+        var deleteBtn = e.target.querySelector('.delete-photo');
+        var coverAlbumBtn = e.target.querySelector('.cover-album');
+        var coverSiteBtn = e.target.querySelector('.cover-site');
+        var hidePhotoBtn = e.target.querySelector('.hide-photo');
+        if (deleteBtn) deleteBtn.style.display = "none";
+        if (coverAlbumBtn) coverAlbumBtn.style.display = "none";
+        if (coverSiteBtn) coverSiteBtn.style.display = "none";
+        if (hidePhotoBtn) hidePhotoBtn.style.display = "none";
       });
     });
     setTrashButtonsEventListeners();
@@ -35396,6 +35423,16 @@ $(document).ready(function () {
   function setTrashButtonsEventListeners() {
     var trashButtons = document.querySelectorAll('.delete-photo');
     trashButtons.forEach(function (button) {
+      button.addEventListener('mouseenter', function (e) {
+        showTooltip('Supprimer la photo', e.clientX, e.clientY);
+      });
+      button.addEventListener('mouseleave', hideTooltip);
+      button.addEventListener('mousemove', function (e) {
+        if (tooltip.style.display === 'block') {
+          tooltip.style.left = e.clientX + 15 + 'px';
+          tooltip.style.top = e.clientY + 15 + 'px';
+        }
+      });
       button.addEventListener('click', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var filename, action, response, pictureSlot, result;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -35456,6 +35493,16 @@ $(document).ready(function () {
   function setAlbumCoverButtonEventListeners() {
     var coverAlbumButtons = document.querySelectorAll('.cover-album');
     coverAlbumButtons.forEach(function (button) {
+      button.addEventListener('mouseenter', function (e) {
+        showTooltip('Définir comme couverture de l\'album', e.clientX, e.clientY);
+      });
+      button.addEventListener('mouseleave', hideTooltip);
+      button.addEventListener('mousemove', function (e) {
+        if (tooltip.style.display === 'block') {
+          tooltip.style.left = e.clientX + 15 + 'px';
+          tooltip.style.top = e.clientY + 15 + 'px';
+        }
+      });
       button.addEventListener('click', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var photoId, albumId, response, result;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -35517,6 +35564,16 @@ $(document).ready(function () {
   function setSiteCoverButtonEventListeners() {
     var coverAlbumButtons = document.querySelectorAll('.cover-site');
     coverAlbumButtons.forEach(function (button) {
+      button.addEventListener('mouseenter', function (e) {
+        showTooltip('Définir comme image d\'accueil du site', e.clientX, e.clientY);
+      });
+      button.addEventListener('mouseleave', hideTooltip);
+      button.addEventListener('mousemove', function (e) {
+        if (tooltip.style.display === 'block') {
+          tooltip.style.left = e.clientX + 15 + 'px';
+          tooltip.style.top = e.clientY + 15 + 'px';
+        }
+      });
       button.addEventListener('click', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var photoId, action, response, result;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -35577,6 +35634,16 @@ $(document).ready(function () {
   function setHidePhotoButtonEventListeners() {
     var coverAlbumButtons = document.querySelectorAll('.hide-photo');
     coverAlbumButtons.forEach(function (button) {
+      button.addEventListener('mouseenter', function (e) {
+        showTooltip('Cacher la photo de l\'album', e.clientX, e.clientY);
+      });
+      button.addEventListener('mouseleave', hideTooltip);
+      button.addEventListener('mousemove', function (e) {
+        if (tooltip.style.display === 'block') {
+          tooltip.style.left = e.clientX + 15 + 'px';
+          tooltip.style.top = e.clientY + 15 + 'px';
+        }
+      });
       button.addEventListener('click', /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         var photoId, response, result;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
@@ -35632,48 +35699,6 @@ $(document).ready(function () {
       })));
     });
   }
-  if (document.getElementById("business-photo-upload")) {
-    var businessDropzone = new (dropzone__WEBPACK_IMPORTED_MODULE_0___default())("#business-photo-upload", {
-      url: document.getElementById('business-photo-upload').action,
-      // Your upload endpoint
-      addRemoveLinks: true,
-      init: function init() {
-        this.on("success", function (file, response) {
-          // Save file ID from the server response (if available)
-          var imgElement = "\n                        <div class=\"photo-slot\" data-filename=\"".concat(response.success, "\">\n                            <img src=\"/storage/business-photos/").concat(response.success, "\" class=\"list-photo\" alt=\"Saved Photo\" data-order=null >\n                            <div class=\"delete-photo\" data-filename=\"").concat(response.success, "\" style=\"display: none;\" data-action='admin/business-photo/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                        </div>\n                    ");
-          document.getElementById('business-photo-container').insertAdjacentHTML('beforeend', imgElement);
-          setEventListenersOnCTAs();
-          file.serverId = response.fileId; // Assuming the server responds with fileId
-        });
-      }
-    });
-  }
-  ;
-  if (document.getElementById("business-photo-container")) {
-    var businessSortable = new sortablejs__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('business-photo-container'), {
-      animation: 150,
-      onEnd: function onEnd(evt) {
-        // Get order of photos
-        var order = [];
-        document.querySelectorAll('.list-photo').forEach(function (photo) {
-          console.log(photo.getAttribute('data-id'));
-          order.push(photo.getAttribute('data-id'));
-        });
-        console.log(order);
-        // Save order to server
-        document.getElementById('saveOrder').addEventListener('click', function () {
-          axios.post('/admin/business/save-order', {
-            photoOrder: order
-          }).then(function (response) {
-            alert('Photos saved successfully!');
-          })["catch"](function (error) {
-            console.error(error);
-          });
-        });
-      }
-    });
-  }
-  ;
   if (document.getElementById("album-photo-upload")) {
     var dropzoneForm = document.getElementById("album-photo-upload");
     var albumDropzone = new (dropzone__WEBPACK_IMPORTED_MODULE_0___default())("#album-photo-upload", {
@@ -35713,6 +35738,50 @@ $(document).ready(function () {
             photoOrder: order
           }).then(function (response) {
             alert('Photos saved successfully!');
+          })["catch"](function (error) {
+            console.error(error);
+          });
+        });
+      }
+    });
+  }
+
+  // Commission Photo Upload
+  if (document.getElementById("commission-photo-upload")) {
+    var commissionDropzoneForm = document.getElementById("commission-photo-upload");
+    var commissionDropzone = new (dropzone__WEBPACK_IMPORTED_MODULE_0___default())("#commission-photo-upload", {
+      url: commissionDropzoneForm.action,
+      addRemoveLinks: true,
+      init: function init() {
+        this.on("success", function (file, response) {
+          console.log('response', response);
+          var imgElement = "\n                        <div class=\"photo-slot\" data-filename=\"".concat(response.filename, "\" data-id=\"").concat(response.id, "\">\n                            <img src=\"/storage/commissioned_photos/").concat(response.filename, "\" class=\"list-photo\" alt=\"Commissioned Photo\" data-order=null data-id=\"").concat(response.id, "\">\n                            <div class=\"delete-photo\" data-filename=\"").concat(response.filename, "\" style=\"display: none;\" data-action='admin/commission/delete'><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></div>\n                        </div>\n                    ");
+          document.getElementById('commissioned-photo-container').insertAdjacentHTML('beforeend', imgElement);
+          setEventListenersOnCTAs();
+          file.serverId = response.id;
+        });
+      }
+    });
+  }
+  ;
+
+  // Commission Photo Container Sortable
+  if (document.getElementById("commissioned-photo-container")) {
+    var commissionSortable = new sortablejs__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('commissioned-photo-container'), {
+      animation: 150,
+      onEnd: function onEnd(evt) {
+        // Get order of photos
+        var order = [];
+        document.querySelectorAll('#commissioned-photo-container .list-photo').forEach(function (photo) {
+          order.push(photo.getAttribute('data-id'));
+        });
+        console.log(order);
+        // Save order to server
+        document.getElementById('saveCommissionOrder').addEventListener('click', function () {
+          axios.post('/admin/commission/save-order', {
+            photoOrder: order
+          }).then(function (response) {
+            alert('Commission photos saved successfully!');
           })["catch"](function (error) {
             console.error(error);
           });
