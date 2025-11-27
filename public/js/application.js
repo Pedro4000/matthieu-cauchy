@@ -201,16 +201,6 @@ $(document).ready(function() {
         */
 
     });
-  
-
-    /**********************************************************************
-    *   Pour enregister le mass edit formulaire
-    */
-
-    $('#photo_mass_edit_cta').click(function(){
-      console.log('ok');
-      $('#photo_mass_edit_form').submit();
-    });
 
 
     /**********************************************************************

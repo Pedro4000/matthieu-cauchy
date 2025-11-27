@@ -11317,7 +11317,7 @@ var defaultOptions = {
   /**
    * The text used before any files are dropped.
    */
-  dictDefaultMessage: "Drop files here to upload",
+  dictDefaultMessage: "Upload",
 
   /**
    * The text that replaces the default message text it the browser is not supported.
@@ -35726,21 +35726,22 @@ $(document).ready(function () {
     var albumSortable = new sortablejs__WEBPACK_IMPORTED_MODULE_1__["default"](document.getElementById('album-photo-container'), {
       animation: 150,
       onEnd: function onEnd(evt) {
-        // Get order of photos
-        var order = [];
+        // Auto-save order when user releases the photo
+        var orderToSave = [];
         document.querySelectorAll('.list-photo').forEach(function (photo) {
-          order.push(photo.getAttribute('data-id'));
+          orderToSave.push(photo.getAttribute('data-id'));
         });
-        console.log(order);
-        // Save order to server
-        document.getElementById('saveOrder').addEventListener('click', function () {
-          axios.post('/admin/photo/save-order', {
-            photoOrder: order
-          }).then(function (response) {
-            alert('Photos saved successfully!');
-          })["catch"](function (error) {
-            console.error(error);
-          });
+        console.log('Saving order:', orderToSave);
+        axios.post('/admin/photo/save-order', {
+          photoOrder: orderToSave
+        }).then(function (response) {
+          console.log('Order saved successfully');
+          // Optional: Show a subtle success indicator
+          // You could add a toast notification here if desired
+        })["catch"](function (error) {
+          var _error$response;
+          console.error('Error saving order:', error);
+          alert('Error saving order: ' + (((_error$response = error.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || error.message));
         });
       }
     });

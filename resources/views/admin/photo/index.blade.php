@@ -5,12 +5,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 container">
                   <div class="flex justify-between mb-2">
                     <div class="inline-block">
-                    </div>
-
-                    <div class="inline-block">
-                      <button id="photo_mass_edit_cta" class="bg-transparent hover:bg-green-200 text-green-400 font-semibold hover:text-white py-2 px-4 border border-green-200 hover:border-transparent rounded" >
-                        enregister
-                      </button>
+                      <p class="text-gray-500 text-sm">Drag to reorder - saves automatically</p>
                     </div>
                   </div>
                   <hr>
@@ -31,8 +26,6 @@
                             </div>
                             @endforeach
                         </div>
-    
-                        <button id="saveOrder" class="btn btn-primary">Save</button>
                     </div>
                 </div>
                   

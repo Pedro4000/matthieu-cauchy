@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{Album, Photo, Type};
 use Illuminate\Http\{Request, File, UploadedFile};
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\{Storage, Log};
 
 
 class PhotoController extends Controller
@@ -138,8 +138,18 @@ class PhotoController extends Controller
     {
         $photoIds = $request->input('photoOrder');
 
+        if (!$photoIds || !is_array($photoIds)) {
+            return response()->json(['error' => 'Invalid photo order data'], 400);
+        }
+
         foreach ($photoIds as $order => $photoId) {
             $photo = Photo::find($photoId);
+            
+            if (!$photo) {
+                \Log::warning("Photo not found when saving order: ID {$photoId}");
+                continue; // Skip this photo and continue with the rest
+            }
+            
             $photo->ordre = $order + 1;
             $photo->save();
         }

@@ -287,21 +287,23 @@ $(document).ready(function() {
         var albumSortable = new Sortable(document.getElementById('album-photo-container'), {
             animation: 150,
             onEnd: function (evt) {
-                // Get order of photos
-                let order = [];
+                // Auto-save order when user releases the photo
+                const orderToSave = [];
                 document.querySelectorAll('.list-photo').forEach(photo => {
-                    order.push(photo.getAttribute('data-id'));
+                    orderToSave.push(photo.getAttribute('data-id'));
                 });
-                console.log(order);
-                // Save order to server
-                document.getElementById('saveOrder').addEventListener('click', function () {
-                    axios.post('/admin/photo/save-order', {
-                        photoOrder: order,
-                    }).then(function (response) {
-                        alert('Photos saved successfully!');
-                    }).catch(function (error) {
-                        console.error(error);
-                    });
+                
+                console.log('Saving order:', orderToSave);
+                
+                axios.post('/admin/photo/save-order', {
+                    photoOrder: orderToSave,
+                }).then(function (response) {
+                    console.log('Order saved successfully');
+                    // Optional: Show a subtle success indicator
+                    // You could add a toast notification here if desired
+                }).catch(function (error) {
+                    console.error('Error saving order:', error);
+                    alert('Error saving order: ' + (error.response?.data?.message || error.message));
                 });
             }
         });

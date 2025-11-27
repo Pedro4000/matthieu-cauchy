@@ -502,23 +502,23 @@ img {
 }
 .retour {
   position: absolute;
-  bottom: 2%;
+  bottom: 5%;
   right: 5%;
 }
 @media screen and (max-width: 980px) {
   .retour {
-    bottom: 2%;
+    bottom: 4%;
     right: 5%;
   }
 }
 .album-description-cta {
   position: absolute;
-  bottom: 2%;
+  bottom: 5%;
   right: 70%;
 }
 @media screen and (max-width: 980px) {
   .album-description-cta {
-    bottom: 2%;
+    bottom: 4%;
     right: 70%;
   }
 }
