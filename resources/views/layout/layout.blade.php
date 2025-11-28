@@ -12,8 +12,7 @@
     <link href="{{ asset('css/checkbox.css') }}" rel="stylesheet">    
     <link rel="icon" href="{{ asset('storage/favicon/favicon3.ico')}}" />
   </head>
-  <body class="bottom-right-class" style="{{ Route::currentRouteName() != 'home' ? 'background: rgb(249, 249, 251)'
- : '' }}">
+  <body class="bottom-right-class" style="{{ Route::currentRouteName() != 'home' ? 'background: rgb(249, 249, 251)' : 'background-image: linear-gradient(to right, #84DBF0 50%, #84DBF0 50%)' }}">
     <header>
       <div class="grid grid-cols-12 w-100">
         <div class="col-span-3 lg:col-span-2 sidebar pl-8 pr-0">

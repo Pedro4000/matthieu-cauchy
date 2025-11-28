@@ -187,8 +187,8 @@ $(document).ready(function() {
         }, 800);    
 
       let couleurFond = $('body').css('background-image');
-      let couleurGauche = 'rgb(249, 249, 251)'; // Default background color
-      let couleurDroite = 'rgb(249, 249, 251)'; // Default background color
+      let couleurGauche = '#84DBF0'; // Default background color (blue)
+      let couleurDroite = '#84DBF0'; // Default background color (blue)
 
       // Check if background-image exists and is a gradient with the expected format
       if (couleurFond && couleurFond.includes('to right, ') && couleurFond.split('to right, ').length > 1) {
