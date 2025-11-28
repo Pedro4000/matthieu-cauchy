@@ -4,7 +4,7 @@
   </div>
   @if(isset($hasCommissionedPhotos) && $hasCommissionedPhotos)
   <div class='inline-block w-1/5 h-10'>
-    <a href="{{ route('commissions') }}" class="inline p-3">Commissions</a>
+    <p class="commissions_click inline p-3 pointer">Commissions</p>
   </div>
   @endif
   <div class='inline-block {{ isset($hasCommissionedPhotos) && $hasCommissionedPhotos ? 'w-1/5' : 'w-1/4' }} h-10'>

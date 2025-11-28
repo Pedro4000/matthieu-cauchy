@@ -19,6 +19,46 @@ home
   <h1 class="h2"></h1>
 </div>
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+<style>
+.commission-photo {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.commissions-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  padding-bottom: 30px;
+}
+
+.commissions-retour {
+  position: fixed;
+  bottom: 30px;
+  right: 5%;
+  z-index: 9999;
+}
+
+.commissions-retour a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.commissions-retour a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 980px) {
+  .commissions-retour {
+    bottom: 50px;
+  }
+}
+</style>
 @endsection
 
 @section('content')
@@ -73,6 +113,22 @@ home
       {!! $aPropos->contenu !!}
     </span>
   @endforeach
+</div>
+
+<div class="commissions_div commissions-div {{ app('request')->input('section_display') == 'commissions' ? '' : 'hidden-away opaque' }}">
+  <div class="row">
+    <div class="commissions-container">
+      @foreach($commissionedPhotos as $photo)
+        <img src="{{ asset('storage/commissioned_photos/'. $photo->filename) }}" class="commission-photo" alt="Commission">
+      @endforeach
+    </div>
+  </div>
+
+  <div class="commissions-retour text-4xl lg:text-base">
+    <a href="{{ route('home', [ 'section_display' => 'projects' ]) }}">
+      <i class="fas fa-long-arrow-alt-left"></i> retour
+    </a>
+  </div>
 </div>
 
 <div class="contact_form_div contact-div mx-8 {{ app('request')->input('section_display') == 'contact' ? '' : 'hidden-away opaque' }}">

@@ -35,7 +35,8 @@ class CauchyController extends Controller
             END
         ")->get();
         
-        $hasCommissionedPhotos = CommissionedPhoto::count() > 0;
+        $commissionedPhotos = CommissionedPhoto::orderBy('order')->get();
+        $hasCommissionedPhotos = $commissionedPhotos->count() > 0;
 
         return view('home', [
             'albums' => $albums,
@@ -43,6 +44,7 @@ class CauchyController extends Controller
             'photoAccueil' => $photoAccueil,
             'contactText' => $contactText,
             'hasCommissionedPhotos' => $hasCommissionedPhotos,
+            'commissionedPhotos' => $commissionedPhotos,
         ]);
     }
 

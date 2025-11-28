@@ -83,4 +83,7 @@ $(document).ready(function() {
 
     });
 
+    // Note: The main navigation logic with color changes is in public/js/application.js
+    // This file is for album slideshow functionality
+
 }); 

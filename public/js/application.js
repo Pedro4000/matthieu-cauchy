@@ -124,26 +124,32 @@ $(document).ready(function() {
       'project_click_background' : 
       {
         couleur : 'pink',
-        divPasLiees : '.contact_form_div, .a_propos_div',
+        divPasLiees : '.contact_form_div, .a_propos_div, .commissions_div',
         divLiee : '.projects_div',
+      },
+      'commissions_click' : 
+      {
+        couleur : '#48ed59',
+        divPasLiees : '.contact_form_div, .a_propos_div, .projects_div',
+        divLiee : '.commissions_div',
       },
       'bio_click' : 
       {
-        couleur : '#AFA59B',
-        divPasLiees : '.contact_form_div, .projects_div',
+        couleur : '#FFB612',
+        divPasLiees : '.contact_form_div, .projects_div, .commissions_div',
         divLiee : '.a_propos_div',
       },
       'contact_click' : 
       {
-        couleur : '#FFB612',
-        divPasLiees : '.a_propos_div, .projects_div',
+        couleur : '#84DBF0',
+        divPasLiees : '.a_propos_div, .projects_div, .commissions_div',
         divLiee : '.contact_form_div',
       },
     };
 
     var navItemClique = '';
 
-    $('.project_click_background, .bio_click, .contact_click').click(function(){
+    $('.project_click_background, .bio_click, .contact_click, .commissions_click').click(function(){
 
         // la première fois, on cache l'image d'accueil
         $(".active").removeClass('active');
@@ -160,6 +166,8 @@ $(document).ready(function() {
           navItemClique = 'project_click_background';
         } else if ($(this).attr('class').match('bio_click')) {
           navItemClique = 'bio_click';
+        } else if ($(this).attr('class').match('commissions_click')) {
+          navItemClique = 'commissions_click';
         } else {
           navItemClique = 'contact_click';
         }
