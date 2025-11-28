@@ -187,11 +187,20 @@ $(document).ready(function() {
         }, 800);    
 
       let couleurFond = $('body').css('background-image');
-      let couleurGauche = couleurFond.split('to right, ')[1].split(' 50%')[0];
-      let couleurDroite = couleurFond.split('to right, ')[1].split(' 50%')[1].substr(2);
+      let couleurGauche = 'rgb(249, 249, 251)'; // Default background color
+      let couleurDroite = 'rgb(249, 249, 251)'; // Default background color
 
-      //$('body').css('background-image', 'linear-gradient(to right, #FFB612 50%, rgb(255, 255, 0) 50%)');
-
+      // Check if background-image exists and is a gradient with the expected format
+      if (couleurFond && couleurFond.includes('to right, ') && couleurFond.split('to right, ').length > 1) {
+        let gradientParts = couleurFond.split('to right, ')[1];
+        if (gradientParts && gradientParts.includes(' 50%')) {
+          let parts = gradientParts.split(' 50%');
+          if (parts.length >= 2) {
+            couleurGauche = parts[0];
+            couleurDroite = parts[1].substring(2); // Remove leading ", " or similar
+          }
+        }
+      }
 
       if ($('body').hasClass('bottom-left-class')) {
         $('body').css('background-image', 'linear-gradient(to right, '+couleurGauche+' 50%, '+tableauCouleurFond[navItemClique].couleur+' 50%)');
