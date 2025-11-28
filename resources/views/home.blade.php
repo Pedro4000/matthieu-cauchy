@@ -193,8 +193,6 @@ home
         $('.premiere-galerie-lien').height($('.premiere-galerie-lien').width())
         $('.premiere_galerie').height($('.premiere_galerie').width())
 
-        console.log($('.premiere-galerie'));
-
         $(window).resize(function(){
           $('.premiere-galerie-lien').height($('.premiere-galerie-lien').width())
           $('.premiere_galerie').height($('.premiere_galerie').width())
